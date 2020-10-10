@@ -11,7 +11,7 @@ import re
 
 
 # Microsoft Word template derived from the SMPTE template and modified for use with pandoc
-refdoc = '..\..\smpte-sg-software\markdown\AG04-1-2016-SMPTE-ST-RP-Template-2016-08-29(pandoc).dotx'
+refdoc = '../../smpte-sg-software\markdown\AG04-1-2016-SMPTE-ST-RP-Template-2016-08-29(pandoc).dotx'
 
 
 def read_config(filename):
@@ -89,7 +89,7 @@ def pandoc_command(source, output, refdoc=None):
 
     if format == 'docx':
         #pandoc = ['pandoc', '--reference-doc', refdoc, '-o', output, source]
-        pandoc = ['pandoc', '--reference-doc', refdoc, '--filter', 'pandoc-citeproc', '-o', output, source]
+        pandoc = ['pandoc', '--reference-doc', os.path.normpath(refdoc), '--filter', 'pandoc-citeproc', '-o', output, source]
     elif format == 'html':
         #pandoc = ['pandoc', '-s', '-H', 'pandoc.css', '-o', output, source]
         pandoc = ['pandoc', '-s', '-H', 'pandoc.css', '--filter', 'pandoc-citeproc', '-o', output, source]
