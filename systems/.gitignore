@@ -1,3 +1,6 @@
 # Ignore files created by pandoc
 *.docx
 *.dotx
+
+# Ignore the settings for Visual Studio Code
+.vscode/

@@ -8,21 +8,70 @@ import json
 import yaml
 import os
 import re
+import sys
 
 
 # Microsoft Word template derived from the SMPTE template and modified for use with pandoc
-pandoc_template = 'AG04-1-2016-SMPTE-ST-RP-Template-2016-08-29(pandoc).dotx'
+default_pandoc_template = 'AG04-1-2016-SMPTE-ST-RP-Template-2016-08-29(pandoc).dotx'
 
-# List of directories that may contain the pandoc template
+# List of directories that may contain the default pandoc template
 template_locations = ['.', '../../Templates']
 
 # Set the default value for the template if it is not found
-refdoc = None
+#refdoc = None
 
-for directory in template_locations:
-    pathname = os.path.join(directory, pandoc_template)
-    if os.path.isfile(pathname):
-        refdoc = pathname
+
+def get_word_template(config, args):
+    """Return the full pathname to the Word template."""
+    refdoc = None
+
+    # Was the Word template provided on the command line?
+    if args.refdoc:
+        refdoc = args.refdoc
+        if args.debug:
+            print(f'Using reference document from command-line arguments: {refdoc}')
+
+
+    # Was the Word template provided in the configuration file?
+    elif 'refdoc' in config:
+        refdoc = config['refdoc']
+        if args.debug:
+            print(f'Using reference document from configuration file: {refdoc}')
+
+    else:
+        # Use the default reference document
+        refdoc = default_pandoc_template
+        if args.debug:
+            print(f'Using default reference document: {refdoc}')
+
+    # Was the full pathname to the Word template provided?
+    if not os.path.isfile(refdoc):
+
+        # Was the location of the templates provided in the configuration file?
+        if 'templates' in config:
+            # Expand variables in the templates location
+            platform = sys.platform
+            home = os.getenv('USERPROFILE') if platform == 'win32' else os.getenv('HOME')
+            #templates = config['templates'].format({'HOME': home})
+            templates = config['templates'].format(HOME=home)
+
+            # Prefix the reference document with the templates location
+            refdoc = os.path.normpath(os.path.join(templates, refdoc))
+
+            if args.debug:
+                print(f'Template location found in configuration: {refdoc}')
+
+        else:
+            # Look for the reference document in the default locations
+            for directory in template_locations:
+                pathname = os.path.normpath(os.path.join(directory, refdoc))
+                if os.path.isfile(pathname):
+                    refdoc = pathname
+                    if args.debug:
+                        print(f'Found template location for list of default locations: {refdoc}')
+
+    return refdoc
+
 
 # Locations for finding the default configuration file
 config_locations = ['.']
@@ -51,7 +100,7 @@ def read_default_config():
     for directory in config_locations:
         if os.path.isdir(directory):
             for filetype in ['json', 'yaml']:
-                pathname = os.path.join(directory, f'config.{filetype}')
+                pathname = os.path.normpath(os.path.join(directory, f'config.{filetype}'))
                 if os.path.isfile(pathname):
                     return read_config(pathname)
                     
@@ -118,6 +167,7 @@ def pandoc_command(source, output, refdoc=None):
 
     if format == 'docx':
         #pandoc = ['pandoc', '--reference-doc', refdoc, '-o', output, source]
+        assert refdoc != None
         pandoc = ['pandoc', '--reference-doc', refdoc, '--filter', 'pandoc-citeproc', '-o', output, source]
     elif format == 'html':
         #pandoc = ['pandoc', '-s', '-H', 'pandoc.css', '-o', output, source]
@@ -146,10 +196,12 @@ if __name__ == '__main__':
     parser.add_argument('-f', '--format', default='docx', help='output file format')
     parser.add_argument('-d', '--date', action='store_true', help='append date to the output filename')
     parser.add_argument('-c', '--config', help='read the document parameters from the specified file')
-    parser.add_argument('-t', '--template', default=refdoc, help='output document template')
-    parser.add_argument('-v', '--verbose', action='store_true', help='enable verbose output')
-    #parser.add_argument('-q', '--quiet', action='store_true', help='suppress all output to the terminal window')
+    parser.add_argument('-r', '--refdoc', help='template for the output Word document')
     parser.add_argument('-e', '--echo', action='store_true', help='echo the pandoc command to the terminal window')
+    parser.add_argument('-v', '--verbose', action='store_true', help='enable verbose output')
+    parser.add_argument('-z', '--debug', action='store_true', help='enable extra output for debugging')
+    #parser.add_argument('-q', '--quiet', action='store_true', help='suppress all output to the terminal window')
+
     args = parser.parse_args()
 
     # Set the document configuration information
@@ -170,10 +222,15 @@ if __name__ == '__main__':
     else:
         filedate = date.today() if args.date else None
         output = output_filename(args.source, config, filedate, args.format)
+    
     if args.verbose: print("Output document: %s" % output)
 
+    # Get the pathname to the reference document (template) for the Word output format
+    if args.format == 'docx':
+       refdoc = get_word_template(config, args)
+
     # Get the command for generating the output document from markdown
-    pandoc = pandoc_command(args.source, output, args.template)
+    pandoc = pandoc_command(args.source, output, refdoc)
     if args.echo: print_command(pandoc)
 
     process = subprocess.Popen(pandoc, stdout=subprocess.PIPE)
@@ -182,4 +239,3 @@ if __name__ == '__main__':
     stdout = process.communicate()[0]
 
     #if args.verbose: print("Output document: %s" % output)
-
