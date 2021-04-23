@@ -1,2 +1,5 @@
 # Ignore the backup files created by Visual Paradigm
 *.vpp.bak_*
+
+# Ignore old files
+Archive/*
