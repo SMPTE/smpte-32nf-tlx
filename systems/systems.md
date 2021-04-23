@@ -3,6 +3,7 @@ title: ST 2120-1 Systems
 ---
 
 # Introduction
+
 This is a rewrite of ST 2120 part 1 on TLX systems. The purpose of this document is to introduce terminology and notation for describing time labels. Individual time label items are described in ST 2120-2 Items and time label use cases are described in ST 2120-3 Profiles.
 
 

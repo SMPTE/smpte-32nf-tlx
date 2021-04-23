@@ -18,7 +18,7 @@ default_pandoc_template = 'AG04-1-2016-SMPTE-ST-RP-Template-2016-08-29(pandoc).d
 template_locations = ['.', '../../Templates']
 
 # Set the default value for the template if it is not found
-#refdoc = None
+refdoc = None
 
 
 def get_word_template(config, args):
