@@ -174,7 +174,7 @@ def pandoc_command(source, output, refdoc=None):
         pandoc = ['pandoc', '-s', '-H', 'pandoc.css', '--filter', 'pandoc-citeproc', '-o', output, source]
     elif format == 'pdf':
         #pandoc = ['pandoc', '-o', output, source]
-        pandoc = ['pandoc', '-s', '-N', '--pdf-engine=xelatex', '--toc', '--filter', 'pandoc-citeproc', '-o', output, source]
+        pandoc = ['pandoc', '-s', '-N', '--pdf-engine=pdflatex', '--toc', '--filter', 'pandoc-citeproc', '-o', output, source]
     else:
         return None
 
