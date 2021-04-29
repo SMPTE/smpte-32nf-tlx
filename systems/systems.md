@@ -6,6 +6,28 @@ title: ST 2120-1 Systems
 
 This is a rewrite of ST 2120 part 1 on TLX systems. The purpose of this document is to introduce terminology and notationxfor describing time labels at a conceptual level. Individual time label items are described in ST 2120-2 Items and time label use cases are described in ST 2120-3 Profiles.
 
+# Time Label Structure
+
+An extensible time label (TLX) comprises a time label header and an unordered list of zero or more time label items. A time label item has a key and a value. The value can be single value, an unordered list of values, or a nested list of unordered key-value pairs.
+
+Each scalar value can include zero or more attributes that provided additional information about the value. 
+
+The time label items are described in ST 2120-2 Items.
+
+
+
+***Describe the time label header***
+
+
+
+# Data Types
+
+
+
+***Move data types here?***
+
+
+
 # Media Units
 
 ***Define media unit*** 
@@ -112,6 +134,8 @@ During the processing of a media sequence, time labels can be copied from the so
 
 
 
+
+
 # Annex A. Time Label Schema
 
 The JSON schema for time labels is introduced in this annex.
@@ -147,5 +171,4 @@ Otherwise, I generally disagree that a PTP Timestamp should be "reconstituted" f
 Using the Digital Birth Certificate profile as an example, the “virtual” TLX label would be using the same TLXuniqueSourceID and TLXptpTimestamp values as the actual TLX label, with an updated TLXmediaCount value to address the intended media unit.  In this example, the correct material (or TLX label) would first be identified by using the unique combination of Source UUID and PTP Timestamp, and then the intended position in a sequence of that material would be identified by using the intended Media Count integer value.
 
 Some of the definitions that are being presented for a Media Identifier and Media Timestamp are not what came from the BNS model, at least for what I can tell, especially with regard to defining Media Sequences.  
-
 
