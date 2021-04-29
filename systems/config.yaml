@@ -6,7 +6,7 @@ number: 2120
 part: 1
 project: TLX
 title: Systems
-note: DRAFT
+#note: DRAFT
 format: docx
 refdoc: "AG04-1-2016-SMPTE-ST-RP-Template-2016-08-29(pandoc).dotx"
 templates: "{HOME}/OneDrive/Documents/SMPTE/Templates"
