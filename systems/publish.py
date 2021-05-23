@@ -168,13 +168,16 @@ def pandoc_command(source, output, refdoc=None):
     if format == 'docx':
         #pandoc = ['pandoc', '--reference-doc', refdoc, '-o', output, source]
         assert refdoc != None
-        pandoc = ['pandoc', '--reference-doc', refdoc, '--filter', 'pandoc-citeproc', '-o', output, source]
+        #pandoc = ['pandoc', '--reference-doc', refdoc, '--filter', 'pandoc-citeproc', '-o', output, source]
+        pandoc = ['pandoc', '--reference-doc', refdoc, '--citeproc', '-o', output, source]
     elif format == 'html':
         #pandoc = ['pandoc', '-s', '-H', 'pandoc.css', '-o', output, source]
-        pandoc = ['pandoc', '-s', '-H', 'pandoc.css', '--filter', 'pandoc-citeproc', '-o', output, source]
+        #pandoc = ['pandoc', '-s', '-H', 'pandoc.css', '--filter', 'pandoc-citeproc', '-o', output, source]
+        pandoc = ['pandoc', '-s', '-H', 'pandoc.css', '--citeproc', '-o', output, source]
     elif format == 'pdf':
         #pandoc = ['pandoc', '-o', output, source]
-        pandoc = ['pandoc', '-s', '-N', '--pdf-engine=pdflatex', '--toc', '--filter', 'pandoc-citeproc', '-o', output, source]
+        #pandoc = ['pandoc', '-s', '-N', '--pdf-engine=pdflatex', '--toc', '--filter', 'pandoc-citeproc', '-o', output, source]
+        pandoc = ['pandoc', '-s', '-N', '--pdf-engine=pdflatex', '--toc', '--citeproc', '-o', output, source]
     else:
         return None
 
