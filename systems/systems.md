@@ -6,17 +6,205 @@ title: ST 2120-1 Systems
 
 This is a rewrite of ST 2120 part 1 on TLX systems. The purpose of this document is to introduce terminology and notationxfor describing time labels at a conceptual level. Individual time label items are described in ST 2120-2 Items and time label use cases are described in ST 2120-3 Profiles.
 
+
+
+# Terms and Definitions
+
+## actual time 
+
+designation for an instant having a defined relationship to, and substantially in agreement with, the International Atomic Time (TAI) time standard 
+
+Note: TAI is the basis for time in PTP (used in SMPTE ST 2059-1) and GPS. 
+
+Note: The precise meaning of “substantially in agreement” is application-specific and out of scope.
+
+Example: If all recording equipment derives actual time from their respective GPS receivers, then captured media sequences can be synchronized in post production.
+
+Example: The sound mixer determined that the date of the shoot and the time from his watch was sufficiently accurate to serve as actual time for recording the wild tracks.
+
+## count continuous 
+
+time labels that are present or inferred for each media unit of an uninterrupted media sequence, with the media count incremented by one for each media unit and for which, if present, the source identifier is constant
+
+Note: Count continuous does not impose any constraint with respect to timestamp. 
+
+ 
+
+## count mode
+
+algorithm for producing a time address from a media count as specified in SMPTE ST 12 document suite 
+
+Note: The time address can be either drop frame or non-drop frame.
+
+Note:	“see the sections on ‘Non-drop frame – Uncompensated mode’ and ‘Drop frame – NTSC time compensated mode’ in SMPTE ST 12-1 
+
+ 
+
+## count modulus 
+
+integer frame count in modulo arithmetic per second as specified in ST 12 
+
+Three count moduli for 24, 25, and 30 frames per second are defined in ST 12-1.
+
+## Extensible Time Label (TLX)
+
+## index kind 
+
+semantic basis for identifying Media Units 
+
+Example: KeyKode, a type of edge code, is one index kind; while a DBC is another.
+
+## extrinsic binding 
+
+association of another object to a media unit 
+
+Example: Time labels can support an extrinsic binding such that post-production operations or slate information are tied to one or more frames of video.
+
+Note: The intrinsic binding between a time label and its corresponding media unit permits other objects to be associated with that media unit by objects holding an identifier for the time label, thereby providing an inbound extrinsic binding.
+
+Note: A time label item carrying an identifier for another object permits an association between the other object and the intrinsically bound media unit, thereby providing an outbound extrinsic binding. 
+
+Note: A time label can be a “binding object”, as defined by ISO/IEC/IEEE 24765:2010, that supports an extrinsic binding between its intrinsically bound Media Unit and another object.
+
+## intrinsic binding
+
+robust connection of a time label to a media unit 
+
+Note: Maintaining the association between a time label and its corresponding media unit is essential for time labels to be useful.  The intrinsic binding of a time label is a kind of local binding as specified in ISO/IEC/IEEE 24765:2010.
+
+## media count 
+
+zero-based integer count of media units from a defined origin 
+
+Note: In some workflows that rely on timecode representations, the media count of the first media unit is an integer multiple of the number of media units in one hour, so that the timecode at the start of a sequence can look like 01:00:00:00 or 04:00:00:00, etc.
+
+## media index
+non-negative integer that identifies the position of a media unit in a media sequence
+
+## media rate 
+
+number of Media Units captured or to be reproduced during a temporal interval of exactly one (1.0) second
+
+Note: Media Rate values are not always integer values and sometimes require many digits of precision. 
+
+Note: Media Rate values can be expressed as a rational number (i.e., the ratio of two integers) 
+
+[SOURCE: SMPTE ST 429-7:2006, modified from Edit Rate; separated Note 1 to entry and Note 2 to entry from original]
+
+## media sequence
+collection of one or more media units in an indexed order
+
+## media unit
+
+smallest temporal increment of access to sound, picture, or data  
+
+[SOURCE: SMPTE ST 429-7:2006, modified from Editable Unit]
+
+## primary time label
+
+primary index for a media sequence 
+
+Example: This time label is the primary time label for clip #3. 
+
+Note 1 to entry: A primary time label is expected to be either time continuous, count continuous, or both. 
+
+Note 2 to entry: In the presence of multiple time labels, which time label is the primary time label is expected to be unambiguous. 
+
+Note 3 to entry: When a media unit having a first time label that is the primary time label is incorporated as a source into a different timeline, the media unit can receive a second time label as the new primary time label, which can replace (delete) or subjugate (preserve, but such that it is no longer a primary time label with respect to the new timeline) the first time label.  Neither case precludes an external database from recording the relationship between the two time labels.
+
+## Source
+
+
+
+
+From 20200522 Requirement List v12.docx
+
+## source identifier
+
+## source name 
+
+user-chosen identifier text associated with the media units in the media sequences for one or more unique source identifiers.
+
+Note: Typically, a more compact or human-friendly name for a device, clip, tape, or roll 
+
+ Examples: “CAM1”, “Coffee Spot”, “001” 
+
+ 
+
+## time continuous 
+
+labels that are present or reconstitutable for each Media Unit of an uninterrupted sequence, with timestamps that strictly increase with no gaps and for which, if present, sourceID is non-changing 
+
+Note 1 to entry:	Time continuous does not imply any constraint with respect to media counts. 
+
+Note 2 to entry:	Time continuous does not imply a fixed media rate, so the notion of no gaps means that there are no labels missing from the sequence. 
+
+Note 3 to entry:	Where an ST 12 count modulus and/or ST 12 counting mode is provided, Count Continuous Time Labels associate with a timecode such that the timecode value for Media Unit [n+1] is always the next legal count after the timecode value for media unit [n] with no gaps. 
+
+## time label / extensible time label / TLX 
+
+metadata, as specified in the TLX document suite, associated with exactly one media unit
+
+## time label item
+
+value of a single instance of time label metadata with optional attributes
+
+## timecode / time code / time and control code 
+
+time address, flag bits, and binary groups; or subsets thereof 
+
+[SOURCE: SMPTE ST 12-1:2014, modified to admit subsets] 
+
+
+
+## timestamp 
+
+record representing an actual time or user time at which a media unit was captured or rendered. 
+
+Note: For a given device producing a sequence of media units, timestamps with actual time values are expected to be unique within the media sequence. 
+
+Note: For a given device producing a sequence of media units, timestamps with user time values are not necessarily unique.
+
+Time labels in different media sequences from a given device may include unique source identifiers and user time values are expected to be unique with respect to a given source identifier.
+
+## user time 
+
+designation for an instant that is not actual time 
+
+Note: User time is commonly seen as the basis for an editorial timeline or as the time recorded by an uninitialized camera. 
+
+Note: User time can be signaled with the “unknown clock” flag in PTP. 
+
+Example: The sound mixer determined that the time from his watch was good enough for recording the wild tracks, but no date is included.
+
+## variable media rate 
+
+media rate that is not identical for all media units in a media sequence 
+
+Note: Timecode is not designed to work for Variable Media Rate. 
+
+Note: An media rate that is not a standard media rate, but is constant throughout a media sequence is not considered a variable media rate.
+
+ 
+
+## TLX Document Suite
+
+all parts of the SMPTE standards documents numbered 2120
+
+
+
+
 # Time Label Structure
 
-An extensible time label (TLX) comprises a time label header and an unordered list of zero or more time label items. A time label item has a key and a value. The value can be single value, an unordered list of values, or a nested list of unordered key-value pairs.
+An extensible time label (TLX) comprises a time label header and an unordered list of zero or more time label items.
 
-Each scalar value can include zero or more attributes that provided additional information about the value. 
+Each time label is a key-length-value (KLV) tuple (see SMPTE xxx).
 
-The time label items are described in ST 2120-2 Items.
+The time label header is the unique SMPTE universal label (UL) that signals a time label and the length of the KLV tuple in bytes.
 
+A time label item has a key and a value. The value can be single value, an unordered list of values, or a nested list of unordered key-value pairs.
 
-
-***Describe the time label header***
+Each time label item can include zero or more attributes that provided additional information about the value of the time label item.
 
 
 
@@ -30,38 +218,40 @@ The time label items are described in ST 2120-2 Items.
 
 # Media Units
 
-***Define media unit*** 
+A media unit is the smallest temporal increment for accessing information in a media sequence.
 
-Example: A media unit is a sample such as a video frame or field or an audio sample.
+Note: In some standards, a media unit is called an access unit.
 
-Each media unit can have at most one time label.
+Examples: a video frame or field, a single audio sample or a block of contiguous audio samples, a subtitle or a caption.
+
+Each media unit can have at most one time label. It is not a requirement that all media units have time labels. For example, it would ne onerous for a single audio sample to have a time label. It is expected that if a media unit does not have a time label, then the time label can be inferred from other media units in the same media sequence that have time labels. 
 
 # Media Sequences
 
-A media sequence is an ordered set of zero or more media units with the same media identifier.
+A media sequence is an ordered set of zero or more media units with the same source identifier.
 
-Media units are continuous with the sequence.
+<!--Previous drafts used the term media identifier instead of source identifier-->
 
-Note: A media sequence can be a file or a segment of tape.
+<!--Should there be both a source identifier (for example, for the device) and a media identifier for the media sequence?-->
 
-<!--“Continuous” could be “uninterrupted” instead.-->
+Media units are uninterrupted within the sequence.
 
-Example: A sequence of video frames could contain left and right stereo pairs in two sequences: one sequence for the left frames, the other sequence for the right frames. Although the left and right frames might have many media counts and timestamps in common, the left and right frames can be distinguished by the media identifier in the time label.
+Example: A sequence of video frames could contain left and right stereo pairs in two sequences: one sequence for the left frames, the other sequence for the right frames. Although the left and right frames might have media counts and timestamps in common, the left and right frames can be distinguished by the source identifier in the time label.
 
-The relationship between media samples in two different media sequences is application-specific and out of scope.
+The relationship between media units in two different media sequences is application-specific and out of scope.
 
-Example: The media samples in the left and right stereo sequences may be interleaved in the video track of a media container.
+Example: The media units in the left and right stereo sequences may be interleaved in the video track of a media container.
 
-Example: A tape device might record media samples with the media count starting at zero. If the tape is stopped and restarted, the media count may begin again at zero but with a different media identifier and hence a new sequence. Multiple sequences can be concatenated on the tape, each with a unique media identifier.
+Example: A tape device might record media units with the media count starting at zero. If the tape is stopped and restarted, the media count may begin again at zero but with a different source identifier and hence a new sequence. Multiple sequences can be concatenated on the tape, each with a unique source identifier.
 
-Within a media container (file, track, or tape for example), if a media unit does not have a media identifier, then the media identifier shall be inferred to be the same as the previous media unit and hence shall be the next media unit in that media sequence.
+Within a media container (file, track, or tape for example), if a media unit does not have a source identifier, then the media identifier shall be inferred to be the same as the previous media unit and hence shall be the next media unit in that media sequence.
 
 
 # Time Labels
 
 Each time label can comprise any combination of the following label items:
 
-* Media identifier
+* Source identifier
 * Media count
 * Media count rate
 * Media timestamp
@@ -69,27 +259,29 @@ Each time label can comprise any combination of the following label items:
 The identifier, count, or timestamp for a media unit that does not have a time label can be inferred from the time labels associated with other media units in the same sequence.
 
 
-## Media Identifier
+## Source Identifier
 
-The media identifier distinguishes media units in different media sequences.
+<!--Source identifier was media identifier in earlier drafts-->
 
-All media units that comprise a media sequence shall have the same media identifier.
+The source identifier distinguishes media units in different media sequences.
 
-Media identifiers shall be unique.
+All media units that comprise a media sequence shall have the same source identifier.
 
-The media identifier could designate the device that captured or processed the media sequence or could be generated when the media is rendered or processed with each new rendering having a new media identifier.
+Source identifiers shall be unique.
 
-Note: If the media identifier designates a physical device, then that device produces a single media sequence and the media count for each media unit must be unique.  
+The source identifier could designate the device that captured or processed the media sequence or could be generated when the media is rendered or processed with each new rendering having a new source identifier.
+
+Note: If the source identifier designates a physical device, then that device produces a single media sequence and the media count for each media unit must be unique. 
 
 ## Media Count
 
-The media count shall be a non-negative integer. Within a sequence, the media count for a media unit shall be one greater than the media count of the previous media unit. The media count for the first media unit in a sequence is out of scope.
+The media count is the ordinal position within a media sequence.
 
-***The media count is the ordinal position within a media sequence.***
+The media count shall be a non-negative integer. Within a media sequence, the media count for a media unit shall be one greater than the media count of the previous media unit. The media count for the first media unit in a sequence is out of scope.
 
-Example: A media count can serve the same function as timecode (SMPTE ST 12)  to establish a position in an timecode sequence.
+Example: A media count can serve the same function as timecode (SMPTE ST 12)  to establish a position in a media sequence.
 
-The media count for media units that do not have time labels can be inferred from the media counts in neighboring media units in the same sequence that have time labels.
+The media count for media units that do not have time labels can be inferred from the media counts in neighboring media units in the same sequence and that have time labels.
 
 Media counts can represent either the presentation order or the decoding order of the media units.
 
@@ -97,15 +289,15 @@ The media count for the next time label in a sequence shall be incremented by th
 
 1. If every media unit has a time label and every time label has a media count, then successive media counts will increment by one.
 
-2. If not every media unit has a time label with a media count, then the media count still tallies the number of  media units in the sequence.
+2. If not every media unit has a time label with a media count, then the media count still tallies the number of media units in the sequence.
 
-   Example: If the first sample in every audio block has a time label with a media count, then the interpolated media counts will increment by one for every audio sample such that the media count minus the starting media count plus one represents the number of samples in the media sequence up to some sample and the media count in any time label corresponds to the first sample in the block.
+Example: If the first sample in every audio block has a time label with a media count, then the interpolated media counts will increment by one for every audio sample such that the media count minus the starting media count plus one represents the number of samples in the media sequence up to some sample and the media count in any time label corresponds to the first sample in the block.
 
-3. If a sample in a sequence does not have a time label, the media count can be inferred from the media counts in nearby time labels.
+3. If a sample in a sequence does not have a time label, the media count can be inferred from the media counts in nearby time labels in the same sequence.
 
 4. If blocks of audio samples are deemed to be media units, then the media count increments by one for every block.
 
-   Example: Each block of audio samples corresponds to a video frame at 24 frame per second, the  media count for the audio track increments by one for every frame, and 
+Example: Each block of audio samples corresponds to a video frame at 24 frame per second, the  media count for the audio track increments by one for every frame, and 
 
 See diagram ~/OneDrive/Documents/SMPTE/TLX/20210416 labels for audio blocks.pdf
 
@@ -115,7 +307,9 @@ Example: After a media sequence is edited, the media counts within the same medi
 
 ## Media Count Rate
 
-***Define media count rate***
+Media count rate is the mapping from count to time on a real line in the case where the interval between points on the real line are constant.
+
+Tme labels that include media count and media count rate provide an alternative to timecode (SMPTE ST 12) that supports higher frame rates.
 
 
 ## Media Timestamp
@@ -134,6 +328,9 @@ During the processing of a media sequence, time labels can be copied from the so
 
 
 
+# Legacy Timecode
+
+Extensible time labeling provides support for legacy SMTE ST 12 timecode and provides an alternative representation of timecode with support for higher frame rates.
 
 
 # Annex A. Time Label Schema
@@ -143,13 +340,11 @@ The JSON schema for time labels is introduced in this annex.
 The JSON schema is extended for individual time label items in Part 2.
 
 
-
 # Annex B. Binary Representation of Time Labels
 
 UBJSON can be used as a binary representation of time labels.
 
 Note: Applications can choose a different representation for time labels.
-
 
 
 # Bibliography
