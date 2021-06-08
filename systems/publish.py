@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Script for publishing markdown documents in various formats
 
@@ -103,7 +103,7 @@ def read_default_config():
                 pathname = os.path.normpath(os.path.join(directory, f'config.{filetype}'))
                 if os.path.isfile(pathname):
                     return read_config(pathname)
-                    
+
     # Could not find a configuration file
     return None
 
@@ -225,7 +225,7 @@ if __name__ == '__main__':
     else:
         filedate = date.today() if args.date else None
         output = output_filename(args.source, config, filedate, args.format)
-    
+
     if args.verbose: print("Output document: %s" % output)
 
     # Get the pathname to the reference document (template) for the Word output format
