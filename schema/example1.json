@@ -1,0 +1,20 @@
+{
+  "tlx":
+  {
+    "version": "1.2",
+    "tlxitems" : [
+      {
+        "label”: "TLXptpTimestamp",
+        "time”: "1617746981.012345678",
+        "currentLocalOffset”: "-7176",
+        "leapSecondEvent”: "false"
+      },
+      {
+        "label”: "TLXptpTimestamp",
+        "time”: "1617746981.012345678",
+        "currentLocalOffset”: "-7176",
+        "leapSecondEvent”: "false"
+      },
+    ]
+  }
+}
