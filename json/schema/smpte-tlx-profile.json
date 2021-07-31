@@ -1,0 +1,287 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://smpte-ra.com/2120/3/2021/smpte-tlx-profile.json",
+  "title": "TLX Profiles",
+  "type": "object",
+  "description": "Schema for the SMPTE Extensible Time Label (TLX) Profiles. Subschemas for TLX profiles specified in ST 2120-3 appear here and should be referenced individually.",
+  "properties": {
+
+
+    "DBC": {
+      "title": "TLX DBC Profile",
+      "type": "object",
+      "description": "Digital Birth Certificate of the associated media unit.",
+      "examples": [
+        {
+          "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+            "currentLocalOffset": -25163 },
+          "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+          "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+        }
+      ],
+      "properties": {
+       "TLXuniqueSourceID": { },
+       "TLXmediaCount": { },
+       "TLXptpTimestamp": { }
+      },
+      "required": [ "TLXuniqueSourceID", "TLXmediaCount", "TLXptpTimestamp" ]
+    },
+
+
+    "ST12-1": {
+      "title": "ST12-1 Profile",
+      "type": "object",
+      "description": "Information sufficient to populate a Time and Control Code, as specified by SMPTE ST 12-1.",
+      "examples": [
+        {
+          "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ], "fieldMark": false,
+            "dropFrame": true, "modulus": "30",
+            "binaryGroups": "47210719", "bgFlags": "6",
+            "DBB1": "01", "DBB2": "00" }
+        },
+        {
+          "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ] }
+        }
+      ],
+      "properties": {
+        "TLXst12": {
+          "type": "object",
+          "properties": {
+            "timeAddress": {},
+            "subframe": false,
+            "modulus": { "enum": [ "24", "25", "30", "48", "50", "60" ] }
+          },
+          "required": [ "timeAddress" ]
+        }
+      },
+      "required": [ "TLXst12" ]
+    },
+
+
+    "ST12-3": {
+      "title": "ST12-3 Profile",
+      "type": "object",
+      "description": "Information sufficient to populate a Time and Control Code, as specified by SMPTE ST 12-3.",
+      "examples": [
+        {
+          "TLXst12": { "timeAddress": [ 1, 0, 9, 71 ],
+            "dropFrame": true, "modulus": "72",
+            "binaryGroups": "47210719",
+            "DBB1": "80", "DBB2": "03" }
+        },
+        {
+          "TLXst12": { "timeAddress": [ 1, 0, 9, 71 ] }
+        }
+      ],
+    "properties": {
+      "TLXst12": {
+        "type": "object",
+        "properties": {
+          "timeAddress": {},
+          "modulus": { "enum": [ "72", "96", "100", "120 (30x4)", "120 (24x5)" ] },
+          "bgFlags": false,
+          "colorFrame": false,
+          "fieldMark": false
+        },
+        "required": [ "timeAddress" ],
+      }
+    },
+    "required": [ "TLXst12" ]
+  },
+
+
+    "TimeOnly": {
+      "title": "TimeOnly Profile",
+      "type": "object",
+      "description": "A record of the creation time of the label for a corresponding media unit.",
+      "examples": [
+        {
+          "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+            "currentLocalOffset": -25163 }
+        }
+      ],
+      "properties": {
+        "TLXptpTimestamp": {
+          "properties": {
+            "ptpTime": {},
+            "currentLocalOffset": {},
+            "leapSecondEvent": {}
+          },
+          "required": [ "ptpTime" ],
+          "additionalProperties": false
+        }
+      },
+      "required": [ "TLXptpTimestamp" ],
+      "additionalProperties": false
+    },
+
+
+    "TimeLoc": {
+      "title": "TimeLoc Profile",
+      "type": "object",
+      "description": "A record of the creation time of the label for a corresponding media unit that can be interpreted as local time.",
+      "examples": [
+        {
+          "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+            "currentLocalOffset": -25163 }
+        }
+      ],
+      "properties": {
+        "TLXptpTimestamp": {
+          "properties": {
+            "ptpTime": {},
+            "currentLocalOffset": {}
+          },
+          "required": [ "ptpTime", "currentLocalOffset" ]
+        }
+      },
+      "required": [ "TLXptpTimestamp" ]
+    },
+
+
+    "TimeStr": {
+      "title": "TimeStr Profile",
+      "type": "object",
+      "description": "Provides the TLXmediaCount item and sufficient metadata for interpreting that count as a time-like string.",
+      "examples": [
+         { "TLXmediaCount": { "count": 300, "rate": [24, 1] } }
+      ],
+      "properties": {
+        "TLXmediaCount": {
+          "properties": {
+            "count": {},
+            "rate": {}
+          },
+          "required": [ "count", "rate" ]
+        }
+      },
+      "required": [ "TLXmediaCount" ]
+    },
+
+
+    "TLXv1": {
+      "title": "TLXv1 Profile",
+      "type": "object",
+      "description": "Contains no items or attributes other than those specified by ST 2120-2:202x.",
+      "examples": [
+        {
+          "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+            "currentLocalOffset": -25163 },
+          "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+          "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+        },
+
+        {
+          "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ], "fieldMark": false,
+              "dropFrame": true, "modulus": "30",
+              "binaryGroups": "47210719", "bgFlags": "6",
+              "DBB1": "01", "DBB2": "00"
+            },
+          "TLXsourceName": { "name": "tape 001" }
+        },
+
+        { "TLXuniqueSourceID": { "sourceID": "8eb03111-2085-48b5-919a-cebbf292ab48" },
+          "TLXmediaCount": { "count": 12000, "rate": [ 1000, 1 ] },
+          "TLXmediaUnitRuntime": { "runtime": [ 3, 1 ] }
+        },
+
+        {
+          "TLXmediaCount": { "count": 300, "rate": [24, 1] },
+          "TLXmediaUnitRuntime": { "runtime": [110, 2400] }
+        }
+      ],
+      "properties": {
+        "TLXptpTimestamp": {
+          "properties": {
+            "ptpTime": {},
+            "currentLocalOffset": {},
+            "leapSecondEvent": {}
+          },
+          "additionalProperties": false
+        },
+        "TLXmediaCount": {
+          "properties": {
+            "count": {},
+            "rate": {}
+          },
+          "additionalProperties": false
+        },
+        "TLXuniqueSourceID": {
+          "properties": {
+            "sourceID": {},
+          },
+          "additionalProperties": false
+        },
+        "TLXmediaUnitRuntime": {
+          "properties": {
+            "runtime": {},
+          },
+          "additionalProperties": false
+        },
+        "TLXst12": {
+          "properties": {
+            "timeAddress": {},
+            "dropFrame": {},
+            "binaryGroups": {},
+            "bgFlags": {},
+            "colorFrame": {},
+            "fieldMark": {},
+            "subFrame": {},
+            "modulus": {},
+            "DBB1": {},
+            "DBB2": {},
+          },
+          "additionalProperties": false
+        },
+        "TLXsourceName": {
+          "properties": {
+            "name": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+
+
+    "BINDptp": {
+      "title": "BINDptp Profile",
+      "type": "object",
+      "description": "Provides a sufficiently unique identifier for the corresponding media unit, suitable for use as the basis for a key in a database such that relationships to the media unit, including temporal ranges of media units, can be established.",
+      "examples": [
+        {
+          "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+            "currentLocalOffset": -25163 },
+          "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+        }
+      ],
+      "properties": {
+        "TLXptpTimestamp": {},
+        "TLXuniqueSourceID": {}
+      },
+      "required": [ "TLXptpTimestamp", "TLXuniqueSourceID" ]
+    },
+
+
+    "BINDcnt": {
+      "title": "BINDcnt Profile",
+      "type": "object",
+      "description": "Provides a sufficiently unique identifier for the corresponding media unit, suitable for use as the basis for a key in a database such that relationships to the media unit, including consecutive ranges of media units, can be established.",
+      "examples": [
+        {
+          "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+          "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+        }
+      ],
+      "properties": {
+        "TLXmediaCount": {},
+        "TLXuniqueSourceID": {}
+      },
+      "required": [ "TLXmediaCount", "TLXuniqueSourceID" ]
+    }
+
+
+  }
+}
+
+
