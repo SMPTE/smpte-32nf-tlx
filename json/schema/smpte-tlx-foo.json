@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://smpte-ra.com/2120/1/2021/smpte-tlx-foo.json",
+  "title": "TLX",
+  "type": "object",
+  "description": "This is an example schema for time labels based on a fictitious item, TLXfoo.",
+  "examples": [
+    {
+      "TLXfoo": {
+        "bar": "चार",
+        "baz": 5
+      }
+    }
+  ],
+  "properties": {
+    "TLXfoo": {
+      "$id": "#/properties/TLXfoo",
+      "title": "TLXfoo",
+      "type": "object",
+      "description": "A fictitious TLX item for illustration.",
+      "examples": [
+        {
+          "bar": "दो",
+          "baz": 5
+        },
+        {
+          "bar": "two"
+        }
+      ],
+      "properties": {
+        "bar": {
+          "$id": "#/properties/TLXfoo/properties/bar",
+          "title": "bar",
+          "type": "string",
+          "description": "A fictitious string attribute, to illustrate character and byte counts can differ.",
+	  "minLength":1,
+	  "maxLength":4,
+          "examples": [
+            "four",
+            "दो",
+            "три"
+          ]
+        },
+        "baz": {
+          "$id": "#/properties/TLXfoo/properties/baz",
+          "title": "baz",
+          "type": "number",
+          "description": "A fictitious number attribute, in the range [0,5].",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 5,
+          "examples": [
+            0,
+            5
+          ]
+        }
+      },
+      "additionalProperties": true,
+      "required": [ "bar" ]
+    }
+  },
+  "additionalProperties": true,
+  "required": [ ],
+  "minProperties": 1
+}
