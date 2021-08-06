@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "http://smpte-ra.com/2120/3/2021/smpte-tlx-profile.json",
+  "$id": "http://smpte-ra.com/2120/3/2021/smpte-tlx-profiles.json",
   "title": "TLX Profiles",
   "type": "object",
   "description": "Schema for the SMPTE Extensible Time Label (TLX) Profiles. Subschemas for TLX profiles specified in ST 2120-3 appear here and should be referenced individually.",
