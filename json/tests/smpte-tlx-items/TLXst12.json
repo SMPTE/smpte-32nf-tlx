@@ -1,0 +1,11 @@
+[ {
+    "description": "TLXst12 item vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-items/TLXst12" },
+    "tests": [
+        {
+            "description": "empty item",
+            "data": { "TLXst12": { } },
+            "valid": false
+        }
+    ]
+} ]

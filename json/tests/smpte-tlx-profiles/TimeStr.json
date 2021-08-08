@@ -1,0 +1,13 @@
+[ {
+    "description": "TimeStr profile vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-profiles/TimeStr" },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "data": { },
+            "valid": false
+        }
+    ]
+} ]
+
+

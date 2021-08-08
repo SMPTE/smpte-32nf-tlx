@@ -1,0 +1,13 @@
+[ {
+    "description": "TimeLoc profile vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-profiles/TimeLoc" },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "data": { },
+            "valid": false
+        }
+    ]
+} ]
+
+

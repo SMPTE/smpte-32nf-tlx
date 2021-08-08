@@ -1,0 +1,111 @@
+[ {
+    "description": "TLXmediaCount item vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-items/TLXmediaCount" },
+    "tests": [
+        {
+            "description": "empty item",
+            "data": { "TLXmediaCount": { } },
+            "valid": false
+        },
+        {
+            "description": "media count of zero",
+            "data": { "TLXmediaCount": { "count": 0 } },
+            "valid": true
+        },
+        {
+            "description": "media count only, less than zero",
+            "data": { "TLXmediaCount": { "count": -100 } },
+            "valid": false
+        },
+        {
+            "description": "missing media count (i.e., empty TLXmediaCount)",
+            "data": { "TLXmediaCount": {} },
+            "valid": false
+        },
+        {
+            "description": "media count and rate of 50fps",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] } },
+            "valid": true
+        },
+        {
+            "description": "media count and rate of 50fps [DELIBERATELY INCORRECT validity parameter]",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate of 29.94fps",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 30000, 1001 ]}},
+            "valid": true
+        },
+        {
+            "description": "media count and rate with missing denominator",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 50 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with zero denominator",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 50, 0 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with zero numerator",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 0, 1 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count only, non-integer",
+            "data": { "TLXmediaCount": { "count": 300.5 } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with negative numerator",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ -50, 1 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with negative denominator",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 50, -1 ] } },
+            "valid": false
+        },
+        {
+            "description": "missing media count, rate only",
+            "data": { "TLXmediaCount": { "rate": [ 50, 1 ] } },
+            "valid": false
+        },
+        {
+            "description": "missing media count, rate only [DELIBERATELY INCORRECT validity parameter]",
+            "data": { "TLXmediaCount": { "rate": [ 50, 1 ] } },
+            "valid": true
+        },
+       {
+            "description": "media count and something else",
+            "data": { "TLXmediaCount": { "count": 300, "extra": true } },
+            "valid": true
+        },
+        {
+            "description": "media count only, except wrong type (string)",
+            "data": { "TLXmediaCount": { "count": "300" } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with wrong type array items",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ "50", "1" ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate of three parts",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 50, 1, 2 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate of non-array type (number)",
+            "data": { "TLXmediaCount": { "count": 300, "rate": 50 } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate of non-array type (string)",
+            "data": { "TLXmediaCount": { "count": 300, "rate": "50, 1" } },
+            "valid": false
+        }
+    ]
+} ]
