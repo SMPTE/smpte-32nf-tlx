@@ -1,6 +1,6 @@
 # Quick illustration of TLX
 
-##Introduction
+## Introduction
 
 TLX, the 'Extensible Time Label', provides metadata about a single media unit that is simple, versatile, and extensible.
 
@@ -8,7 +8,7 @@ A TLX label (see ST 2120-1*) is comprised of one or more "items" (see 2120-2*). 
 
 In general, no item is required.  However, TLX profiles (see 2120-3*) can be defined to impose additional constraints on the formulation of a TLX label, requiring or forbidding certain items, attributes.  A profile can specify further constraints, e.g., how a certain metadata is produced.
 
-* these documents are members of the ST 2120 suite of standards, which as of AUG, 2021 are being drafted.
+    * these documents are members of the ST 2120 suite of standards, which as of AUG, 2021 are being drafted.
 
 ## Example: the Digital Birth Certificate (DBC)
 
@@ -19,11 +19,12 @@ One profile, the DBC, requires a conforming TLX label to include three specific 
     "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
     "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ], "currentLocalOffset": -25163 },
     "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
-}```
+}
+```
 
-The example above is presented in the text-based UTF-8 encoded protocol "JSON".  JSON is a great choice when trying to understand what's in a message – it's quite easy to read.  Of course, for a complete understanding of the elements, one should consult the SMPTE ST 2120 suite of documents, currently in draft.  However, a JSON representation is not at all compact.  The underlying metadata data can be much more efficiently represented by other encodings, such as the SMPTE KLV data encoding protocol described in SMTPE ST 336, which should suggest that a TLX label could be encoded in multiple, different ways.
+The example above is presented in the text-based UTF-8 encoded protocol "JSON".  JSON is a great choice when trying to understand what's in a message – it's quite easy to read.  Of course, for a complete understanding of the elements, one should consult the SMPTE ST 2120 suite of documents, still in draft.  However, a JSON representation is not at all compact.  The underlying metadata data can be much more efficiently represented by other encodings, such as the SMPTE KLV data encoding protocol described in SMTPE ST 336, which should suggest that a TLX label could be encoded in multiple, different ways.
 
-##TLX Schemas: smpte-tlx-items & smpte-tlx-profiles
+## TLX Schemas: smpte-tlx-items & smpte-tlx-profiles
 
 An instance of a TLX label, such as the one above, can be verified to be a valid TLX instance by the JSON Schema smpte-tlx-items.json.  The TLX label itself is merely an object: a non-empty, unordered collection of items, none of which are required.  TLX items are themselves objects, an non-empty unordered collection of attributes, some of which might be required.  The smpte-tlx-items schema includes the overall TLX schema, a subschema for each of the TLX items and its attributes, and some derived types that also appear as subschemas to assist in consistency when describing the attributes.
 
@@ -61,7 +62,7 @@ Here is an exemplary portion of the smpte-tlx-items schema, to give you an idea 
 
 The TLXptpTimestamp “item” is an object that requires the attribute "ptpTime", which is an array containing two integers representing seconds and nanoseconds.  Both integers are constrained to be positive; but each has a different limit, which comes from the PTP timestamp representation specified in IEEE 1588, e.g., nanoseconds is limited to 999,999,999 and thus rolling over at one second.  Because they are both explicitly described in the subschema as the array's elements, both are required, and additional elements are explicitly precluded.  The TLXptpTimestamp item permits additional attributes to be added, which is one way the TLX structure provides future extensibility.
 
-##UBJSON encoding
+## UBJSON encoding
 
 Another example encoding available for JSON is UBJSON.  Although UBJSON provides a binary encoding, it does not compress strings, such as the names of name-value pairs and values of type string (including hexadecimal strings).  Thus, which it offers another example for ways to encode a TLX label, it is only about 30% more efficient than JSON itself.
 
