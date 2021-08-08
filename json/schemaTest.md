@@ -18,6 +18,14 @@ schemaTest.py [-h][-d] [-s <schemaUnderTestFile> [ <testSuiteFile>]* ]'
   
   Upon execution, a report is given of each test run.  Diagnostics are presented when a validation result differs from what is expected.  Diagnostics are those provided by the jsonSchema.exceptions module.
   
+  ## Example usage
+
+```
+./schemaTest.py -s ./schema/smpte-tlx-items.json ./tests/smpte-tlx-items/*
+```
+
+  
+  
   ## Modules Required
   sys, getopt, inspect, json, jsonschema, jsonschema.exceptions
   
