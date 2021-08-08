@@ -1,0 +1,13 @@
+[ {
+    "description": "TLXv1 profile vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-profiles/TLXv1" },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "data": { },
+            "valid": false
+        }
+    ]
+} ]
+
+

@@ -1,0 +1,12 @@
+[ {
+    "description": "<name> <item/profile> vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-profiles/<name>" },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "data": { },
+            "valid": false
+        }
+    ]
+} ]
+

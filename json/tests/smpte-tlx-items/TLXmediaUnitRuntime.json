@@ -1,0 +1,36 @@
+[ {
+    "description": "TLXmediaUnitRuntime item vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-items/TLXmediaUnitRuntime" },
+    "tests": [
+        {
+            "description": "empty item",
+            "data": { "TLXmediaUnitRuntime": { } },
+            "valid": false
+        },
+        {
+            "description": "ATSC runtime",
+            "data": { "TLXmediaUnitRuntime": { "runtime": [ 1001, 30000 ] } },
+            "valid": true
+        },
+        {
+            "description": "DVB runtime",
+            "data": { "TLXmediaUnitRuntime": { "runtime": [ 1, 50 ] } },
+            "valid": true
+        },
+        {
+            "description": "bad denominator",
+            "data": { "TLXmediaUnitRuntime": { "runtime": [ 1, 0 ] } },
+            "valid": false
+        },
+        {
+            "description": "missing 'runtime' attribute",
+            "data": { "TLXmediaUnitRuntime": { "duration": [ 1, 0 ] } },
+            "valid": false
+        },
+        {
+            "description": "extra attribute",
+            "data": { "TLXmediaUnitRuntime": { "runtime": [ 1,50 ], "extra": null } },
+            "valid": true
+        }
+    ]
+} ]

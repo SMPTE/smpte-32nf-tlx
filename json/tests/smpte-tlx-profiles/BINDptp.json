@@ -1,0 +1,13 @@
+[ {
+    "description": "BINDptp profile vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-profiles/BINDptp" },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "data": { },
+            "valid": false
+        }
+    ]
+} ]
+
+

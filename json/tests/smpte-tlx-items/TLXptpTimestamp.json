@@ -1,0 +1,11 @@
+[ {
+    "description": "TLXptpTimestamp item vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-items/TLXptpTimestamp" },
+    "tests": [
+        {
+            "description": "empty item",
+            "data": { "TLXptpTimestamp": { } },
+            "valid": false
+        }
+    ]
+} ]

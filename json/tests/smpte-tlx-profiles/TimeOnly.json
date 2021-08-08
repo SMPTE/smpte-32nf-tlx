@@ -1,0 +1,13 @@
+[ {
+    "description": "TimeOnly profile vigorous test suite",
+    "schema": { "$ref": "../smpte-tlx-profiles/TimeOnly" },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "data": { },
+            "valid": false
+        }
+    ]
+} ]
+
+

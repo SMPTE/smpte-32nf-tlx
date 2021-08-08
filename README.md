@@ -5,13 +5,13 @@ overview.txt
 > Over of the TLX document suite written by Bill Redmann
 
 models/
-> Class diagrams for TLX drawn using Visual Paradigm
+> [needs update] Class diagrams for TLX drawn using Visual Paradigm
 
 notes/
-> Notes on JSON schema
+> [needs update] Notes on JSON schema
 
 schema/
-> Early experiments with JSON schema
+> [UPDATED] smpte-tlx schemas (for items & profiles), and testing software
 
 systems/
 > Markdown version of TLX Part 1 superseded by the Word draft on Teams.
