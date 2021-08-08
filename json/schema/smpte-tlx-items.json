@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "http://smpte-ra.com/2120/2/2021/smpte-tlx.json",
+  "$id": "http://smpte-ra.com/2120/2/2021/smpte-tlx-items.json",
   "title": "TLX",
   "type": "object",
   "description": "Schema for the SMPTE Extensible Time Label (TLX).",
@@ -33,7 +33,6 @@
     }
   ],
 
-  "$comment": "Subschemas for TLX items specified in ST 2120-2 appear here.",
   "properties": {
 
     "TLXptpTimestamp": {
@@ -108,7 +107,7 @@
       "$id": "#TLXmediaUnitRuntime",
       "title": "TLXmediaUnitRuntime",
       "type": "object",
-      "description": "The number of seconds for the media unit.",
+      "description": "The number of seconds for the media unit runtime.",
       "examples": [
         { "runtime": [ 1001, 30000 ] },
         { "runtime": [ 1, 50] },
@@ -123,6 +122,7 @@
           ]
         }
       },
+      "required": [ "runtime" ],
       "additionalProperties": true
     },
 
@@ -234,9 +234,7 @@
             { "$ref": "#/definitions/hexstringType" },
             { "pattern": "^[0-1][0-9a-f]$"  }
           ],
-          "description": "hexadecimal value for five bits:
-           [ 0, 0, 0, sub-frame_5,
-             sub-frame_4, sub-frame_3, sub-frame_2, sub-frame_1 ]"
+          "description": "hexadecimal value for five bits: [ 0, 0, 0, sub-frame_5, sub-frame_4, sub-frame_3, sub-frame_2, sub-frame_1 ]"
         },
         "modulus": {
           "description":  "A count for when the frames field rolls over.",
@@ -268,11 +266,10 @@
     { "required": [ "TLXuniqueSourceID" ] },
     { "required": [ "TLXst12" ] },
     { "required": [ "TLXsourceName" ] },
-    { "required": [ "TLXmediaRuntime" ] }
+    { "required": [ "TLXmediaUnitRuntime" ] }
   ],
 
   "definitions": {
-    "description": "Subschemas for derived types in ST 2120-2 Table 1 appear here.",
 
     "integerType": {
       "type": "integer",
@@ -292,6 +289,7 @@
           ]
         }
       ],
+      "minItems": 2,
       "additionalItems": false
     },
 
@@ -302,4 +300,3 @@
     }
   }
 }
-
