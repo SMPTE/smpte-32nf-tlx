@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# chmod 777 schemaTest.py
+# hoping the execution permissions propagate to GitHub (then these two lines can go away)
 
 import sys, getopt, inspect, json, jsonschema, jsonschema.exceptions
 #from jsonschema import validate
