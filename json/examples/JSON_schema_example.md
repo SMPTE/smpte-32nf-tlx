@@ -51,7 +51,7 @@ Here is an exemplary portion of the smpte-tlx-items schema, to give you an idea 
             "ptpTime": { "type": "array", "items": [
                     { "description": "seconds", "type": "integer", "minimum": 0, "exclusiveMaximum": 281474976710656 },
                     { "description": "nanoseconds", "type": "integer", "minimum": 0, "exclusiveMaximum": 1000000000 } ],
-                "additionalItems": false },
+                "minItems": 2, "additionalItems": false },
             "currentLocalOffset": { "type": "integer", "minimum": -2147483648, "exclusiveMaximum": 2147483648 },
             "leapSecondEvent": { "type": "boolean", "default": false }
         },
@@ -60,7 +60,7 @@ Here is an exemplary portion of the smpte-tlx-items schema, to give you an idea 
     }...
 ```
 
-The TLXptpTimestamp “item” is an object that requires the attribute "ptpTime", which is an array containing two integers representing seconds and nanoseconds.  Both integers are constrained to be positive; but each has a different limit, which comes from the PTP timestamp representation specified in IEEE 1588, e.g., nanoseconds is limited to 999,999,999 and thus rolling over at one second.  Because they are both explicitly described in the subschema as the array's elements, both are required, and additional elements are explicitly precluded.  The TLXptpTimestamp item permits additional attributes to be added, which is one way the TLX structure provides future extensibility.
+The TLXptpTimestamp “item” is an object that requires the attribute "ptpTime", which is an array containing two integers representing seconds and nanoseconds.  Both integers are constrained to be positive; but each has a different limit, which comes from the PTP timestamp representation specified in IEEE 1588, e.g., nanoseconds is limited to 999,999,999 and thus rolling over at one second.  Both are explicitly required and additional elements are explicitly precluded.  The TLXptpTimestamp item permits additional attributes to be added, which is one way the TLX structure provides future extensibility.
 
 ## UBJSON encoding
 
