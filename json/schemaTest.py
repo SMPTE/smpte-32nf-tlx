@@ -14,18 +14,19 @@ jsonSchema = 'json-schema-draft-7'
 
 
 # this is the JSON schema that validates a good test suite
-testSchemaFilename = 'test-schema.json'
+testSchemaFilename = './schema/test-schema.json'
 # TODO: the test suite includes a "schema" parameter for each collection of tests,
 #       but for now, we're not using that.  (Need to set up the resolver code to trace the $ref).
 
 def showUsage():
-    print ('USAGE: schemaTest.py [-h][-d] [-s <schemaUnderTestFile> [ <testSuiteFile>]* ]' )
+    print ('USAGE: schemaTest.py [-h][-d] [-s <schemaUnderTestFile> [ <testSuiteFile>]+ ]' )
     print (' Validates the schemaUnderTestFile, then tests with zero or more testSuiteFile(s)')
     print (' -d prints debug hints')
 
 def main(argv):
     debug = 0
-    firstArg = 0  # with no options, SUT is agrv[0]
+    schemaUnderTestFilename = ''
+
     # validate the arguments passed
     try:
         opts, args = getopt.getopt(argv,'hds:')
@@ -39,21 +40,22 @@ def main(argv):
             sys.exit()
         if opt == '-d':
             debug = 1
-            firstArg += 1
-            
-    if len(argv) < firstArg + 1:
+        if opt == '-s':
+            schemaUnderTestFilename = arg
+    ListOfTestFiles = args
+    if (len(ListOfTestFiles) == 0) or schemaUnderTestFilename == '':        
         print ('ERR: too few arguments')
         showUsage()
         sys.exit(2)
         
     # load the schema under test (SUT)
     try:
-        with open(argv[firstArg]) as schemaUnderTestFile:
+        with open(schemaUnderTestFilename) as schemaUnderTestFile:
             SUT = json.load(schemaUnderTestFile)
             schemaUnderTestFile.close()
-            #if debug: print ('DEBUG: 1st arg', argv[firstArg], ' (SUT) seems OK.')
+            #if debug: print ('DEBUG: the -s arg' + schemaUnderTestFilename + ' (SUT) seems OK.')
     except Exception as e:
-        print('ERR:',argv[firstArg],'is missing or poorly formed JSON')
+        print('ERR:',schemaUnderTestFilename,'is missing or poorly formed JSON')
         print(str(e))
         sys.exit(2)
 
@@ -69,52 +71,53 @@ def main(argv):
         sys.exit(2)
 
     # validate that all the test set files are readable and valid
-    for i in range ( firstArg + 1, len(argv) ):
-        #if debug: print ('DEBUG: loading test suite',argv[i],'for preliminary checks')
+    for i in range ( 0, len(ListOfTestFiles) ):
+        #if debug: print ('DEBUG: loading test suite',ListOfTestFiles[i],'for preliminary checks')
         try:
-            with open(argv[i]) as currentTestSet:
+            with open(ListOfTestFiles[i]) as currentTestSet:
                 try:
-                    #if debug: print('DEBUG: verifying test suite file', argv[i],'.')
+                    #if debug: print('DEBUG: verifying test suite file', ListOfTestFiles[i],'.')
                     TESTSUITELIST = json.load(currentTestSet)
                 except Exception as e:
-                    print('WARN: Can\'t parse JSON for test suite', argv[i],'.')
+                    print('WARN: Can\'t parse JSON for test suite', ListOfTestFiles[i],'.')
                     print(str(e),'\n skipping...')
                 else:
                     try:
                         jsonschema.validate( instance=TESTSUITELIST, schema=TESTSCHEMA)
                     except Exception as e:
-                        print('WARN:', argv[i],'isn\'t a well-formed test suite.')
+                        print('WARN:', ListOfTestFiles[i],'isn\'t a well-formed test suite.')
                         print(str(e),'\n skipping...')
                 currentTestSet.close()
         except Exception as e:
-            print('WARN: Could not read test suite file', argv[i],'.')
+            print('WARN: Could not read test suite file', ListOfTestFiles[i],'.')
             print(str(e),'\n skipping...')
 
     # now reopen and run each test suite
-    for i in range ( firstArg + 1, len(argv) ):
-        #if debug: print ('DEBUG: re-loading test suite file',argv[i])
+    for i in range ( 0, len(ListOfTestFiles) ):
+        #if debug: print ('DEBUG: re-loading test suite file',ListOfTestFiles[i])
         try:
-            with open(argv[i]) as currentTestSet:
+            with open(ListOfTestFiles[i]) as currentTestSet:
                 try:
-                    #if debug: print('DEBUG: re-verifying test suite', argv[i],'.')
+                    #if debug: print('DEBUG: re-verifying test suite', ListOfTestFiles[i],'.')
                     TESTSUITELIST = json.load(currentTestSet)
                     currentTestSet.close()
                 except Exception as e:
-                    print('WARN: Can\'t parse JSON for test suite', argv[i],'.')
+                    print('WARN: Can\'t parse JSON for test suite', ListOfTestFiles[i],'.')
                     print(str(e),'\n skipping...')
                     continue
                 else:
                     try:
                         jsonschema.validate( instance=TESTSUITELIST, schema=TESTSCHEMA)
                     except Exception as e:
-                        print('WARN:', argv[i],'isn\'t a well-formed test suite.')
+                        print('WARN:', ListOfTestFiles[i],'isn\'t a well-formed test suite.')
                         print(str(e),'\n skipping...')
                         continue
         except Exception as e:
-            print('WARN: Could not read test suite file', argv[i],'.')
+            print('WARN: Could not read test suite file', ListOfTestFiles[i],'.')
             print(str(e),'\n skipping...')
 
-        print('\nSuite', argv[i], '(', TESTSUITELIST['description'], ')' )
+        print('\nSuite', ListOfTestFiles[i], '(' + str(TESTSUITELIST[0]['description']) + ')' )
+	# TODO fixed index of [0] is not appropriate for description when multiple sets are in a single file
         
         # TESTS could have multiple schemas, but one is expected
         for j in range ( 0, len(TESTSUITELIST) ):
@@ -127,7 +130,7 @@ def main(argv):
                 #if debug: print('DEBUG:', str(TESTSUITE['schema']),'.')
                 #jsonschema.validate(instance=TEST['schema'], schema=schema.json)
             except Exception as e:
-                print('WARN:', argv[i],'has a faulty schema item in array element',j,'.')
+                print('WARN:', ListOfTestFiles[i],'has a faulty schema item in array element',j,'.')
                 print(str(e),'\n skipping...')
                 continue
             else:
@@ -164,7 +167,7 @@ def main(argv):
                             print('  WARN: this test instance:\n    ', s,'\n  is supposed to be INVALID but PASSED.')
                     finally:
                         continue
-    print ('DEBUG: done')
+    print ('\n\ndone.')
     
     #v = validate(instance= { "TLXptpTimestamp": { "ptpTime": [1,2] } }, schema=SUT)
     #print (v)
@@ -173,4 +176,4 @@ def main(argv):
 
 if __name__ == '__main__':
    main(sys.argv[1:])
-   print ('main exits silently')
+   #print ('main exits silently')
