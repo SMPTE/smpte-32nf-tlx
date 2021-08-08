@@ -58,6 +58,7 @@
                "type": "integer",
                "minimum": 0, "exclusiveMaximum": 1000000000 }
           ],
+          "minItems": 2,
           "additionalItems": false
         },
         "currentLocalOffset": {
