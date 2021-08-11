@@ -3,9 +3,64 @@
     "schema": { "$ref": "../smpte-tlx-items/TLXsourceName" },
     "tests": [
         {
-            "description": "empty item",
+            "description": "empty source name item",
             "data": { "TLXsourceName": { } },
             "valid": false
-        }
+        },
+        {
+            "description": "simple source name item",
+            "data": { "TLXsourceName": { "name": "TAPE 001" } },
+            "valid": true
+        },
+        {
+            "description": "zero-length source name item",
+            "data": { "TLXsourceName": { "name": "" } },
+            "valid": false
+        },
+        {
+            "description": "max source name (40 code points, 40 bytes) item",
+            "data": { "TLXsourceName": { "name": "tape 0010/tape 0020/tape 0030/tape 0040/" } },
+            "valid": true
+        },
+        {
+            "description": "long source name (50 code points, 50 bytes) item",
+            "data": { "TLXsourceName": { "name": "tape 0010/tape 0020/tape 0030/tape 0040/tape 0050/" } },
+            "valid": false
+        },
+        {
+            "description": "Russian source name (9 code points, 14 bytes - two per Cyrillic character) item",
+            "data": { "TLXsourceName": { "name": "ЛЕНТА 001" } },
+            "valid": true
+        },
+        {
+            "description": "Hindi source name (6 code points, 10 bytes - three per Devanagari character) item",
+            "data": { "TLXsourceName": { "name": "टेप 001" } },
+            "valid": true
+        },
+        {
+            "description": "mixed text and icons source name (26 code points, 41 bytes - four per icon character) item",
+            "data": { "TLXsourceName": { "name": "📀 001, 📄 125A, 🎬 1, 🎥 2, ⭕️" } },
+            "valid": true
+        },
+        {
+            "description": "max source name (40 code points, 160 bytes - four per emoji character) item",
+            "data": { "TLXsourceName": { "name": "😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍" } },
+            "valid": true
+        },
+        {
+            "description": "long source name (50 code points, 200 bytes) item",
+            "data": { "TLXsourceName": { "name": "😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍" } },
+            "valid": false
+        },
+        {
+            "description": "simple source name item + unknown attribute",
+            "data": { "TLXsourceName": { "name": "TAPE 001", "language": "English" } },
+            "valid": true
+        },
+        {
+            "description": "source name item with unknown attribute only",
+            "data": { "TLXsourceName": { "language": "English" } },
+            "valid": false
+        },
     ]
 } ]
