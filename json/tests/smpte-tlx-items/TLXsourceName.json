@@ -61,6 +61,6 @@
             "description": "source name item with unknown attribute only",
             "data": { "TLXsourceName": { "language": "English" } },
             "valid": false
-        },
+        }
     ]
 } ]
