@@ -101,7 +101,7 @@ def main(argv):
                     except Exception as e:
                         print('WARN:', ListOfTestFiles[i],'isn\'t a well-formed test suite.')
                         print(str(e),'\n skipping...')
-			suitesBroken += 1
+                        suitesBroken += 1
                         continue
         except Exception as e:
             print('WARN: Could not read test suite file', ListOfTestFiles[i],'.')
