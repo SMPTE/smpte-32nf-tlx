@@ -31,8 +31,6 @@ def main(argv):
     # counters for report at end
     suitesRun = 0
     suitesBroken = 0
-    testsRun = 0
-    testsBroken = 0
     testsPassed = 0
     testsFailed = 0
 
@@ -149,17 +147,17 @@ def main(argv):
                         if isVALID == True:
                             print('  WARN: instance is supposed to be VALID but FAILED.')
                             print('\n  DIAGNOSTIC: \n-------------------------------------\n',str(e),'\n-------------------------------------\n')
-                            testFailed += 1
+                            testsFailed += 1
                         else:
-                            testPassed += 1
+                            testsPassed += 1
                             #if debug: print('DEBUG:', s,'INVALID and FAILED (correct).')
                     else:
                         #if debug: print('  DEBUG: instance DID validate and validity flag is', isVALID)
                         if isVALID == True:
-                            testPassed += 1
+                            testsPassed += 1
                             #if debug: print('DEBUG:', s,'VALID and PASSED (correct).')
                         else:
-                            testFailed += 1
+                            testsFailed += 1
                             print('  WARN: this test instance:\n    ', s,'\n  is supposed to be INVALID but PASSED.')
                     finally:
                         continue
