@@ -162,7 +162,7 @@ def main(argv):
                     finally:
                         continue
 
-    print ('\n\nResults:\nOf', suitesRun + suitesBroken, 'test suites,', suitesBroken, 'were broken, leaving', suitesRun, 'to run.')
+    print ('\n\nResults:\nOf', suitesRun + suitesBroken, 'test suites,', suitesBroken, 'was' if suitesBroken == 1 else 'were' + ' broken, leaving', suitesRun, 'to run.')
     print ('From those,', testsPassed + testsFailed, 'tests were run with', testsPassed, 'PASSED and', testsFailed, 'FAILED.')
     print ('\n\nDone.')
 
