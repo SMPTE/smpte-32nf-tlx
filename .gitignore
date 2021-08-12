@@ -3,3 +3,4 @@
 
 # Ignore old files
 Archive/*
+.DS_Store
