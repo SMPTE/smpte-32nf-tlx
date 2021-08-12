@@ -8,12 +8,12 @@
             "valid": false
         },
         {
-            "description": "zero length source ID item",
+            "description": "simple source ID item, zero length",
             "data": { "TLXuniqueSourceID": { "sourceID": "" } },
             "valid": false
         },
         {
-            "description": "missing character source ID item",
+            "description": "simple source ID item, missing character",
             "data": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f" } },
             "valid": false
         },
@@ -33,7 +33,7 @@
             "valid": false
         },
         {
-            "description": "simple source ID item + unknown attribute",
+            "description": "source ID item + unknown attribute",
             "data": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3",
                                              "MACaddress": "23-EA-4A-3B-21-EF" } },
             "valid": true
