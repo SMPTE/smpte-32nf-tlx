@@ -126,13 +126,7 @@
             "valid": true
         },
         {
-            "description": "ST 12 item, binary groups upper case hexadecimal (a receiver should PASS this test)",
-            "data": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
-                                 "binaryGroups": "0123ABCD" } },
-            "valid": true
-        },
-       {
-            "description": "ST 12 item, binary groups upper case hexadecimal (a sender should FAIL this test)",
+            "description": "ST 12 item, binary groups upper case hexadecimal (receiver may PASS, sender shall FAIL)",
             "data": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
                                  "binaryGroups": "0123ABCD" } },
             "valid": false
@@ -195,8 +189,9 @@
             "description": "ST 12 item, subFrame too short",
             "data": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
                                  "subFrame": "0" } },
-            "valid": true
-        },        {
+            "valid": false
+        },
+        {
             "description": "ST 12 item, subFrame maximum value",
             "data": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
                                  "subFrame": "1f" } },
@@ -365,16 +360,10 @@
             "valid": true
         },
         {
-            "description": "ST 12 item, DBB1, uppercase (a receiver should PASS this)",
+            "description": "ST 12 item, DBB1, uppercase (receiver may PASS, sender shall FAIL)",
             "data": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
                                  "DBB1": "1A" } },
             "valid": true
-        },
-        {
-            "description": "ST 12 item, DBB1, uppercase (a sender should FAIL this)",
-            "data": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
-                                 "DBB1": "1A" } },
-            "valid": false
         },
         {
             "description": "ST 12 item, DBB2",
@@ -413,13 +402,7 @@
             "valid": true
         },
         {
-            "description": "ST 12 item, DBB2, uppercase (a receiver should PASS this)",
-            "data": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
-                                 "DBB2": "1A" } },
-            "valid": true
-        },
-        {
-            "description": "ST 12 item, DBB2, uppercase (a sender should FAIL this)",
+            "description": "ST 12 item, DBB2, uppercase (receiver may PASS, sender shall FAIL)",
             "data": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
                                  "DBB2": "1A" } },
             "valid": false
