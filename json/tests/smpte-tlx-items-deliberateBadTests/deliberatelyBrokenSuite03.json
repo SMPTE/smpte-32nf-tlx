@@ -1,0 +1,11 @@
+[ {
+    "description": "valid JSON, invalid test schema (no 'valid')",
+    "schema": { "$ref": "../smpte-tlx-items/TLXmediaCount" },
+    "tests": [
+      {
+        "description": "media count and rate of 29.94fps (valid test)",
+        "data": { "TLXmediaCount": { "count": 300, "rate": [ 30000, 1001 ]}},
+      }
+    ]
+} ]
+
