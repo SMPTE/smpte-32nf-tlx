@@ -425,7 +425,7 @@
             "data": { "TLXst12": { 
                 "timeAddress": [ 1, 0, 9, 23 ], 
                 "modulus": "72",
-                "subFrame": "2",
+                "subFrame": "02",
                 "binaryGroups": "00000000",
                 "DBB1": "80",
                 "DBB2": "03" } },
