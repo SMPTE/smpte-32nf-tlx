@@ -93,7 +93,7 @@ def main(argv):
                 except Exception as e:
                     print('WARN: Can\'t parse JSON for test suite', ListOfTestFiles[i],'.')
                     print(str(e),'\n skipping...')
-		    suitesBroken += 1
+                    suitesBroken += 1
                     continue
                 else:
                     try:
@@ -106,12 +106,12 @@ def main(argv):
         except Exception as e:
             print('WARN: Could not read test suite file', ListOfTestFiles[i],'.')
             print(str(e),'\n skipping...')
-	    suitesBroken += 1
-	    continue
+            suitesBroken += 1
+            continue
 
         print('\nSuite', ListOfTestFiles[i], '(' + str(TESTSUITELIST[0]['description']) + ')' )
-	suitesRun += 1
-	# TODO constant index of [0] is not appropriate for description when multiple test sets are in a single file
+        suitesRun += 1
+        # TODO constant index of [0] is not appropriate for description when multiple test sets are in a single file
         
         # TESTS could have multiple schemas, but one is expected
         for j in range ( 0, len(TESTSUITELIST) ):
@@ -149,7 +149,7 @@ def main(argv):
                         if isVALID == True:
                             print('  WARN: instance is supposed to be VALID but FAILED.')
                             print('\n  DIAGNOSTIC: \n-------------------------------------\n',str(e),'\n-------------------------------------\n')
-			    testFailed += 1
+                            testFailed += 1
                         else:
                             testPassed += 1
                             #if debug: print('DEBUG:', s,'INVALID and FAILED (correct).')
@@ -159,13 +159,13 @@ def main(argv):
                             testPassed += 1
                             #if debug: print('DEBUG:', s,'VALID and PASSED (correct).')
                         else:
-			    testFailed += 1
+                            testFailed += 1
                             print('  WARN: this test instance:\n    ', s,'\n  is supposed to be INVALID but PASSED.')
                     finally:
                         continue
-			
+
     print ('\n\nResults:\nOf', suitesRun + suitesBroken, 'test suites,', suitesBroken, 'were broken, leaving', suitesRun, 'to run.')
-    print ('From those,', testsPassed + testsFailed, 'tests were run with', testsPassed, 'PASSED and', testsFailed, 'FAILED.		
+    print ('From those,', testsPassed + testsFailed, 'tests were run with', testsPassed, 'PASSED and', testsFailed, 'FAILED.
     print ('\n\nDone.')
 
 if __name__ == '__main__':
