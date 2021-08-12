@@ -23,22 +23,12 @@
             "valid": true
         },
         {
-            "description": "simple source ID item, wrong case (this test is expected to PASS for a receiver)",
-            "data": { "TLXuniqueSourceID": { "sourceID": "D1E64EfD-19D1-4643-8DE9-119E19f4D8A6" } },
-            "valid": true
-        },
-        {
-            "description": "simple source ID item, wrong case (this test is expected to FAIL for a sender",
+            "description": "simple source ID item, wrong case (receiver may PASS, sender shall FAIL)",
             "data": { "TLXuniqueSourceID": { "sourceID": "D1E64EfD-19D1-4643-8DE9-119E19f4D8A6" } },
             "valid": false
         },
         {
-            "description": "simple source ID item, no hyphens (this test is expected to PASS for a receiver)",
-            "data": { "TLXuniqueSourceID": { "sourceID": "e2aae9bad5424691b242fc0748744d90" } },
-            "valid": true
-        },
-        {
-            "description": "simple source ID item, no hyphens (this test is expected to FAIL for a sender)",
+            "description": "simple source ID item, no hyphens (receiver may PASS, sender shall FAIL)",
             "data": { "TLXuniqueSourceID": { "sourceID": "e2aae9bad5424691b242fc0748744d90" } },
             "valid": false
         },
