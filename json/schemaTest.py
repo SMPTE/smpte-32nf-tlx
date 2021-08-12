@@ -165,7 +165,7 @@ def main(argv):
                         continue
 
     print ('\n\nResults:\nOf', suitesRun + suitesBroken, 'test suites,', suitesBroken, 'were broken, leaving', suitesRun, 'to run.')
-    print ('From those,', testsPassed + testsFailed, 'tests were run with', testsPassed, 'PASSED and', testsFailed, 'FAILED.
+    print ('From those,', testsPassed + testsFailed, 'tests were run with', testsPassed, 'PASSED and', testsFailed, 'FAILED.')
     print ('\n\nDone.')
 
 if __name__ == '__main__':
