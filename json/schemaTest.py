@@ -27,6 +27,15 @@ def showUsage():
 
 def main(argv):
     debug = 0
+
+    # counters for report at end
+    suitesRun = 0
+    suitesBroken = 0
+    testsRun = 0
+    testsBroken = 0
+    testsPassed = 0
+    testsFailed = 0
+
     schemaUnderTestFilename = ''
 
     # validate the arguments passed
@@ -74,28 +83,6 @@ def main(argv):
 
     # validate that all the test set files are readable and valid
     for i in range ( 0, len(ListOfTestFiles) ):
-        #if debug: print ('DEBUG: loading test suite',ListOfTestFiles[i],'for preliminary checks')
-        try:
-            with open(ListOfTestFiles[i]) as currentTestSet:
-                try:
-                    #if debug: print('DEBUG: verifying test suite file', ListOfTestFiles[i],'.')
-                    TESTSUITELIST = json.load(currentTestSet)
-                except Exception as e:
-                    print('WARN: Can\'t parse JSON for test suite', ListOfTestFiles[i],'.')
-                    print(str(e),'\n skipping...')
-                else:
-                    try:
-                        jsonschema.validate( instance=TESTSUITELIST, schema=TESTSCHEMA)
-                    except Exception as e:
-                        print('WARN:', ListOfTestFiles[i],'isn\'t a well-formed test suite.')
-                        print(str(e),'\n skipping...')
-                currentTestSet.close()
-        except Exception as e:
-            print('WARN: Could not read test suite file', ListOfTestFiles[i],'.')
-            print(str(e),'\n skipping...')
-
-    # now reopen and run each test suite
-    for i in range ( 0, len(ListOfTestFiles) ):
         #if debug: print ('DEBUG: re-loading test suite file',ListOfTestFiles[i])
         try:
             with open(ListOfTestFiles[i]) as currentTestSet:
@@ -106,6 +93,7 @@ def main(argv):
                 except Exception as e:
                     print('WARN: Can\'t parse JSON for test suite', ListOfTestFiles[i],'.')
                     print(str(e),'\n skipping...')
+		    suitesBroken += 1
                     continue
                 else:
                     try:
@@ -113,13 +101,17 @@ def main(argv):
                     except Exception as e:
                         print('WARN:', ListOfTestFiles[i],'isn\'t a well-formed test suite.')
                         print(str(e),'\n skipping...')
+			suitesBroken += 1
                         continue
         except Exception as e:
             print('WARN: Could not read test suite file', ListOfTestFiles[i],'.')
             print(str(e),'\n skipping...')
+	    suitesBroken += 1
+	    continue
 
         print('\nSuite', ListOfTestFiles[i], '(' + str(TESTSUITELIST[0]['description']) + ')' )
-	# TODO fixed index of [0] is not appropriate for description when multiple sets are in a single file
+	suitesRun += 1
+	# TODO constant index of [0] is not appropriate for description when multiple test sets are in a single file
         
         # TESTS could have multiple schemas, but one is expected
         for j in range ( 0, len(TESTSUITELIST) ):
@@ -157,24 +149,24 @@ def main(argv):
                         if isVALID == True:
                             print('  WARN: instance is supposed to be VALID but FAILED.')
                             print('\n  DIAGNOSTIC: \n-------------------------------------\n',str(e),'\n-------------------------------------\n')
+			    testFailed += 1
                         else:
-                            pass
+                            testPassed += 1
                             #if debug: print('DEBUG:', s,'INVALID and FAILED (correct).')
                     else:
                         #if debug: print('  DEBUG: instance DID validate and validity flag is', isVALID)
                         if isVALID == True:
-                            pass
+                            testPassed += 1
                             #if debug: print('DEBUG:', s,'VALID and PASSED (correct).')
                         else:
+			    testFailed += 1
                             print('  WARN: this test instance:\n    ', s,'\n  is supposed to be INVALID but PASSED.')
                     finally:
                         continue
-    print ('\n\ndone.')
-    
-    #v = validate(instance= { "TLXptpTimestamp": { "ptpTime": [1,2] } }, schema=SUT)
-    #print (v)
-    #errors = sorted(v.iter_errors(instance), key=lambda e: e.schema_path)
-    #print (errors)
+			
+    print ('\n\nResults:\nOf', suitesRun + suitesBroken, 'test suites,', suitesBroken, 'were broken, leaving', suitesRun, 'to run.')
+    print ('From those,', testsPassed + testsFailed, 'tests were run with', testsPassed, 'PASSED and', testsFailed, 'FAILED.		
+    print ('\n\nDone.')
 
 if __name__ == '__main__':
    main(sys.argv[1:])
