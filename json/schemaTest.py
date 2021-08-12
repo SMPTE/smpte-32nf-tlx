@@ -89,7 +89,7 @@ def main(argv):
                     TESTSUITELIST = json.load(currentTestSet)
                     currentTestSet.close()
                 except Exception as e:
-                    print('WARN: Can\'t parse JSON for test suite', ListOfTestFiles[i],'.')
+                    print('\n\nWARN: Can\'t parse JSON for test suite', ListOfTestFiles[i],'.')
                     print(str(e),'\n skipping...')
                     suitesBroken += 1
                     continue
@@ -97,12 +97,12 @@ def main(argv):
                     try:
                         jsonschema.validate( instance=TESTSUITELIST, schema=TESTSCHEMA)
                     except Exception as e:
-                        print('WARN:', ListOfTestFiles[i],'isn\'t a well-formed test suite.')
+                        print('\n\nWARN:', ListOfTestFiles[i],'isn\'t a well-formed test suite.')
                         print(str(e),'\n skipping...')
                         suitesBroken += 1
                         continue
         except Exception as e:
-            print('WARN: Could not read test suite file', ListOfTestFiles[i],'.')
+            print('\n\nWARN: Could not read test suite file', ListOfTestFiles[i],'.')
             print(str(e),'\n skipping...')
             suitesBroken += 1
             continue
