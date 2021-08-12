@@ -363,7 +363,7 @@
             "description": "ST 12 item, DBB1, uppercase (receiver may PASS, sender shall FAIL)",
             "data": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
                                  "DBB1": "1A" } },
-            "valid": true
+            "valid": false
         },
         {
             "description": "ST 12 item, DBB2",
