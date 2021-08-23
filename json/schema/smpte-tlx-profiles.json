@@ -182,12 +182,12 @@
 
         { "TLXuniqueSourceID": { "sourceID": "8eb03111-2085-48b5-919a-cebbf292ab48" },
           "TLXmediaCount": { "count": 12000, "rate": [ 1000, 1 ] },
-          "TLXmediaUnitRuntime": { "runtime": [ 3, 1 ] }
+          "TLXmediaUnitInterval": { "interval": [ 3, 1 ] }
         },
 
         {
           "TLXmediaCount": { "count": 300, "rate": [24, 1] },
-          "TLXmediaUnitRuntime": { "runtime": [110, 2400] }
+          "TLXmediaUnitInterval": { "interval": [110, 2400] }
         }
       ],
       "properties": {
@@ -212,9 +212,9 @@
           },
           "additionalProperties": false
         },
-        "TLXmediaUnitRuntime": {
+        "TLXmediaUnitInterval": {
           "properties": {
-            "runtime": {},
+            "interval": {},
           },
           "additionalProperties": false
         },
