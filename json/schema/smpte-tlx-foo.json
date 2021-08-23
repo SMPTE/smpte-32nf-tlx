@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "http://smpte-ra.com/2120/1/2021/smpte-tlx-foo.json",
+  "$id": "http://smpte-ra.com/2120/1/2021/smpte-tlx-foo",
   "title": "TLX",
   "type": "object",
   "description": "This is an example schema for time labels based on a fictitious item, TLXfoo.",
@@ -14,7 +14,7 @@
   ],
   "properties": {
     "TLXfoo": {
-      "$id": "#/properties/TLXfoo",
+      "$id": "#TLXfoo",
       "title": "TLXfoo",
       "type": "object",
       "description": "A fictitious TLX item for illustration.",
@@ -29,7 +29,7 @@
       ],
       "properties": {
         "bar": {
-          "$id": "#/properties/TLXfoo/properties/bar",
+          "$id": "#TLXfoo.bar",
           "title": "bar",
           "type": "string",
           "description": "A fictitious string attribute, to illustrate character and byte counts can differ.",
@@ -42,7 +42,7 @@
           ]
         },
         "baz": {
-          "$id": "#/properties/TLXfoo/properties/baz",
+          "$id": "#TLXfoo.baz",
           "title": "baz",
           "type": "number",
           "description": "A fictitious number attribute, in the range [0,5].",
