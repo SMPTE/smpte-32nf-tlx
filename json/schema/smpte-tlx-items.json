@@ -152,7 +152,7 @@
       "$id": "#TLXsourceName",
       "title": "TLXsourceName",
       "type": "object",
-      "description": "The informal name of a source or sequence for the media unit.",
+      "description": "The user-chosen name of a source or sequence for the media unit.",
       "examples": [
         { "name": "tape 001" },
         { "name": "stage 07, camera 02" },
@@ -239,7 +239,7 @@
           "description": "hexadecimal value for five bits: [ 0, 0, 0, sub-frame_5, sub-frame_4, sub-frame_3, sub-frame_2, sub-frame_1 ]"
         },
         "modulus": {
-          "description":  "A count for when the frames field rolls over.",
+          "description":  "indicates an associated frame-counting or frames-per-second system.",
           "type": "string" ,
           "enum": [ "24", "25", "30", "48", "50", "60",
             "72", "96", "100", "120 (24x5)", "120 (30x4)" ]
