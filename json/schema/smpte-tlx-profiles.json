@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "http://smpte-ra.com/2120/3/2021/smpte-tlx-profiles.json",
+  "$id": "http://smpte-ra.com/2120/3/2021/smpte-tlx-profiles",
   "title": "TLX Profiles",
   "type": "object",
   "description": "Schema for the SMPTE Extensible Time Label (TLX) Profiles. Subschemas for TLX profiles specified in ST 2120-3 appear here and should be referenced individually.",
@@ -8,6 +8,7 @@
 
 
     "DBC": {
+      "$id": "#DBC",
       "title": "TLX DBC Profile",
       "type": "object",
       "description": "Digital Birth Certificate of the associated media unit.",
@@ -29,6 +30,7 @@
 
 
     "ST12-1": {
+      "$id": "#ST12-1",
       "title": "ST12-1 Profile",
       "type": "object",
       "description": "Information sufficient to populate a Time and Control Code, as specified by SMPTE ST 12-1.",
@@ -59,6 +61,7 @@
 
 
     "ST12-3": {
+      "$id": "#ST12-3",
       "title": "ST12-3 Profile",
       "type": "object",
       "description": "Information sufficient to populate a Time and Control Code, as specified by SMPTE ST 12-3.",
@@ -73,24 +76,25 @@
           "TLXst12": { "timeAddress": [ 1, 0, 9, 71 ] }
         }
       ],
-    "properties": {
-      "TLXst12": {
-        "type": "object",
-        "properties": {
-          "timeAddress": {},
-          "modulus": { "enum": [ "72", "96", "100", "120 (30x4)", "120 (24x5)" ] },
-          "bgFlags": false,
-          "colorFrame": false,
-          "fieldMark": false
-        },
-        "required": [ "timeAddress" ],
-      }
+      "properties": {
+        "TLXst12": {
+          "type": "object",
+          "properties": {
+            "timeAddress": {},
+            "modulus": { "enum": [ "72", "96", "100", "120 (30x4)", "120 (24x5)" ] },
+            "bgFlags": false,
+            "colorFrame": false,
+            "fieldMark": false
+          },
+          "required": [ "timeAddress" ],
+        }
+      },
+      "required": [ "TLXst12" ]
     },
-    "required": [ "TLXst12" ]
-  },
 
 
     "TimeOnly": {
+      "$id": "#TimeOnly",
       "title": "TimeOnly Profile",
       "type": "object",
       "description": "A record of the creation time of the label for a corresponding media unit.",
@@ -117,6 +121,7 @@
 
 
     "TimeLoc": {
+      "$id": "#TimeLoc",
       "title": "TimeLoc Profile",
       "type": "object",
       "description": "A record of the creation time of the label for a corresponding media unit that can be interpreted as local time.",
@@ -140,6 +145,7 @@
 
 
     "TimeLike": {
+      "$id": "#TimeLike",
       "title": "TimeLike Profile",
       "type": "object",
       "description": "Provides the TLXmediaCount item and sufficient metadata for interpreting that count as a time-like value.",
@@ -160,6 +166,7 @@
 
 
     "TLXv1": {
+      "$id": "#TLXv1",
       "title": "TLXv1 Profile",
       "type": "object",
       "description": "Contains no items or attributes other than those specified by ST 2120-2:202x.",
@@ -245,6 +252,7 @@
 
 
     "BINDptp": {
+      "$id": "#BINDptp",
       "title": "BINDptp Profile",
       "type": "object",
       "description": "Provides a sufficiently unique identifier for the corresponding media unit, suitable for use as the basis for a key in a database such that relationships to the media unit, including temporal ranges of media units, can be established.",
@@ -264,6 +272,7 @@
 
 
     "BINDcnt": {
+      "$id": "#BINDcnt",
       "title": "BINDcnt Profile",
       "type": "object",
       "description": "Provides a sufficiently unique identifier for the corresponding media unit, suitable for use as the basis for a key in a database such that relationships to the media unit, including consecutive ranges of media units, can be established.",
@@ -276,6 +285,31 @@
       "properties": {
         "TLXmediaCount": {},
         "TLXuniqueSourceID": {}
+      },
+      "required": [ "TLXmediaCount", "TLXuniqueSourceID" ]
+    },
+
+
+    "US-ASCII": {
+      "$id": "#US-ASCII",
+      "title": "US-ASCII Profile",
+      "type": "object",
+      "description": "Provides a TLXsourceName for which the 'name' attribute has a length in Unicode characters that is the same as its length in bytes.",
+      "examples": [
+        {
+          "TLXsourceName": { "name": "Tape 001" }
+        }
+      ],
+      "properties": {
+          "TLXsourceName": {
+              "type": "object",
+              "properties": {
+                  "name": {
+                      "type": "string",
+                      "pattern": "^[ -\\~]+$" 
+                  }
+              }
+          }
       },
       "required": [ "TLXmediaCount", "TLXuniqueSourceID" ]
     }
