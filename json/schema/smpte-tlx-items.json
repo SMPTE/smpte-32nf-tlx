@@ -24,12 +24,12 @@
 
     { "TLXuniqueSourceID": { "sourceID": "8eb03111-2085-48b5-919a-cebbf292ab48" },
       "TLXmediaCount": { "count": 12000, "rate": [ 1000, 1 ] },
-      "TLXmediaUnitRuntime": { "runtime": [ 3, 1 ] }
+      "TLXmediaUnitInterval": { "interval": [ 3, 1 ] }
     },
 
     {
       "TLXmediaCount": { "count": 300, "rate": [24, 1] },
-      "TLXmediaUnitRuntime": { "runtime": [110, 2400] }
+      "TLXmediaUnitInterval": { "interval": [110, 2400] }
     }
   ],
 
@@ -104,26 +104,26 @@
       "additionalProperties": true
     },
 
-    "TLXmediaUnitRuntime": {
-      "$id": "#TLXmediaUnitRuntime",
-      "title": "TLXmediaUnitRuntime",
+    "TLXmediaUnitInterval": {
+      "$id": "#TLXmediaUnitInterval",
+      "title": "TLXmediaUnitInterval",
       "type": "object",
-      "description": "The number of seconds for the media unit runtime.",
+      "description": "The number of seconds for the media unit interval.",
       "examples": [
-        { "runtime": [ 1001, 30000 ] },
-        { "runtime": [ 1, 50] },
-        { "runtime": [ 110, 5000 ] },
-        { "runtime": [ 1001, 30000 ], "extensible": null }
+        { "interval": [ 1001, 30000 ] },
+        { "interval": [ 1, 50] },
+        { "interval": [ 110, 5000 ] },
+        { "interval": [ 1001, 30000 ], "extensible": null }
       ],
       "properties": {
-        "runtime" : {
+        "interval" : {
           "allOf": [
             { "$ref": "#/definitions/rationalType" },
             { "items": { "minimum": 1 } }
           ]
         }
       },
-      "required": [ "runtime" ],
+      "required": [ "interval" ],
       "additionalProperties": true
     },
 
@@ -268,7 +268,7 @@
     { "required": [ "TLXuniqueSourceID" ] },
     { "required": [ "TLXst12" ] },
     { "required": [ "TLXsourceName" ] },
-    { "required": [ "TLXmediaUnitRuntime" ] }
+    { "required": [ "TLXmediaUnitInterval" ] }
   ],
 
   "definitions": {
