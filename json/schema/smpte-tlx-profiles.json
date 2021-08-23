@@ -139,10 +139,10 @@
     },
 
 
-    "TimeStr": {
-      "title": "TimeStr Profile",
+    "TimeLike": {
+      "title": "TimeLike Profile",
       "type": "object",
-      "description": "Provides the TLXmediaCount item and sufficient metadata for interpreting that count as a time-like string.",
+      "description": "Provides the TLXmediaCount item and sufficient metadata for interpreting that count as a time-like value.",
       "examples": [
          { "TLXmediaCount": { "count": 300, "rate": [24, 1] } }
       ],
