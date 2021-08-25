@@ -49,8 +49,8 @@
       ],
       "properties": {
         "ptpTime": {
-          "$id": "#TLXptpTimestamp.ptpTime",
-          "title": "TLXptpTimestamp.ptpTime",
+          "$id": "#TLXptpTimestamp/ptpTime",
+          "title": "TLXptpTimestamp/ptpTime",
           "type": "array",
           "items": [
             { "description": "seconds",
@@ -64,14 +64,14 @@
           "additionalItems": false
         },
         "currentLocalOffset": {
-          "$id": "#TLXptpTimestamp.currentLocalOffset",
-          "title": "TLXptpTimestamp.leapSecondEvent",
+          "$id": "#TLXptpTimestamp/currentLocalOffset",
+          "title": "TLXptpTimestamp/currentLocalOffset",
           "type": "integer", "minimum": -2147483648, "exclusiveMaximum": 2147483648,
           "$comment": "ST 2059-2 limits to int32."
         },
         "leapSecondEvent": {
-          "$id": "#TLXptpTimestamp.leapSecondEvent",
-          "title": "TLXptpTimestamp.leapSecondEvent",
+          "$id": "#TLXptpTimestamp/leapSecondEvent",
+          "title": "TLXptpTimestamp/leapSecondEvent",
           "type": "boolean",
           "default": false
         }
@@ -82,7 +82,7 @@
 
     "TLXmediaCount": {
       "$id": "#TLXmediaCount",
-      "title": " TLXmediaCount ",
+      "title": "TLXmediaCount",
       "type": "object",
       "description": "Index of media unit in a sequence.",
       "examples": [
@@ -94,16 +94,16 @@
       ],
       "properties": {
         "count": {
-          "$id": "#TLXmediaCount.count",
-          "title": "TLXmediaCount.count",
+          "$id": "#TLXmediaCount/count",
+          "title": "TLXmediaCount/count",
           "allOf": [
             { "$ref": "#/definitions/integerType" },
             { "minimum": 0 }
           ]
         },
         "rate": {
-          "$id": "#TLXmediaCount.rate",
-          "title": "TLXmediaCount.rate",
+          "$id": "#TLXmediaCount/rate",
+          "title": "TLXmediaCount/rate",
           "allOf": [
             { "$ref": "#/definitions/rationalType"},
             { "items": { "minimum": 1 } }
@@ -127,8 +127,8 @@
       ],
       "properties": {
         "interval" : {
-          "$id": "#TLXmediaUnitInterval.interval",
-         "title": "TLXmediaUnitInterval.interval",
+          "$id": "#TLXmediaUnitInterval/interval",
+         "title": "TLXmediaUnitInterval/interval",
           "allOf": [
             { "$ref": "#/definitions/rationalType" },
             { "items": { "minimum": 1 } }
@@ -151,8 +151,8 @@
       ],
       "properties": {
         "sourceID" : {
-          "$id": "#TLXuniqueSourceID.sourceID",
-          "title": "TLXuniqueSourceID.sourceID",
+          "$id": "#TLXuniqueSourceID/sourceID",
+          "title": "TLXuniqueSourceID/sourceID",
           "type": "string",
           "pattern": "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
           "not": { "enum": [ "00000000-0000-0000-0000-000000000000" ] }
@@ -180,8 +180,8 @@
       ],
       "properties": {
         "name": {
-        "$id": "#TLXsourceName.name",
-        "title": "TLXsourceName.name",
+        "$id": "#TLXsourceName/name",
+        "title": "TLXsourceName/name",
         "type": "string",
         "minLength": 1,
         "maxLength": 40}
@@ -215,8 +215,8 @@
       ],
       "properties": {
         "timeAddress": {
-          "$id": "#TLXst12.timeAddress",
-          "title": "TLXst12.timeAddress",
+          "$id": "#TLXst12/timeAddress",
+          "title": "TLXst12/timeAddress",
           "type": "array",
           "description": "[ hours, minutes, seconds, frames ]",
           "items": [
@@ -229,14 +229,14 @@
           "maxItems": 4
         },
         "dropFrame": {
-          "$id": "#TLXst12.dropFrame",
-          "title": "TLXst12.dropFrame",
+          "$id": "#TLXst12/dropFrame",
+          "title": "TLXst12/dropFrame",
           "type": "boolean",
           "default": false
         },
         "binaryGroups": {
-          "$id": "#TLXst12.binaryGroups",
-          "title": "TLXst12.binaryGroups",
+          "$id": "#TLXst12/binaryGroups",
+          "title": "TLXst12/binaryGroups",
           "allOf": [
             { "$ref": "#/definitions/hexstringType" },
             { "minLength": 8, "maxLength": 8 }
@@ -244,8 +244,8 @@
           "default": "00000000"
         },
         "bgFlags": {
-          "$id": "#TLXst12.bgFlags",
-          "title": "TLXst12.bgFlags",
+          "$id": "#TLXst12/bgFlags",
+          "title": "TLXst12/bgFlags",
           "description": "hexadecimal value for four bits: [ 0, BGF2, BGF1, BGF0 ]",
           "allOf": [
             { "$ref": "#/definitions/hexstringType" },
@@ -254,19 +254,19 @@
           "default": "0"
         },
         "colorFrame": {
-          "$id": "#TLXst12.colorFrame",
-          "title": "TLXst12.colorFrame",
+          "$id": "#TLXst12/colorFrame",
+          "title": "TLXst12/colorFrame",
           "type": "boolean",
           "default": false
         },
         "fieldMark": {
-          "$id": "#TLXst12.fieldMark",
-          "title": "TLXst12.fieldMark",
+          "$id": "#TLXst12/fieldMark",
+          "title": "TLXst12/fieldMark",
           "type": "boolean"
         },
         "subFrame": {
-          "$id": "#TLXst12.subFrame",
-          "title": "TLXst12.subFrame",
+          "$id": "#TLXst12/subFrame",
+          "title": "TLXst12/subFrame",
           "allOf": [
             { "$ref": "#/definitions/hexstringType" },
             { "pattern": "^[0-1][0-9a-f]$"  }
@@ -274,24 +274,24 @@
           "description": "hexadecimal value for five bits: [ 0, 0, 0, sub-frame_5, sub-frame_4, sub-frame_3, sub-frame_2, sub-frame_1 ]"
         },
         "modulus": {
-          "$id": "#TLXst12.modulus",
-          "title": "TLXst12.modulus",
+          "$id": "#TLXst12/modulus",
+          "title": "TLXst12/modulus",
           "description":  "indicates an associated frame-counting or frames-per-second system.",
           "type": "string" ,
           "enum": [ "24", "25", "30", "48", "50", "60",
             "72", "96", "100", "120 (24x5)", "120 (30x4)" ]
         },
         "DBB1" : {
-          "$id": "#TLXst12.DBB1",
-          "title": "TLXst12.DBB1",
+          "$id": "#TLXst12/DBB1",
+          "title": "TLXst12/DBB1",
           "allOf": [
             { "$ref": "#/definitions/hexstringType" },
             { "minLength": 2 , "maxLength": 2 }
           ]
         },
         "DBB2" : {
-          "$id": "#TLXst12.DBB2",
-          "title": "TLXst12.DBB2",
+          "$id": "#TLXst12/DBB2",
+          "title": "TLXst12/DBB2",
           "allOf": [
             { "$ref": "#/definitions/hexstringType" },
             { "minLength": 2 , "maxLength": 2 }
