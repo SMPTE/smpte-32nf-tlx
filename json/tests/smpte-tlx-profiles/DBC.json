@@ -1,12 +1,50 @@
 [ {
     "description": "DBC profile vigorous test suite",
-    "schema": { "$ref": "../smpte-tlx-profiles/DBC" },
+    "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "$id": "test/DBC",
+        "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/DBC"
+    },
     "tests": [
         {
             "description": "empty TLX",
             "data": { },
             "valid": false
+        },
+        {
+            "description": "DBC version",
+            "data": {
+                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                "TLXmediaCount": { "count": 0 },
+                "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
+            },
+            "valid": true
+        },
+        {
+            "description": "DBC version 2 of 3 a",
+            "data": {
+                "TLXmediaCount": { "count": 0 },
+                "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
+            },
+            "valid": false
+        },
+        {
+            "description": "DBC version 2 of 3 b",
+            "data": {
+                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
+            },
+            "valid": false
+        },
+        {
+            "description": "DBC version 2 of 3 c",
+            "data": {
+                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                "TLXmediaCount": { "count": 0 }
+             },
+            "valid": false
         }
+
+
     ]
 } ]
-

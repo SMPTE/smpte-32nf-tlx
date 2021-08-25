@@ -1,34 +1,77 @@
-[ {
-    "description": "combined DBC and TimeLoc profiles composite test suite [THIS SUITE WON'T WORK until schema element is being used",
-    "schema":   { "allOf": [
-                        $ref": "../smpte-tlx-profiles/DBC",
-                        $ref": "../smpte-tlx-profiles/TimeLoc"
-                ] },
-    "tests": [
-        {
-            "description": "empty TLX",
-            "data": { },
-            "valid": false
+# puzzling on the $refs in the schema's allOf construct
+[
+    {
+        "description": "combined DBC and TimeLoc profiles composite test suite",
+        "schema":   {
+            "$schema": "http://json-schema.org/draft-07/schema",
+            "$id": "test/DBC-and-TimeLoc",
+            "allOf": [
+                { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/DBC" },
+                { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/TimeLoc" }
+            ]
         },
-        {
-            "description": "DBC with no currentLocalOffset",
-            "data": {
-                "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
-                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
-                { "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" } }
+        "tests": [
+            {
+                "description": "empty TLX",
+                "data": { },
+                "valid": true
             },
-            "valid": false
+            {
+                "description": "DBC with no currentLocalOffset",
+                "data": {
+                    "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
+                    "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                    "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
+                },
+                "valid": false
+            },
+            {
+                "description": "DBC including currentLocalOffset",
+                "data": {
+                    "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
+                    "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ],
+                        "currentLocalOffset": -25237 },
+                    "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
+                },
+                "valid": true
+            }
+        ]
+    },
+    {
+        "description": "combined DBC and TimeLoc profiles composite test suite",
+        "schema": {
+            "$schema": "http://json-schema.org/draft-07/schema",
+            "allOf": [
+                { "$ref": "smpte-tlx-profiles/DBC.json" },
+                { "$ref": "smpte-tlx-profiles/TimeLoc.json" }
+            ]
         },
-        {
-            "description": "DBC including currentLocalOffset",
-            "data": {
-                "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
-                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ],
-                    "currentLocalOffset": -25237 },
-                "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
+        "tests": [
+            {
+                "description": "empty TLX",
+                "data": { },
+                "valid": false
             },
-            "valid": true
-        }
-    ]
-} ]
+            {
+                "description": "DBC with no currentLocalOffset",
+                "data": {
+                    "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
+                    "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                    "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
+                },
+                "valid": false
+            },
+            {
+                "description": "DBC including currentLocalOffset",
+                "data": {
+                    "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
+                    "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ],
+                        "currentLocalOffset": -25237 },
+                    "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
+                },
+                "valid": true
+            }
+        ]
+    }
+]
 
