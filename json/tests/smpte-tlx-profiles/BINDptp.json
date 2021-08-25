@@ -1,6 +1,9 @@
 [ {
     "description": "BINDptp profile vigorous test suite",
-    "schema": { "$ref": "../smpte-tlx-profiles/BINDptp" },
+    "schema": {
+        "$id": "test/BINDptp",
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/BINDptp" },
     "tests": [
         {
             "description": "empty TLX",

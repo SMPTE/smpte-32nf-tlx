@@ -1,6 +1,10 @@
 [ {
     "description": "TLXst12 item vigorous test suite",
-    "schema": { "$ref": "../smpte-tlx-items/TLXst12" },
+    "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$id": "test/TLXst12",
+        "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
+    },
     "tests": [
         {
             "description": "empty ST 12 item",
