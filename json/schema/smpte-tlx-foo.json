@@ -29,7 +29,7 @@
       ],
       "properties": {
         "bar": {
-          "$id": "#TLXfoo.bar",
+          "$id": "#TLXfoo/bar",
           "title": "bar",
           "type": "string",
           "description": "A fictitious string attribute, to illustrate character and byte counts can differ.",
@@ -42,7 +42,7 @@
           ]
         },
         "baz": {
-          "$id": "#TLXfoo.baz",
+          "$id": "#TLXfoo/baz",
           "title": "baz",
           "type": "number",
           "description": "A fictitious number attribute, in the range [0,5].",
