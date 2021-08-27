@@ -1,6 +1,11 @@
 [ {
     "description": "TLXmediaUnitRuntime item vigorous test suite",
-    "schema": { "$ref": "../smpte-tlx-items/TLXmediaUnitRuntime" },
+    "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$id": "test/TLXmediaUnitRuntime",
+        "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
+
+    },
     "tests": [
         {
             "description": "empty item",

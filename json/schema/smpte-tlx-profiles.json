@@ -1,10 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "http://smpte-ra.com/2120/3/2021/smpte-tlx-profiles",
+  "$id": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles",
   "title": "TLX Profiles",
   "type": "object",
-  "description": "Schema for the SMPTE Extensible Time Label (TLX) Profiles. Subschemas for TLX profiles specified in ST 2120-3 appear here and should be referenced individually.",
-  "properties": {
+  "description": "Schemas for the SMPTE Extensible Time Label (TLX) Profiles, as specified in ST 2120-3, appear here as subschemas and should be referenced individually.",
+  "$defs": {
 
 
     "DBC": {
@@ -215,13 +215,13 @@
         },
         "TLXuniqueSourceID": {
           "properties": {
-            "sourceID": {},
+            "sourceID": {}
           },
           "additionalProperties": false
         },
         "TLXmediaUnitInterval": {
           "properties": {
-            "interval": {},
+            "interval": 
           },
           "additionalProperties": false
         },
@@ -236,7 +236,7 @@
             "subFrame": {},
             "modulus": {},
             "DBB1": {},
-            "DBB2": {},
+            "DBB2": {}
           },
           "additionalProperties": false
         },
@@ -247,6 +247,7 @@
           "additionalProperties": false
         }
       },
+      "minProperties": 1,
       "additionalProperties": false
     },
 
@@ -313,8 +314,8 @@
       },
       "required": [ "TLXmediaCount", "TLXuniqueSourceID" ]
     }
-
-
+    
+    
   }
 }
 
