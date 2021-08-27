@@ -173,10 +173,10 @@ def main(argv):
             
             
             #validate each of the tests vs the schema
-            testNumber = 0 #
+            testNumber = 0 # restart for each suite, testsPassed + testsFailed = tests already run
             for instance in currentTestSuite['tests']:
                 testNumber += 1
-                print('\n  Test [' + str(testNumber) + '] >', str(instance['description']))
+                print('\n  Test [' + str(suitesRun + suitesBroken) + '.' + str(testNumber) + '] [[' + str(testsPassed + testsFailed + 1) + ']] >', str(instance['description']))
 
                #perform validation test on the current instance
                 currentTestInstance = instance['data']
@@ -232,7 +232,7 @@ def main(argv):
 
     print ('\n\nResults:\nOf', suitesRun + suitesBroken, 'test suites,',
         suitesBroken, ('was' if suitesBroken == 1 else 'were') + ' broken, leaving', suitesRun, 'to run.')
-    print ('From those,', testsPassed + testsFailed, 'tests were run with', testsPassed, 'PASSED and', testsFailed, 'FAILED.')
+    print ('From those,\n  ', testsPassed + testsFailed, 'tests were run with', testsPassed, 'PASSED and', testsFailed, 'FAILED.')
     print ('\n\nDone.')
 
 if __name__ == '__main__':
