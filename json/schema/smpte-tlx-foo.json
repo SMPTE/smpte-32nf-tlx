@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "http://smpte-ra.com/2120/1/2021/smpte-tlx-foo",
+  "$id": "http://smpte-ra.org/2120/1/2021/smpte-tlx-foo",
   "title": "TLX",
   "type": "object",
   "description": "This is an example schema for time labels based on a fictitious item, TLXfoo.",

@@ -31,6 +31,8 @@ def main(argv):
     verbose = 0
 
     # counters for report at end
+    schemasLoaded = 0
+    schemasBroken = 0
     suitesRun = 0
     suitesBroken = 0
     testsPassed = 0
@@ -90,6 +92,7 @@ def main(argv):
                     candidateSchemaFile.close()
             except Exception as e:
                 print('WARN: Could not read valid JSON from', filename, '\n ', e, '\n  skipping...')
+                schemasBroken += 1
                 continue
             else:
                 try:
@@ -97,6 +100,7 @@ def main(argv):
                     id = candidateSchema['$id']
                 except Exception as e:
                     print('WARN: schema candidate', filename, 'does not have an "$id" element, so won\'t be referenced as a schema.\n ', e, '\n skipping...')
+                    schemasBroken += 1
                     continue
                 else:
                     # confirm that the schema is valid
@@ -104,14 +108,17 @@ def main(argv):
                         jsonschema.validate( instance= candidateSchema, schema=json.loads('{}'))
                     except Exception as e:
                         print('WARN: schema candidate', filename, 'does not validate as a schema.\n', e, '\n  skipping...')
+                        schemasBroken += 1
                         continue
                     else:
                         # add to the store by id
+                        schemasLoaded += 1
                         schemaStore[id] = candidateSchema
                         if filename == testSchemaFilename: testSchemaID = id  # record this for when validating test files
         else:
             if os.path.isdir(filename):
                 print("WARN: Directory", filename, 'in schema directory was not a file of type .json.\n  skipping...')
+                schemasBroken += 1
             else:
                 if filename[0] != '.': #ignore hidden files that fail, it's expected
                     print('WARN: File', filename, 'in schema directory was not of type .json.\n  skipping...')
@@ -188,20 +195,30 @@ def main(argv):
                 # add schemaUnderTest to store
                 schemaStore[ schemaUnderTest['$id'] ] = currentTestInstance
                 
-                #if debug:
-                #    print ('  DEBUG: Schema store contents:')
-                #    for schemaURI in schemaStore.keys():
-                #        print( '    schema $id:', schemaURI,'\n      value length:', len(str(schemaStore[schemaURI])) )
-
+                try:
+                    schemaNeeded = currentTestSet[0]['schema']['$ref']
+                    # strip any fragment
+                    schemaNeeded = schemaNeeded.split('#')[0]
+                except:
+                    # don't care if no $schema required (I think)
+                    pass
+                else:
+                    try:
+                        schemaOnHand = schemaStore[ schemaNeeded ]
+                    except:
+                      print('WARN: Test file', testFilename, 'requires $schema', schemaNeeded, 'which is not present in the store.'  )
+                      suitesBroken += 1
+                      break
+                    
                 # rebuild the resolver for each schemaUnderTest (usually only once per test file)
                 resolver= jsonschema.RefResolver( None, referrer= schemaUnderTest, store= schemaStore )
-#                resolver= jsonschema.RefResolver( base_uri= None, referrer= None, store= schemaStore)
+                #resolver= jsonschema.RefResolver( base_uri= None, referrer= None, store= schemaStore)
 
                 try:
                     jsonschema.validate(instance= currentTestInstance, schema= schemaUnderTest, resolver = resolver)
                     #if debug: print('\n\nDid it:\n', str(resolver.store), '\n\n')
                 except jsonschema.exceptions.SchemaError as e:
-                    print("  WARN: schema in", testFilename, 'is faulty')
+                    print('  WARN: schema in', testFilename, 'is faulty')
                     print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
                 except jsonschema.exceptions.ValidationError as e:
                     if isVALID == True:
@@ -230,7 +247,10 @@ def main(argv):
                     #break
                 continue
 
-    print ('\n\nResults:\nOf', suitesRun + suitesBroken, 'test suites,',
+    print ('\n\nResults:')
+    print ('Of', schemasLoaded + schemasBroken, 'files at <schemaPath>,',
+        schemasBroken, ('was' if schemasBroken == 1 else 'were') + ' skipped,', schemasLoaded, 'were used.')
+    print ('Of', suitesRun + suitesBroken, 'test suites,',
         suitesBroken, ('was' if suitesBroken == 1 else 'were') + ' broken, leaving', suitesRun, 'to run.')
     print ('From those,\n  ', testsPassed + testsFailed, 'tests were run with', testsPassed, 'PASSED and', testsFailed, 'FAILED.')
     print ('\n\nDone.')

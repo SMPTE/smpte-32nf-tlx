@@ -1,40 +1,45 @@
 [ {
-    "description": "TLXmediaUnitRuntime item vigorous test suite",
+    "description": "TLXmediaUnitInterval item vigorous test suite",
     "schema": {
         "$schema": "http://json-schema.org/draft-07/schema",
-        "$id": "test/TLXmediaUnitRuntime",
+        "$id": "test/TLXmediaUnitInterval",
         "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
 
     },
     "tests": [
         {
             "description": "empty item",
-            "data": { "TLXmediaUnitRuntime": { } },
+            "data": { "TLXmediaUnitInterval": { } },
             "valid": false
         },
         {
             "description": "ATSC runtime",
-            "data": { "TLXmediaUnitRuntime": { "runtime": [ 1001, 30000 ] } },
+            "data": { "TLXmediaUnitInterval": { "interval": [ 1001, 30000 ] } },
             "valid": true
         },
         {
             "description": "DVB runtime",
-            "data": { "TLXmediaUnitRuntime": { "runtime": [ 1, 50 ] } },
+            "data": { "TLXmediaUnitInterval": { "interval": [ 1, 50 ] } },
             "valid": true
         },
         {
             "description": "bad denominator",
-            "data": { "TLXmediaUnitRuntime": { "runtime": [ 1, 0 ] } },
+            "data": { "TLXmediaUnitInterval": { "interval": [ 1, 0 ] } },
             "valid": false
         },
         {
-            "description": "missing 'runtime' attribute",
-            "data": { "TLXmediaUnitRuntime": { "duration": [ 1, 0 ] } },
+            "description": "missing 'interval' attribute",
+            "data": { "TLXmediaUnitInterval": { "duration": [ 1, 50 ] } },
+            "valid": false
+        },
+        {
+            "description": "missing 'interval' attribute",
+            "data": { "TLXmediaUnitInterval": { "runtime": [ 1001, 30000 ] } },
             "valid": false
         },
         {
             "description": "extra attribute",
-            "data": { "TLXmediaUnitRuntime": { "runtime": [ 1,50 ], "extra": null } },
+            "data": { "TLXmediaUnitInterval": { "interval": [ 1,50 ], "extra": null } },
             "valid": true
         }
     ]

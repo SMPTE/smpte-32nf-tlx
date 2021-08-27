@@ -37,8 +37,8 @@
             "valid": true
         },
         {
-            "description": "runtime item only TLX",
-            "data": { "TLXmediaUnitRuntime": { "runtime": [ 1, 50] } },
+            "description": "interval item only TLX",
+            "data": { "TLXmediaUnitInterval": { "interval": [ 1, 50] } },
             "valid": true
         },
        {
@@ -82,8 +82,8 @@
            "valid": true
        },
        {
-           "description": "runtime item + unknown item TLX",
-           "data": { "TLXmediaUnitRuntime": { "runtime": [ 1, 50] } ,
+           "description": "interval item + unknown item TLX",
+           "data": { "TLXmediaUnitInterval": { "interval": [ 1, 50] } ,
                "TLXnewItem": { "magicNumber": 2, "important": true }
            },
            "valid": true

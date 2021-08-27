@@ -86,7 +86,7 @@
             "colorFrame": false,
             "fieldMark": false
           },
-          "required": [ "timeAddress" ],
+          "required": [ "timeAddress" ]
         }
       },
       "required": [ "TLXst12" ]
@@ -221,7 +221,7 @@
         },
         "TLXmediaUnitInterval": {
           "properties": {
-            "interval": 
+            "interval": {}
           },
           "additionalProperties": false
         },
@@ -307,7 +307,7 @@
               "properties": {
                   "name": {
                       "type": "string",
-                      "pattern": "^[ -\\~]+$" 
+                      "pattern": "^[ -\\~]+$"
                   }
               }
           }
