@@ -7,7 +7,7 @@
   "$defs": {
 
 
-  "DBC": {
+    "DBC": {
       "$id": "#DBC",
       "title": "TLX DBC Profile",
       "type": "object",
@@ -76,21 +76,21 @@
           "TLXst12": { "timeAddress": [ 1, 0, 9, 71 ] }
         }
       ],
-    "properties": {
-      "TLXst12": {
-        "type": "object",
-        "properties": {
-          "timeAddress": {},
-          "modulus": { "enum": [ "72", "96", "100", "120 (30x4)", "120 (24x5)" ] },
-          "bgFlags": false,
-          "colorFrame": false,
-          "fieldMark": false
-        },
-        "required": [ "timeAddress" ]
-      }
+      "properties": {
+        "TLXst12": {
+          "type": "object",
+          "properties": {
+            "timeAddress": {},
+            "modulus": { "enum": [ "72", "96", "100", "120 (30x4)", "120 (24x5)" ] },
+            "bgFlags": false,
+            "colorFrame": false,
+            "fieldMark": false
+          },
+          "required": [ "timeAddress" ],
+        }
+      },
+      "required": [ "TLXst12" ]
     },
-    "required": [ "TLXst12" ]
-  },
 
 
     "TimeOnly": {
@@ -189,12 +189,12 @@
 
         { "TLXuniqueSourceID": { "sourceID": "8eb03111-2085-48b5-919a-cebbf292ab48" },
           "TLXmediaCount": { "count": 12000, "rate": [ 1000, 1 ] },
-          "TLXmediaUnitRuntime": { "runtime": [ 3, 1 ] }
+          "TLXmediaUnitInterval": { "interval": [ 3, 1 ] }
         },
 
         {
           "TLXmediaCount": { "count": 300, "rate": [24, 1] },
-          "TLXmediaUnitRuntime": { "runtime": [110, 2400] }
+          "TLXmediaUnitInterval": { "interval": [110, 2400] }
         }
       ],
       "properties": {
@@ -219,9 +219,9 @@
           },
           "additionalProperties": false
         },
-        "TLXmediaUnitRuntime": {
+        "TLXmediaUnitInterval": {
           "properties": {
-            "runtime": {}
+            "interval": 
           },
           "additionalProperties": false
         },
@@ -286,6 +286,31 @@
       "properties": {
         "TLXmediaCount": {},
         "TLXuniqueSourceID": {}
+      },
+      "required": [ "TLXmediaCount", "TLXuniqueSourceID" ]
+    },
+
+
+    "US-ASCII": {
+      "$id": "#US-ASCII",
+      "title": "US-ASCII Profile",
+      "type": "object",
+      "description": "Provides a TLXsourceName for which the 'name' attribute has a length in Unicode characters that is the same as its length in bytes.",
+      "examples": [
+        {
+          "TLXsourceName": { "name": "Tape 001" }
+        }
+      ],
+      "properties": {
+          "TLXsourceName": {
+              "type": "object",
+              "properties": {
+                  "name": {
+                      "type": "string",
+                      "pattern": "^[ -\\~]+$" 
+                  }
+              }
+          }
       },
       "required": [ "TLXmediaCount", "TLXuniqueSourceID" ]
     }
