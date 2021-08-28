@@ -9,10 +9,10 @@
         {
             "description": "empty TLX",
             "data": { },
-            "valid": true
+            "valid": false
         },
         {
-            "description": "valid TLX with no sourceName",
+            "description": "valid TLX with no TLXsourceName",
             "data": { "TLXuniqueSourceID": "fc1536a9-f952-430f-9382-b345b869cf97" },
             "valid": true
         },
@@ -47,23 +47,128 @@
             "valid": true
         },
         {
-            "description": "variety of acceptable characters + tab",
-            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\t\"\\/?!@#$%^&*" } },
+            "description": "alphanumerics + space",
+            "data": { "TLXsourceName": { "name": "A b 1" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + square brackets",
+            "data": { "TLXsourceName": { "name": "[Ab1]" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + curly brackets",
+            "data": { "TLXsourceName": { "name": "{Ab1}" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + angle brackets",
+            "data": { "TLXsourceName": { "name": "<Ab1>" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + parens",
+            "data": { "TLXsourceName": { "name": "(Ab1)" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + double quote",
+            "data": { "TLXsourceName": { "name": "\"" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + single quote",
+            "data": { "TLXsourceName": { "name": "'" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + simple punctuation",
+            "data": { "TLXsourceName": { "name": ".ABC," } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + question",
+            "data": { "TLXsourceName": { "name": "ABC?" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + asterisk",
+            "data": { "TLXsourceName": { "name": "*ABC*" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + plus + equals",
+            "data": { "TLXsourceName": { "name": "012=ABC+abc" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + other punctuation",
+            "data": { "TLXsourceName": { "name": "0:1;2|A!B@C#a$b%c^7&8-9_" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + tilde (upper limit)",
+            "data": { "TLXsourceName": { "name": "~Ab1" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + solidus (slash)",
+            "data": { "TLXsourceName": { "name": "/Ab1/" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + reverse solidus (backslash)",
+            "data": { "TLXsourceName": { "name": "a\\b\\1" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + tab",
+            "data": { "TLXsourceName": { "name": "ab1\t" } },
             "valid": false
         },
         {
-            "description": "variety of acceptable characters + backspace",
-            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\b\"\\/?!@#$%^&*" } },
+            "description": "alphanumerics + backspace",
+            "data": { "TLXsourceName": { "name": "ab1\b" } },
             "valid": false
         },
         {
-            "description": "variety of acceptable characters + newline",
-            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\n\"\\/?!@#$%^&*" } },
+            "description": "alphanumerics + newline",
+            "data": { "TLXsourceName": { "name": "ab1\n" } },
             "valid": false
         },
         {
-            "description": "variety of acceptable characters + return",
-            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\r\"\\/?!@#$%^&*" } },
+            "description": "alphanumerics + carriage return",
+            "data": { "TLXsourceName": { "name": "ab1\r" } },
+            "valid": false
+        },
+        {
+            "description": "alphanumerics + option key characters",
+            "data": { "TLXsourceName": { "name": "0†1™2¡A§B¶C∑a≥bc" } },
+            "valid": false
+        },
+        {
+            "description": "alphanumerics + umlaut u",
+            "data": { "TLXsourceName": { "name": "ü" } },
+            "valid": false
+        },
+        {
+            "description": "alphanumerics + e-accute",
+            "data": { "TLXsourceName": { "name": "é" } },
+            "valid": false
+        },
+        {
+            "description": "alphanumerics + e-grave",
+            "data": { "TLXsourceName": { "name": "è" } },
+            "valid": false
+        },
+        {
+            "description": "alphanumerics + enyay",
+            "data": { "TLXsourceName": { "name": "ñ" } },
+            "valid": false
+        },
+        {
+            "description": "alphanumerics + a-ring",
+            "data": { "TLXsourceName": { "name": "å" } },
             "valid": false
         }
     ]
