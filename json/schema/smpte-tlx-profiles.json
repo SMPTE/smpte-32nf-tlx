@@ -309,10 +309,14 @@
                       "type": "string",
                       "pattern": "^[ -\\~]+$"
                   }
-              }
+              },
+              "required": [ "name" ],
+              "additionalProperties": true
           }
       },
-      "required": [ "TLXmediaCount", "TLXuniqueSourceID" ]
+      "required": [ ],
+      "additionalProperties": true,
+      "minProperties": 1
     }
     
     
