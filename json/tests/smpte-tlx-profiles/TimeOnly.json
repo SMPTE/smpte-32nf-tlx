@@ -9,6 +9,31 @@
             "description": "empty TLX",
             "data": { },
             "valid": false
+        },
+        {
+            "description": "timestamp only",
+            "data": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] }
+            },
+            "valid": true
+        },
+        {
+            "description": "timestamp only with offset",
+            "data": {
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789 ],
+                    "currentLocalOffset": -25163
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "timestamp and sourceName",
+            "data": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] },
+                "TLXsourceName": { "name": "tape 001" }
+            },
+            "valid": false
         }
     ]
 }
