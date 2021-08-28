@@ -1,1 +1,70 @@
-
+{
+    "description": "US-ASCII profile vigorous test suite",
+    "schema": {
+        "$id": "test/US-ASCII",
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/US-ASCII"
+    },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "data": { },
+            "valid": true
+        },
+        {
+            "description": "valid TLX with no sourceName",
+            "data": { "TLXuniqueSourceID": "fc1536a9-f952-430f-9382-b345b869cf97" },
+            "valid": true
+        },
+        {
+            "description": "simple tape name",
+            "data": { "TLXsourceName": { "name": "Tape 001" } },
+            "valid": true
+        },
+        {
+            "description": "simple tape name + extra",
+            "data": { 
+                "TLXsourceName": {
+                  "name": "Tape 001",
+                  "extra": null
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "Russian tape name",
+            "data": { "TLXsourceName": { "name": "ЛЕНТА 001" } },
+            "valid": false
+        },
+        {
+            "description": "Hindi tape name",
+            "data": { "TLXsourceName": { "name": "टेप 001" } },
+            "valid": false
+        },
+        {
+            "description": "variety of acceptable characters",
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\\"\\/?!@#$%^&*" } },
+            "valid": true
+        },
+        {
+            "description": "variety of acceptable characters + tab",
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\t\\"\\/?!@#$%^&*" } },
+            "valid": false
+        },
+        {
+            "description": "variety of acceptable characters + backspace",
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\b\\"\\/?!@#$%^&*" } },
+            "valid": false
+        },
+        {
+            "description": "variety of acceptable characters + newline",
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\n\\"\\/?!@#$%^&*" } },
+            "valid": false
+        },
+        {
+            "description": "variety of acceptable characters + return",
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\r\\"\\/?!@#$%^&*" } },
+            "valid": false
+        }
+    ]
+}
