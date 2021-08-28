@@ -47,53 +47,58 @@
             "valid": true
         },
         {
-            "description": "alphanumerics + space",
-            "data": { "TLXsourceName": { "name": "A b 1" } },
+            "description": "space",
+            "data": { "TLXsourceName": { "name": " " } },
             "valid": true
         },
         {
-            "description": "alphanumerics + square brackets",
-            "data": { "TLXsourceName": { "name": "[Ab1]" } },
+            "description": "square brackets",
+            "data": { "TLXsourceName": { "name": "[]" } },
             "valid": true
         },
         {
-            "description": "alphanumerics + curly brackets",
-            "data": { "TLXsourceName": { "name": "{Ab1}" } },
+            "description": "curly brackets",
+            "data": { "TLXsourceName": { "name": "{}" } },
             "valid": true
         },
         {
-            "description": "alphanumerics + angle brackets",
-            "data": { "TLXsourceName": { "name": "<Ab1>" } },
+            "description": "angle brackets",
+            "data": { "TLXsourceName": { "name": "<>" } },
             "valid": true
         },
         {
-            "description": "alphanumerics + parens",
-            "data": { "TLXsourceName": { "name": "(Ab1)" } },
+            "description": "parens",
+            "data": { "TLXsourceName": { "name": "()" } },
             "valid": true
         },
         {
-            "description": "alphanumerics + double quote",
+            "description": "double quote",
             "data": { "TLXsourceName": { "name": "\"" } },
             "valid": true
         },
         {
-            "description": "alphanumerics + single quote",
+            "description": "single quote",
             "data": { "TLXsourceName": { "name": "'" } },
             "valid": true
         },
         {
-            "description": "alphanumerics + simple punctuation",
-            "data": { "TLXsourceName": { "name": ".ABC," } },
+            "description": "period",
+            "data": { "TLXsourceName": { "name": "." } },
             "valid": true
         },
         {
-            "description": "alphanumerics + question",
-            "data": { "TLXsourceName": { "name": "ABC?" } },
+            "description": "comma",
+            "data": { "TLXsourceName": { "name": "," } },
             "valid": true
         },
         {
-            "description": "alphanumerics + asterisk",
-            "data": { "TLXsourceName": { "name": "*ABC*" } },
+            "description": "question",
+            "data": { "TLXsourceName": { "name": "?" } },
+            "valid": true
+        },
+        {
+            "description": "asterisk",
+            "data": { "TLXsourceName": { "name": "*" } },
             "valid": true
         },
         {
@@ -107,67 +112,67 @@
             "valid": true
         },
         {
-            "description": "alphanumerics + tilde (upper limit)",
-            "data": { "TLXsourceName": { "name": "~Ab1" } },
+            "description": "tilde (upper limit)",
+            "data": { "TLXsourceName": { "name": "~" } },
             "valid": true
         },
         {
-            "description": "alphanumerics + solidus (slash)",
-            "data": { "TLXsourceName": { "name": "/Ab1/" } },
+            "description": "solidus (slash)",
+            "data": { "TLXsourceName": { "name": "/" } },
             "valid": true
         },
         {
-            "description": "alphanumerics + reverse solidus (backslash)",
-            "data": { "TLXsourceName": { "name": "a\\b\\1" } },
+            "description": "reverse solidus (backslash)",
+            "data": { "TLXsourceName": { "name": "\\" } },
             "valid": true
         },
         {
-            "description": "alphanumerics + tab",
-            "data": { "TLXsourceName": { "name": "ab1\t" } },
+            "description": "tab",
+            "data": { "TLXsourceName": { "name": "\t" } },
             "valid": false
         },
         {
-            "description": "alphanumerics + backspace",
-            "data": { "TLXsourceName": { "name": "ab1\b" } },
+            "description": "backspace",
+            "data": { "TLXsourceName": { "name": "\b" } },
             "valid": false
         },
         {
-            "description": "alphanumerics + newline",
-            "data": { "TLXsourceName": { "name": "ab1\n" } },
+            "description": "newline",
+            "data": { "TLXsourceName": { "name": "\n" } },
             "valid": false
         },
         {
-            "description": "alphanumerics + carriage return",
-            "data": { "TLXsourceName": { "name": "ab1\r" } },
+            "description": "carriage return",
+            "data": { "TLXsourceName": { "name": "\r" } },
             "valid": false
         },
         {
-            "description": "alphanumerics + option key characters",
-            "data": { "TLXsourceName": { "name": "0†1™2¡A§B¶C∑a≥bc" } },
+            "description": "option key characters",
+            "data": { "TLXsourceName": { "name": "†™¡§¶∑≥" } },
             "valid": false
         },
         {
-            "description": "alphanumerics + umlaut u",
+            "description": "umlaut u",
             "data": { "TLXsourceName": { "name": "ü" } },
             "valid": false
         },
         {
-            "description": "alphanumerics + e-accute",
+            "description": "e-accute",
             "data": { "TLXsourceName": { "name": "é" } },
             "valid": false
         },
         {
-            "description": "alphanumerics + e-grave",
+            "description": "e-grave",
             "data": { "TLXsourceName": { "name": "è" } },
             "valid": false
         },
         {
-            "description": "alphanumerics + enyay",
+            "description": "enyay",
             "data": { "TLXsourceName": { "name": "ñ" } },
             "valid": false
         },
         {
-            "description": "alphanumerics + a-ring",
+            "description": "a-ring",
             "data": { "TLXsourceName": { "name": "å" } },
             "valid": false
         }
