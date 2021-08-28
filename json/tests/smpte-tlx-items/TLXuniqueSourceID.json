@@ -8,43 +8,43 @@
     "tests": [
         {
             "description": "empty source ID item",
-            "data": { "TLXuniqueSourceID": { } },
+            "TLX": { "TLXuniqueSourceID": { } },
             "valid": false
         },
         {
             "description": "simple source ID item, zero length",
-            "data": { "TLXuniqueSourceID": { "sourceID": "" } },
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "" } },
             "valid": false
         },
         {
             "description": "simple source ID item, missing character",
-            "data": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f" } },
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f" } },
             "valid": false
         },
         {
             "description": "simple source ID item",
-            "data": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3" } },
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3" } },
             "valid": true
         },
         {
             "description": "simple source ID item, wrong case (receiver may PASS, sender shall FAIL)",
-            "data": { "TLXuniqueSourceID": { "sourceID": "D1E64EfD-19D1-4643-8DE9-119E19f4D8A6" } },
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "D1E64EfD-19D1-4643-8DE9-119E19f4D8A6" } },
             "valid": false
         },
         {
             "description": "simple source ID item, no hyphens (receiver may PASS, sender shall FAIL)",
-            "data": { "TLXuniqueSourceID": { "sourceID": "e2aae9bad5424691b242fc0748744d90" } },
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "e2aae9bad5424691b242fc0748744d90" } },
             "valid": false
         },
         {
             "description": "source ID item + unknown attribute",
-            "data": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3",
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3",
                                              "MACaddress": "23-EA-4A-3B-21-EF" } },
             "valid": true
         },
         {
             "description": "source ID item with unknown attribute only",
-            "data": { "TLXuniqueSourceID": { "MACaddress": "23-EA-4A-3B-21-EF" } },
+            "TLX": { "TLXuniqueSourceID": { "MACaddress": "23-EA-4A-3B-21-EF" } },
             "valid": false
         }
     ]

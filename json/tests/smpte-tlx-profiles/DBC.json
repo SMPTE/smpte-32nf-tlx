@@ -8,12 +8,12 @@
     "tests": [
         {
             "description": "empty TLX",
-            "data": { },
+            "TLX": { },
             "valid": false
         },
         {
             "description": "DBC version",
-            "data": {
+            "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
                 "TLXmediaCount": { "count": 0 },
                 "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
@@ -22,7 +22,7 @@
         },
         {
             "description": "DBC version 2 of 3 a",
-            "data": {
+            "TLX": {
                 "TLXmediaCount": { "count": 0 },
                 "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
             },
@@ -30,7 +30,7 @@
         },
         {
             "description": "DBC version 2 of 3 b",
-            "data": {
+            "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
                 "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
             },
@@ -38,7 +38,7 @@
         },
         {
             "description": "DBC version 2 of 3 c",
-            "data": {
+            "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
                 "TLXmediaCount": { "count": 0 }
              },

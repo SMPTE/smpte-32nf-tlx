@@ -186,13 +186,13 @@ def main(argv):
         
         
         #validate each of the tests vs the schema
-        testNumber = 0 # restart for each suite, testsPassed + testsFailed = tests already run
+        testNumber = 0 # restart for each suite, testsPassed + testsFailed = total of tests already run
         for instance in currentTestSuite['tests']:
             testNumber += 1
             print('\n  Test [' + str(suitesRun + suitesBroken) + '.' + str(testNumber) + '] [[' + str(testsPassed + testsFailed + 1) + ']] >', str(instance['description']))
 
-            #perform validation test on the current instance
-            currentTestInstance = instance['data']
+            #perform validation test on the current TLX instance
+            currentTestInstance = instance['TLX']
             isVALID = instance['valid']
 
             #check vs schemaUnderTest

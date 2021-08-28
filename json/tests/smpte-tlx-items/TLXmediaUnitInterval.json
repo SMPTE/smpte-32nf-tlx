@@ -9,37 +9,37 @@
     "tests": [
         {
             "description": "empty item",
-            "data": { "TLXmediaUnitInterval": { } },
+            "TLX": { "TLXmediaUnitInterval": { } },
             "valid": false
         },
         {
             "description": "ATSC runtime",
-            "data": { "TLXmediaUnitInterval": { "interval": [ 1001, 30000 ] } },
+            "TLX": { "TLXmediaUnitInterval": { "interval": [ 1001, 30000 ] } },
             "valid": true
         },
         {
             "description": "DVB runtime",
-            "data": { "TLXmediaUnitInterval": { "interval": [ 1, 50 ] } },
+            "TLX": { "TLXmediaUnitInterval": { "interval": [ 1, 50 ] } },
             "valid": true
         },
         {
             "description": "bad denominator",
-            "data": { "TLXmediaUnitInterval": { "interval": [ 1, 0 ] } },
+            "TLX": { "TLXmediaUnitInterval": { "interval": [ 1, 0 ] } },
             "valid": false
         },
         {
             "description": "missing 'interval' attribute",
-            "data": { "TLXmediaUnitInterval": { "duration": [ 1, 50 ] } },
+            "TLX": { "TLXmediaUnitInterval": { "duration": [ 1, 50 ] } },
             "valid": false
         },
         {
             "description": "missing 'interval' attribute",
-            "data": { "TLXmediaUnitInterval": { "runtime": [ 1001, 30000 ] } },
+            "TLX": { "TLXmediaUnitInterval": { "runtime": [ 1001, 30000 ] } },
             "valid": false
         },
         {
             "description": "extra attribute",
-            "data": { "TLXmediaUnitInterval": { "interval": [ 1,50 ], "extra": null } },
+            "TLX": { "TLXmediaUnitInterval": { "interval": [ 1,50 ], "extra": null } },
             "valid": true
         }
     ]

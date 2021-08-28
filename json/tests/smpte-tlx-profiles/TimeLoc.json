@@ -8,19 +8,19 @@
     "tests": [
         {
             "description": "empty TLX",
-            "data": { },
+            "TLX": { },
             "valid": false
         },
         {
             "description": "Simple TLX",
-            "data": { "TLXptpTimestamp": {
+            "TLX": { "TLXptpTimestamp": {
                 "ptpTime": [ 1234567890, 123456789] }
             },
             "valid": false
         },
         {
             "description": "local-time capable TLX",
-            "data": {
+            "TLX": {
                 "TLXptpTimestamp": {
                     "ptpTime": [ 1234567890, 123456789],
                     "currentLocalOffset": -25163

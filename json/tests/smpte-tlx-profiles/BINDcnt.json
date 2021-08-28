@@ -8,7 +8,7 @@
     "tests": [
         {
             "description": "empty TLX",
-            "data": { },
+            "TLX": { },
             "valid": false
         }
     ]

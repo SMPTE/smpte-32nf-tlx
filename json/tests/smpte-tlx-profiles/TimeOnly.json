@@ -7,19 +7,19 @@
     "tests": [
         {
             "description": "empty TLX",
-            "data": { },
+            "TLX": { },
             "valid": false
         },
         {
             "description": "timestamp only",
-            "data": {
+            "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] }
             },
             "valid": true
         },
         {
             "description": "timestamp only with offset",
-            "data": {
+            "TLX": {
                 "TLXptpTimestamp": {
                     "ptpTime": [ 1234567890, 123456789 ],
                     "currentLocalOffset": -25163
@@ -29,7 +29,7 @@
         },
         {
             "description": "timestamp and sourceName",
-            "data": {
+            "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] },
                 "TLXsourceName": { "name": "tape 001" }
             },
