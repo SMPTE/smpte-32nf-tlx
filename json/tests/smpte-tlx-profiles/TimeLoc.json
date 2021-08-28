@@ -1,4 +1,4 @@
-[ {
+{
     "description": "TimeLoc profile vigorous test suite",
     "schema": {
         "$id": "test/TimeLoc",
@@ -30,6 +30,6 @@
         }
 
     ]
-} ]
+}
 
 

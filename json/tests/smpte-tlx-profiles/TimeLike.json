@@ -1,4 +1,4 @@
-[ {
+{
     "description": "TimeLike profile vigorous test suite",
     "schema": {
         "$id": "test/TimeLike",
@@ -12,6 +12,6 @@
             "valid": false
         }
     ]
-} ]
+}
 
 

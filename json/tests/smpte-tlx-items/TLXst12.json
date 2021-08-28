@@ -1,4 +1,4 @@
-[ {
+{
     "description": "TLXst12 item vigorous test suite",
     "schema": {
         "$schema": "http://json-schema.org/draft-07/schema",
@@ -436,4 +436,4 @@
             "valid": true
         }        
     ]
-} ]
+}

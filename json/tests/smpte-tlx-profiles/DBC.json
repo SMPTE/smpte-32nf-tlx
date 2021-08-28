@@ -1,7 +1,7 @@
-[ {
+{
     "description": "DBC profile vigorous test suite",
     "schema": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
+        "$schema": "http://json-schema.org/draft-07/schema",
         "$id": "test/DBC",
         "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/DBC"
     },
@@ -47,4 +47,4 @@
 
 
     ]
-} ]
+}

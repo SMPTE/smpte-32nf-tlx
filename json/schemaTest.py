@@ -140,7 +140,7 @@ def main(argv):
         try:
             with open(testFilename) as currentTestFile:
                 try:
-                    currentTestSet = json.load(currentTestFile)
+                    currentTestSuite = json.load(currentTestFile)
                     currentTestFile.close()
                 except Exception as e:
                     print('\nWARN: Can\'t parse JSON for test suite', testFilename,'.')
@@ -150,102 +150,99 @@ def main(argv):
                 else:
                     try:
                         schemaForTestSets = schemaStore[testSchemaID]
-                        jsonschema.validate( instance= currentTestSet, schema= schemaForTestSets)
-                        if debug: print('DEBUG: testSet', testFilename, 'is well formed.')
+                        jsonschema.validate( instance= currentTestSuite, schema= schemaForTestSets)
                     except jsonschema.exceptions.SchemaError as e:
                         print('\nERR: schema for validating testSets,', testSchemaFilename, ' is faulty.')
                         print(' ', e, '\n')
                         sys.exit(2)
                     except jsonschema.exceptions.ValidationError as e:
-                        print('\nWARN: currentTestSet from "' + testFilename + '" is NOT well-formed.')
+                        print('\nWARN: currentTestSuite from "' + testFilename + '" is NOT well-formed.')
                         print(' ', e, '\n  skipping...')
                         suitesBroken += 1
+                        continue
                     else:
-                        if debug: print('DEBUG: currentTestSet, from ', testFilename,', is well-formed.')
+                        if debug: print('DEBUG: currentTestSuite, from ', testFilename,', is well-formed.')
         except Exception as e:
-            print('\nWARN: currentTestSet, from', testFilename,' couldn\'t be read.')
+            print('\nWARN: currentTestSuite, from', testFilename,' couldn\'t be read.')
             print(' ', e, '\n  skipping...')
             suitesBroken += 1
             continue
 
 
-        # the test suite list was valid,
-        print('\nSuite', testFilename, '(' + str(currentTestSet[0]['description']) + ')' )
+        # the test suite was valid,
+        print('\nSuite', testFilename, '(' + str(currentTestSuite['description']) + ')' )
         suitesRun += 1
-        # TODO constant index of [0] is not appropriate for description when multiple test sets are in a single file
         
-        # TEST SUITE LIST could have multiple schemas, but one is expected
-        for currentTestSuite in currentTestSet:
-            schemaUnderTest = currentTestSuite['schema']
+        schemaUnderTest = currentTestSuite['schema']
+        
+        
+        #validate each of the tests vs the schema
+        testNumber = 0 # restart for each suite, testsPassed + testsFailed = tests already run
+        for instance in currentTestSuite['tests']:
+            testNumber += 1
+            print('\n  Test [' + str(suitesRun + suitesBroken) + '.' + str(testNumber) + '] [[' + str(testsPassed + testsFailed + 1) + ']] >', str(instance['description']))
+
+            #perform validation test on the current instance
+            currentTestInstance = instance['data']
+            isVALID = instance['valid']
+
+            #check vs schemaUnderTest
+            if debug: print ( '    prepping to validate','\n    currentTestInstance:', currentTestInstance, '\n    schemaUnderTest:', schemaUnderTest)
+
+            # add schemaUnderTest to store
+            schemaStore[ schemaUnderTest['$id'] ] = currentTestInstance
             
-            
-            #validate each of the tests vs the schema
-            testNumber = 0 # restart for each suite, testsPassed + testsFailed = tests already run
-            for instance in currentTestSuite['tests']:
-                testNumber += 1
-                print('\n  Test [' + str(suitesRun + suitesBroken) + '.' + str(testNumber) + '] [[' + str(testsPassed + testsFailed + 1) + ']] >', str(instance['description']))
-
-               #perform validation test on the current instance
-                currentTestInstance = instance['data']
-                isVALID = instance['valid']
-
-                #check vs schemaUnderTest
-                if debug: print ( '    prepping to validate','\n    currentTestInstance:', currentTestInstance, '\n    schemaUnderTest:', schemaUnderTest)
-
-                # add schemaUnderTest to store
-                schemaStore[ schemaUnderTest['$id'] ] = currentTestInstance
-                
+            try:
+                schemaNeeded = currentTestSet['schema']['$ref']
+                # strip any fragment
+                schemaNeeded = schemaNeeded.split('#')[0]
+            except:
+                # don't care if no $schema required (I think)
+                pass
+            else:
                 try:
-                    schemaNeeded = currentTestSet[0]['schema']['$ref']
-                    # strip any fragment
-                    schemaNeeded = schemaNeeded.split('#')[0]
+                    schemaOnHand = schemaStore[ schemaNeeded ]
                 except:
-                    # don't care if no $schema required (I think)
-                    pass
-                else:
-                    try:
-                        schemaOnHand = schemaStore[ schemaNeeded ]
-                    except:
-                      print('WARN: Test file', testFilename, 'requires $schema', schemaNeeded, 'which is not present in the store.'  )
-                      suitesBroken += 1
-                      break
-                    
-                # rebuild the resolver for each schemaUnderTest (usually only once per test file)
-                resolver= jsonschema.RefResolver( None, referrer= schemaUnderTest, store= schemaStore )
-                #resolver= jsonschema.RefResolver( base_uri= None, referrer= None, store= schemaStore)
+                  print('WARN: Test file', testFilename, 'requires $schema', schemaNeeded, 'which is not present in the store.'  )
+                  suitesBroken += 1
+                  break
+                
+            # rebuild the resolver for each schemaUnderTest (usually only once per test file)
+            resolver= jsonschema.RefResolver( None, referrer= schemaUnderTest, store= schemaStore )
+            #resolver= jsonschema.RefResolver( base_uri= None, referrer= None, store= schemaStore)
 
-                try:
-                    jsonschema.validate(instance= currentTestInstance, schema= schemaUnderTest, resolver = resolver)
-                    #if debug: print('\n\nDid it:\n', str(resolver.store), '\n\n')
-                except jsonschema.exceptions.SchemaError as e:
-                    print('  WARN: schema in', testFilename, 'is faulty')
+            try:
+                jsonschema.validate(instance= currentTestInstance, schema= schemaUnderTest, resolver = resolver)
+                #if debug: print('\n\nDid it:\n', str(resolver.store), '\n\n')
+            except jsonschema.exceptions.SchemaError as e:
+                print('  WARN: schema in', testFilename, 'is faulty')
+                print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
+            except jsonschema.exceptions.ValidationError as e:
+                if isVALID == True:
+                    # FAILED, but supposedly VALID
+                    print('  WARN: instance is supposed to be VALID but FAILED.')
                     print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
-                except jsonschema.exceptions.ValidationError as e:
-                    if isVALID == True:
-                        # FAILED, but supposedly VALID
-                        print('  WARN: instance is supposed to be VALID but FAILED.')
-                        print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
-                        testsFailed += 1
-                    else:
-                        # FAILD and supposedly INVALID
-                        testsPassed += 1
-                        if debug: print('DEBUG:', currentTestInstance,'INVALID and FAILED (correct).')
+                    testsFailed += 1
                 else:
-                    if debug: print('  DEBUG: instance DID validate and validity flag is', isVALID)
-                    if isVALID == True:
-                        # PASSED and supposedly VALID
-                        testsPassed += 1
-                        #if debug: print('DEBUG:', currentTestInstance,'VALID and PASSED (correct).')
-                    else:
-                        # PASSED but supposedly INVALID
-                        testsFailed += 1
-                        print('  WARN: this test instance:\n    ', currentTestInstance,'\n  is supposed to be INVALID but PASSED.')
-                finally:
-                    # remove schemaUnderTest from store
-                    del schemaStore[schemaUnderTest['$id']]
+                    # FAILD and supposedly INVALID
+                    testsPassed += 1
+                    if debug: print('DEBUG:', currentTestInstance,'INVALID and FAILED (correct).')
+            else:
+                if debug: print('  DEBUG: instance DID validate and validity flag is', isVALID)
+                if isVALID == True:
+                    # PASSED and supposedly VALID
+                    testsPassed += 1
+                    #if debug: print('DEBUG:', currentTestInstance,'VALID and PASSED (correct).')
+                else:
+                    # PASSED but supposedly INVALID
+                    testsFailed += 1
+                    print('  WARN: this test instance:\n    ', currentTestInstance,'\n  is supposed to be INVALID but PASSED.')
+            finally:
+                # remove schemaUnderTest from store
+                del schemaStore[schemaUnderTest['$id']]
 
-                    #break
-                continue
+                #break
+            continue
 
     print ('\n\nResults:')
     print ('Of', schemasLoaded + schemasBroken, 'files at <schemaPath>,',
