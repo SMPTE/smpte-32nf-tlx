@@ -184,7 +184,7 @@ def main(argv):
 
 
         # the test suite was valid,
-        if quiet < 2: print('\nSuite', testFilename, '(' + str(currentTestSuite['description']) + ')' )
+        if quiet < 2: print('\nSuite', testFilename, '(' + str(currentTestSuite['description']) + ') with', str(len(currentTestSuite['tests'])), 'tests.' )
         suitesRun += 1
         
         schemaUnderTest = currentTestSuite['schema']
