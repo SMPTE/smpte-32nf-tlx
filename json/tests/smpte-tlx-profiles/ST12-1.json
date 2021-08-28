@@ -1,4 +1,4 @@
-[ {
+{
     "description": "ST12-1 profile vigorous test suite",
     "schema": {
         "$id": "test/ST12-1",
@@ -12,6 +12,6 @@
             "valid": false
         }
     ]
-} ]
+}
 
 

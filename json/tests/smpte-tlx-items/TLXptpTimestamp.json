@@ -1,4 +1,4 @@
-[ {
+{
     "description": "TLXptpTimestamp item vigorous test suite",
     "schema": {
         "$schema": "http://json-schema.org/draft-07/schema",
@@ -85,4 +85,4 @@
         }
         
     ]
-} ]
+}

@@ -1,4 +1,4 @@
-[ {
+{
     "description": "TLXv1 profile vigorous test suite",
     "schema": {
         "$id": "test/TLXv1",
@@ -12,4 +12,4 @@
             "valid": false
         }
     ]
-} ]
+}

@@ -1,95 +1,66 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "/test-schema",
-    "description": "Schema for collection of test suites. Each suite in the collection may use a different version of the jsonSchema metaschema.",
+    "description": "Schema for a test suite providing a $schema against which TLX test instances are evaluated, a 'schema' that is the jsonSchema metaschema against which the $schema is evaluated, and am array of TLX test instances.",
 
-    "type": "array",
-    "items": {
-        "type": "object",
-        "required": [ "description", "schema", "tests" ],
-        "properties": {
-            "id": {
-                "description": "Uniquely identifies a set of tests",
-                "type": "string",
-                "format": "uri"
-            },
-            "description": {
-                "description": "The test set description",
-                "type": "string"
-            },
-            "comment": {
-                "description": "Any additional comments about the test set",
-                "type": "string"
-            },
-            "schema": {
-                "description": "This should be a valid schema. This should be a ref to a meta-schema if schema keywords need testing."
-            },
-            "tests": {
-                "description": "A set of related tests all using the same schema",
-                "type": "array",
-                "items": { "$ref": "#/definitions/test" },
-                "minItems": 1
-            }
+    "type": "object",
+
+    "properties": {
+        "description": {
+            "description": "The test set description",
+            "type": "string"
         },
-        "additionalProperties": false,
-        "minItems": 1
+        "schema": {
+            "description": "This test suite's schema for evaluating test instances.  An $id and a $schema (metadata) are required.",
+            "$ref": "#/definitions/adhocSchema"
+         },
+        "tests": {
+            "description": "A set of related tests all using the same schema",
+            "type": "array",
+            "items": { "$ref": "#/definitions/test" },
+            "minItems": 1
+        }
     },
+    "required": [ "description", "schema", "tests" ],
+    "additionalProperties": false,
+    "minItems": 1,
+
     "definitions": {
-        "outputItem": {
+        "adhocSchema": {
+            "description": "schema to evaluate test data herein",
             "type": "object",
             "properties": {
-                "valid": { "type": "boolean" },
-                "keywordLocation": { "type": "string" },
-                "absoluteKeywordLocation": {
+                "$schema": {
+                    "description": "metaschema used to validate this suite's schema",
                     "type": "string",
                     "format": "uri"
                 },
-                "instanceLocation": { "type": "string" },
-                "annotations": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/outputItem" }
-                },
-                "errors": {
-                    "type": "array",
-                    "items": { "$ref": "#/definitions/outputItem" }
+                "$id": {
+                    "description": "base uri identifier for this suite's schema",
+                    "type": "string",
+                    "format": "uri"
                 }
-            }
+            },
+            "required": [ "$schema", "$id" ],
+            "additionalProperties": true,
+            "minProperties": 3
         },
         "test": {
-            "description": "A single test",
+            "description": "individual TLX test object",
             "type": "object",
-            "required": [ "description", "data", "valid" ],
             "properties": {
-                "id": {
-                    "description": "Uniquely identifies a single test",
-                    "type": "string",
-                    "format": "uri"
-                },
                 "description": {
-                    "description": "The test description",
-                    "type": "string"
-                },
-                "comment": {
-                    "description": "Any additional comments about the test",
-                    "type": "string"
+                    "description": "unique-ish name of test (brief)",
+                    "type": "string",
+                    "minLength": 1
                 },
                 "data": {
-                    "description": "This is the instance to be validated against the schema in \"schema\"."
-                
-                
+                    "description": "TLX instance to be validated against the schema."
                 },
-                "valid": { "type": "boolean" },
-                "output": {
-                    "type": "object",
-                    "required": [ "basic", "detailed", "verbose" ],
-                    "properties": {
-                        "basic": { "$ref": "#/definitions/outputItem" },
-                        "detailed": { "$ref": "#/definitions/outputItem" },
-                        "verbose": { "$ref": "#/definitions/outputItem" }
-                    }
-                }
+                "valid": { "type": "boolean" }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "required": [ "description", "data", "valid" ]
         }
     }
 }

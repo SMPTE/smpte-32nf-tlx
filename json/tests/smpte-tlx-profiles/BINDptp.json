@@ -1,4 +1,4 @@
-[ {
+{
     "description": "BINDptp profile vigorous test suite",
     "schema": {
         "$id": "test/BINDptp",
@@ -11,6 +11,6 @@
             "valid": false
         }
     ]
-} ]
+}
 
 
