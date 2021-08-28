@@ -5,7 +5,8 @@
         "$id": "test/DBC-and-TimeLoc",
         "allOf": [
             { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/DBC" },
-            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/TimeLoc" }
+            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/TimeLoc" },
+            { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
         ]
     },
     "tests": [
