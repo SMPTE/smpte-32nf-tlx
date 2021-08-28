@@ -43,27 +43,27 @@
         },
         {
             "description": "variety of acceptable characters",
-            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\\"\\/?!@#$%^&*" } },
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\"\\/?!@#$%^&*" } },
             "valid": true
         },
         {
             "description": "variety of acceptable characters + tab",
-            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\t\\"\\/?!@#$%^&*" } },
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\t\"\\/?!@#$%^&*" } },
             "valid": false
         },
         {
             "description": "variety of acceptable characters + backspace",
-            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\b\\"\\/?!@#$%^&*" } },
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\b\"\\/?!@#$%^&*" } },
             "valid": false
         },
         {
             "description": "variety of acceptable characters + newline",
-            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\n\\"\\/?!@#$%^&*" } },
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\n\"\\/?!@#$%^&*" } },
             "valid": false
         },
         {
             "description": "variety of acceptable characters + return",
-            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\r\\"\\/?!@#$%^&*" } },
+            "data": { "TLXsourceName": { "name": " 012 ABC abc ~ [{(&]})',<.>;:\r\"\\/?!@#$%^&*" } },
             "valid": false
         }
     ]
