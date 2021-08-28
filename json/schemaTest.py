@@ -37,6 +37,7 @@ def main(argv):
     suitesBroken = 0
     testsPassed = 0
     testsFailed = 0
+    warnings = 0
 
     # this is where the schemas should be found (with a default)
     schemaPath = './schema'
@@ -93,6 +94,7 @@ def main(argv):
             except Exception as e:
                 print('WARN: Could not read valid JSON from', filename, '\n ', e, '\n  skipping...')
                 schemasBroken += 1
+                warnings += 1
                 continue
             else:
                 try:
@@ -101,6 +103,7 @@ def main(argv):
                 except Exception as e:
                     print('WARN: schema candidate', filename, 'does not have an "$id" element, so won\'t be referenced as a schema.\n ', e, '\n skipping...')
                     schemasBroken += 1
+                    warnings += 1
                     continue
                 else:
                     # confirm that the schema is valid
@@ -109,6 +112,7 @@ def main(argv):
                     except Exception as e:
                         print('WARN: schema candidate', filename, 'does not validate as a schema.\n', e, '\n  skipping...')
                         schemasBroken += 1
+                        warnings += 1
                         continue
                     else:
                         # add to the store by id
@@ -119,9 +123,11 @@ def main(argv):
             if os.path.isdir(filename):
                 print("WARN: Directory", filename, 'in schema directory was not a file of type .json.\n  skipping...')
                 schemasBroken += 1
+                warnings += 1
             else:
                 if filename[0] != '.': #ignore hidden files that fail, it's expected
                     print('WARN: File', filename, 'in schema directory was not of type .json.\n  skipping...')
+                    warnings += 1
             continue
     if verbose: print('LOADED', len(schemaStore), 'SCHEMAS')
         
@@ -146,6 +152,7 @@ def main(argv):
                     print('\nWARN: Can\'t parse JSON for test suite', testFilename,'.')
                     print(' ', e, '\n  skipping...')
                     suitesBroken += 1
+                    warnings += 1
                     continue
                 else:
                     try:
@@ -159,6 +166,7 @@ def main(argv):
                         print('\nWARN: currentTestSuite from "' + testFilename + '" is NOT well-formed.')
                         print(' ', e, '\n  skipping...')
                         suitesBroken += 1
+                        warnings += 1
                         continue
                     else:
                         if debug: print('DEBUG: currentTestSuite, from ', testFilename,', is well-formed.')
@@ -166,6 +174,7 @@ def main(argv):
             print('\nWARN: currentTestSuite, from', testFilename,' couldn\'t be read.')
             print(' ', e, '\n  skipping...')
             suitesBroken += 1
+            warnings += 1
             continue
 
 
@@ -205,6 +214,7 @@ def main(argv):
                 except:
                   print('WARN: Test file', testFilename, 'requires $schema', schemaNeeded, 'which is not present in the store.'  )
                   suitesBroken += 1
+                  warnings += 1
                   break
                 
             # rebuild the resolver for each schemaUnderTest (usually only once per test file)
@@ -213,9 +223,10 @@ def main(argv):
 
             try:
                 jsonschema.validate(instance= currentTestInstance, schema= schemaUnderTest, resolver = resolver)
-                #if debug: print('\n\nDid it:\n', str(resolver.store), '\n\n')
             except jsonschema.exceptions.SchemaError as e:
+                # this shouldn't happen here - it should be caught above
                 print('  WARN: schema in', testFilename, 'is faulty')
+                warnings += 1
                 print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
             except jsonschema.exceptions.ValidationError as e:
                 if isVALID == True:
@@ -223,6 +234,7 @@ def main(argv):
                     print('  WARN: instance is supposed to be VALID but FAILED.')
                     print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
                     testsFailed += 1
+                    warnings += 1
                 else:
                     # FAILD and supposedly INVALID
                     testsPassed += 1
@@ -237,6 +249,7 @@ def main(argv):
                     # PASSED but supposedly INVALID
                     testsFailed += 1
                     print('  WARN: this test instance:\n    ', currentTestInstance,'\n  is supposed to be INVALID but PASSED.')
+                    warnings += 1
             finally:
                 # remove schemaUnderTest from store
                 del schemaStore[schemaUnderTest['$id']]
@@ -245,6 +258,7 @@ def main(argv):
             continue
 
     print ('\n\nResults:')
+    if warnings > 0: print("Total WARNINGS:", warnings)
     print ('Of', schemasLoaded + schemasBroken, 'files at <schemaPath>,',
         schemasBroken, ('was' if schemasBroken == 1 else 'were') + ' skipped,', schemasLoaded, 'were used.')
     print ('Of', suitesRun + suitesBroken, 'test suites,',
