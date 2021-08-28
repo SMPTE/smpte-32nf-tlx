@@ -154,7 +154,7 @@ def main(argv):
                     currentTestSuite = json.load(currentTestFile)
                     currentTestFile.close()
                 except Exception as e:
-                    print('\nWARN: Can\'t parse JSON for test suite', testFilename, '.\n  skipping...')
+                    print('\nWARN: Can\'t parse JSON for test suite "' + testFilename + '".\n  skipping...')
                     if quiet < 2: print('  ', e)
                     suitesBroken += 1
                     warnings += 1
@@ -228,6 +228,10 @@ def main(argv):
 
             try:
                 jsonschema.validate(instance= currentTestInstance, schema= schemaUnderTest, resolver = resolver)
+            except jsonschema.exceptions.RefResolutionError as e:
+                print('  WARN: Unable to resolve a $ref pointer in the schema of suite "' + testFilename + '"')
+                suitesBroken += 1
+                break
             except jsonschema.exceptions.SchemaError as e:
                 # this shouldn't happen here - it should be caught above
                 print('  WARN: schema in', testFilename, 'is faulty')

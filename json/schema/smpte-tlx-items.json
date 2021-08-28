@@ -118,7 +118,7 @@
       "$id": "#TLXmediaUnitInterval",
       "title": "TLXmediaUnitInterval",
       "type": "object",
-      "description": "The number of seconds for the media unit interval.",
+      "description": "The number of seconds in the media unit interval.",
       "examples": [
         { "interval": [ 1001, 30000 ] },
         { "interval": [ 1, 50] },
@@ -143,7 +143,7 @@
       "$id": "#TLXuniqueSourceID",
       "title": "TLXuniqueSourceID",
       "type": "object",
-      "description": "The sourceID for the media unit.",
+      "description": "Identifier for the label source (i.e., label generator).  In some implementations, this can be the same as for the media source of the associated media unit.",
       "examples": [
         { "sourceID": "181c9ce2-e821-11eb-beb2-0242ac130002" },
         { "sourceID": "3b0b483d-834d-412a-ad40-ff62eff6948e" },

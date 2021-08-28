@@ -3,13 +3,63 @@
     "schema": {
         "$id": "test/TimeLike",
         "$schema": "http://json-schema.org/draft-07/schema",
-        "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/TimeLike"
+        "allOf": [
+            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/TimeLike" },
+            { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
+        ]
     },
     "tests": [
         {
             "description": "empty TLX",
             "TLX": { },
             "valid": false
+        },
+        {
+            "description": "exemplar TimeLike",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [24, 1] } },
+            "valid": true
+        },
+        {
+            "description": "missing count",
+            "TLX": { "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] } },
+            "valid": false
+        },
+        {
+            "description": "missing rate",
+            "TLX": { "TLXmediaCount": { "count": 300 } },
+            "valid": false
+        },
+        {
+            "description": "exemplar TimeLike + known item",
+            "TLX": {
+                "TLXmediaCount": { "count": 300, "rate": [24, 1] },
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] }
+            },
+            "valid": true
+        },
+        {
+            "description": "exemplar TimeLike + extra item",
+            "TLX": {
+                "TLXmediaCount": {
+                    "count": 300,
+                    "rate": [24, 1]
+                },
+                "extra": {
+                    "more": [ true, false, true, null, true ]
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "exemplar TimeLike + extra count attribute",
+            "TLX": {
+                "TLXmediaCount": {
+                    "count": 300,
+                    "rate": [24, 1],
+                    "exztra": "backwards"
+                }
+            },
+            "valid": true
         }
     ]
 }

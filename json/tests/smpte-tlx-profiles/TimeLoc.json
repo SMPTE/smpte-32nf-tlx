@@ -12,14 +12,7 @@
             "valid": false
         },
         {
-            "description": "Simple TLX",
-            "TLX": { "TLXptpTimestamp": {
-                "ptpTime": [ 1234567890, 123456789] }
-            },
-            "valid": false
-        },
-        {
-            "description": "local-time capable TLX",
+            "description": "exemplar TimeLoc",
             "TLX": {
                 "TLXptpTimestamp": {
                     "ptpTime": [ 1234567890, 123456789],
@@ -27,6 +20,35 @@
                 }
             },
             "valid": true
+        },
+        {
+            "description": "exemplar TimeLoc + leap second",
+            "TLX": {
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789],
+                    "currentLocalOffset": -25163,
+                    "leapSecondEvent": false
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "exemplar TimeLoc + extra",
+            "TLX": {
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789],
+                    "currentLocalOffset": -25163,
+                    "extra": "always"
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "simple timestamp",
+            "TLX": { "TLXptpTimestamp": {
+                "ptpTime": [ 1234567890, 123456789] }
+            },
+            "valid": false
         }
 
     ]

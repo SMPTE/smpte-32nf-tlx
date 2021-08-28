@@ -3,7 +3,10 @@
     "schema": {
         "$id": "test/BINDcnt",
         "$schema": "http://json-schema.org/draft-07/schema",
-        "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/BINDcnt"
+        "allOf": [
+            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/BINDcnt" },
+            { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
+        ]
     },
     "tests": [
         {
@@ -16,6 +19,30 @@
             "TLX": {
                 "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
                 "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": true
+        },
+        {
+            "description": "exemplar + extra count attribute",
+            "TLX": {
+                "TLXmediaCount": { "count": 0,
+                    "rate": [ 30000, 1001 ],
+                    "extra": true
+                },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": true
+        },
+        {
+            "description": "exemplar + extra sourceID attribute",
+            "TLX": {
+                "TLXmediaCount": { "count": 0,
+                    "rate": [ 30000, 1001 ],
+                    "extra": true
+                },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004",
+                    "extra": "YES"
+                }
             },
             "valid": true
         },
@@ -58,6 +85,22 @@
                 "TLXptpTimestamp": {
                     "ptpTime": [ 1234567890, 123456789 ]
                 }
+            },
+            "valid": false
+        },
+        {
+            "description": "broken SourceID",
+            "TLX": {
+                "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+                "TLXuniqueSourceID": { "srcID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": false
+        },
+        {
+            "description": "broken count",
+            "TLX": {
+                "TLXmediaCount": { "cnt": 0, "rate": [ 30000, 1001 ] },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
             },
             "valid": false
         }

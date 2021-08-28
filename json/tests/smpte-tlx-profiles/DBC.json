@@ -3,7 +3,10 @@
     "schema": {
         "$schema": "http://json-schema.org/draft-07/schema",
         "$id": "test/DBC",
-        "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/DBC"
+        "allOf": [
+            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/DBC" },
+            { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
+        ]
     },
     "tests": [
         {
@@ -12,7 +15,7 @@
             "valid": false
         },
         {
-            "description": "DBC version",
+            "description": "DBC exemplar",
             "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
                 "TLXmediaCount": { "count": 0 },
@@ -21,7 +24,7 @@
             "valid": true
         },
         {
-            "description": "DBC version 2 of 3 a",
+            "description": "DBC only 2 of 3 items (a)",
             "TLX": {
                 "TLXmediaCount": { "count": 0 },
                 "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
@@ -29,7 +32,7 @@
             "valid": false
         },
         {
-            "description": "DBC version 2 of 3 b",
+            "description": "DBC only 2 of 3 items (b)",
             "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
                 "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
@@ -37,11 +40,93 @@
             "valid": false
         },
         {
-            "description": "DBC version 2 of 3 c",
+            "description": "DBC only 2 of 3 items (c)",
             "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
                 "TLXmediaCount": { "count": 0 }
              },
+            "valid": false
+        },
+        {
+            "description": "DBC exemplar + extra item",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                "TLXmediaCount": { "count": 0 },
+                "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" },
+                "PreviouslyUnseen": true
+            },
+            "valid": true
+        },
+        {
+            "description": "DBC exemplar + extra timestamp attribute",
+            "TLX": {
+                "TLXptpTimestamp": {
+                    "ptpTime": [1234567890, 123456789 ],
+                    "extra": [ "and", "how" ]
+                },
+                "TLXmediaCount": { "count": 0 },
+                "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
+            },
+            "valid": true
+        },
+        {
+            "description": "DBC exemplar + extra count attribute",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                "TLXmediaCount": {
+                    "count": 0,
+                    "extra": "always welcome"
+                },
+                "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
+            },
+            "valid": true
+        },
+        {
+            "description": "DBC exemplar + extra sourceID",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                "TLXmediaCount": { "count": 0 },
+                "TLXuniqueSourceID": {
+                    "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d",
+                    "extra": { "extensibility": true }
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "broken timestamp",
+            "TLX": {
+                "TLXptpTimestamp": { "ptp": [1234567890, 123456789 ] },
+                "TLXmediaCount": { "count": 0 },
+                "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
+            },
+            "valid": false
+        },
+        {
+            "description": "broken count",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                "TLXmediaCount": { "cnt": 0 },
+                "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
+            },
+            "valid": false
+        },
+        {
+            "description": "broken sourceID",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                "TLXmediaCount": { "count": 0 },
+                "TLXuniqueSourceID": { "scrID": "088793b7-9a42-4a60-b51d-574ff5ed484d" }
+            },
+            "valid": false
+        },
+        {
+            "description": "broken UUID",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
+                "TLXmediaCount": { "count": 0 },
+                "TLXuniqueSourceID": { "sourceID": "088793b7-9a42-4a60-b51d-574ff5ed484" }
+            },
             "valid": false
         }
 

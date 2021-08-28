@@ -27,6 +27,11 @@
             "valid": true
         },
         {
+            "description": "broken sourceID",
+            "TLX": { "TLXuniqueSourceID": { "srcID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3" } },
+            "valid": false
+        },
+        {
             "description": "simple source ID item, wrong case (receiver may PASS, sender shall FAIL)",
             "TLX": { "TLXuniqueSourceID": { "sourceID": "D1E64EfD-19D1-4643-8DE9-119E19f4D8A6" } },
             "valid": false
@@ -39,12 +44,12 @@
         {
             "description": "source ID item + unknown attribute",
             "TLX": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3",
-                                             "MACaddress": "23-EA-4A-3B-21-EF" } },
+                                             "MACaddress": "23-ea-4a-3b-21-ef" } },
             "valid": true
         },
         {
             "description": "source ID item with unknown attribute only",
-            "TLX": { "TLXuniqueSourceID": { "MACaddress": "23-EA-4A-3B-21-EF" } },
+            "TLX": { "TLXuniqueSourceID": { "MACaddress": "23-ea-4a-3b-21-ef" } },
             "valid": false
         }
     ]

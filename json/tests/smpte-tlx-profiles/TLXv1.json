@@ -10,6 +10,116 @@
             "description": "empty TLX",
             "TLX": { },
             "valid": false
+        },
+        {
+            "description": "DBC ",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+                  "currentLocalOffset": -25163 },
+                "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": true
+        },
+        {
+            "description": "ST 12-1 workflow",
+            "TLX": {
+                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ], "fieldMark": false,
+                    "dropFrame": true, "modulus": "30",
+                    "binaryGroups": "47210719", "bgFlags": "6",
+                    "DBB1": "01", "DBB2": "00"
+                  },
+                "TLXsourceName": { "name": "tape 001" }
+            },
+            "valid": true
+        },
+        {
+            "description": "time lapse",
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "8eb03111-2085-48b5-919a-cebbf292ab48" },
+                "TLXmediaCount": { "count": 12000, "rate": [ 1000, 1 ] },
+                "TLXmediaUnitInterval": { "interval": [ 3, 1 ] }
+            },
+            "valid": true
+        },
+        {
+            "description": "offspeed",
+            "TLX": {
+                "TLXmediaCount": { "count": 300, "rate": [24, 1] },
+                "TLXmediaUnitInterval": { "interval": [110, 2400] }
+              },
+            "valid": true
+        },
+        {
+            "description": "TLXmediaCount + extra attribute",
+            "TLX": {
+                "TLXmediaCount": { "count": 300, "rate": [24, 1], "extra": true }
+              },
+            "valid": false
+        },
+        {
+            "description": "TLXmediaUnitInterval + extra attribute",
+            "TLX": {
+                "TLXmediaUnitInterval": {
+                    "interval": [110, 2400], "extra": false
+                }
+            },
+            "valid": false
+        },
+        {
+            "description": "TLXptpTimestamp + extra attribute",
+            "TLX": {
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789 ],
+                    "currentLocalOffset": -25163,
+                    "extra": "shouldn't be here"
+                }
+            },
+            "valid": false
+        },
+        {
+            "description": "TLXuniqueSourceID + extra attribute",
+            "TLX": {
+                "TLXuniqueSourceID": {
+                    "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004",
+                    "extra": false
+                }
+            },
+            "valid": false
+        },
+        {
+            "description": "TLXst12 + extra attribute",
+            "TLX": {
+                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ], "fieldMark": false,
+                    "dropFrame": true, "modulus": "30",
+                    "binaryGroups": "47210719", "bgFlags": "6",
+                    "DBB1": "01", "DBB2": "00",
+                    "extra": "prohibited"
+                  }
+            },
+            "valid": false
+        },
+        {
+            "description": "TLXsourceName + extra attribute",
+            "TLX": {
+                "TLXsourceName": {
+                    "name": "tape 001",
+                    "language": "EN-US"
+                }
+            },
+            "valid": false
+        },
+        {
+            "description": "DBC + extra item",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+                  "currentLocalOffset": -25163 },
+                "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" },
+                "extra": { "object-worthy": "yes, but not here" }
+            },
+            "valid": false
         }
     ]
 }
+
+
