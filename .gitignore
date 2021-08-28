@@ -3,4 +3,6 @@
 
 # Ignore old files
 Archive/*
+
+# Ignore the files inserted by MacOS
 .DS_Store
