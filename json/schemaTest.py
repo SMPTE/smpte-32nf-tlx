@@ -29,6 +29,7 @@ def showUsage():
 def main(argv):
     debug = 0
     verbose = 0
+    quiet = 0
 
     # counters for report at end
     schemasLoaded = 0
@@ -44,7 +45,7 @@ def main(argv):
 
     # validate the arguments passed
     try:
-        opts, args = getopt.getopt(argv,'vhds:')
+        opts, args = getopt.getopt(argv,'vhdqs:')
     except getopt.GetoptError as e:
         print ('ERR:',e)
         showUsage()
@@ -59,6 +60,9 @@ def main(argv):
             schemaPath = arg
         if opt == '-v':
             verbose = 1
+        if opt == '-q':
+            verbose = 0
+            quiet += 1
 
     # remaining arguments should be a list of test files
     if debug: print('DEBUG: \noptlist as detected:', opts, '\nremaining arguments:', args)
@@ -77,7 +81,7 @@ def main(argv):
         print('ERR: expected a schema path, use -s <schemaPath> option')
         sys.exit(2)
 
-    print('SCHEMATEST: will run the tests listed in', args, 'against the schemas found in', schemaPath + ".\n" )
+    if quiet < 1: print('SCHEMATEST: will run the tests listed in', args, 'against the schemas found in', schemaPath + "." )
 
 
     if verbose: print('LOADING SCHEMAS...')
@@ -92,7 +96,8 @@ def main(argv):
                     candidateSchema = json.load(candidateSchemaFile)
                     candidateSchemaFile.close()
             except Exception as e:
-                print('WARN: Could not read valid JSON from', filename, '\n ', e, '\n  skipping...')
+                print('\nWARN: Could not read valid JSON from', filename, '\n  skipping...')
+                if quiet < 2: print('  ', e)
                 schemasBroken += 1
                 warnings += 1
                 continue
@@ -101,7 +106,7 @@ def main(argv):
                     # check if candidate schema has an id, suitable for indexing in the schema store
                     id = candidateSchema['$id']
                 except Exception as e:
-                    print('WARN: schema candidate', filename, 'does not have an "$id" element, so won\'t be referenced as a schema.\n ', e, '\n skipping...')
+                    print('\nWARN: schema candidate', filename, 'does not have an "$id" element, so won\'t be referenced as a schema.\n  skipping...')
                     schemasBroken += 1
                     warnings += 1
                     continue
@@ -110,7 +115,7 @@ def main(argv):
                     try:
                         jsonschema.validate( instance= candidateSchema, schema=json.loads('{}'))
                     except Exception as e:
-                        print('WARN: schema candidate', filename, 'does not validate as a schema.\n', e, '\n  skipping...')
+                        print('\nWARN: schema candidate', filename, 'does not validate as a schema.\n', e, '\n  skipping...')
                         schemasBroken += 1
                         warnings += 1
                         continue
@@ -121,12 +126,12 @@ def main(argv):
                         if filename == testSchemaFilename: testSchemaID = id  # record this for when validating test files
         else:
             if os.path.isdir(filename):
-                print("WARN: Directory", filename, 'in schema directory was not a file of type .json.\n  skipping...')
+                print("\nWARN: Directory", filename, 'in schema directory was not a file of type .json.\n  skipping...')
                 schemasBroken += 1
                 warnings += 1
             else:
                 if filename[0] != '.': #ignore hidden files that fail, it's expected
-                    print('WARN: File', filename, 'in schema directory was not of type .json.\n  skipping...')
+                    print('\nWARN: File', filename, 'in schema directory was not of type .json.\n  skipping...')
                     warnings += 1
             continue
     if verbose: print('LOADED', len(schemaStore), 'SCHEMAS')
@@ -149,8 +154,8 @@ def main(argv):
                     currentTestSuite = json.load(currentTestFile)
                     currentTestFile.close()
                 except Exception as e:
-                    print('\nWARN: Can\'t parse JSON for test suite', testFilename,'.')
-                    print(' ', e, '\n  skipping...')
+                    print('\nWARN: Can\'t parse JSON for test suite', testFilename, '.\n  skipping...')
+                    if quiet < 2: print('  ', e)
                     suitesBroken += 1
                     warnings += 1
                     continue
@@ -160,26 +165,26 @@ def main(argv):
                         jsonschema.validate( instance= currentTestSuite, schema= schemaForTestSets)
                     except jsonschema.exceptions.SchemaError as e:
                         print('\nERR: schema for validating testSets,', testSchemaFilename, ' is faulty.')
-                        print(' ', e, '\n')
+                        print('  ', e)
                         sys.exit(2)
                     except jsonschema.exceptions.ValidationError as e:
-                        print('\nWARN: currentTestSuite from "' + testFilename + '" is NOT well-formed.')
-                        print(' ', e, '\n  skipping...')
+                        print('\nWARN: currentTestSuite from "' + testFilename + '" is NOT well-formed.\n  skipping...')
+                        if quiet < 2: print('  ', e)
                         suitesBroken += 1
                         warnings += 1
                         continue
                     else:
-                        if debug: print('DEBUG: currentTestSuite, from ', testFilename,', is well-formed.')
+                        if debug: print('DEBUG: Test suite in, from ', testFilename,', is well-formed.')
         except Exception as e:
-            print('\nWARN: currentTestSuite, from', testFilename,' couldn\'t be read.')
-            print(' ', e, '\n  skipping...')
+            print('\nWARN: currentTestSuite, from', testFilename,' couldn\'t be read.\n  skipping...')
+            if quiet < 2: print('  ', e)
             suitesBroken += 1
             warnings += 1
             continue
 
 
         # the test suite was valid,
-        print('\nSuite', testFilename, '(' + str(currentTestSuite['description']) + ')' )
+        if quiet < 2: print('\nSuite', testFilename, '(' + str(currentTestSuite['description']) + ')' )
         suitesRun += 1
         
         schemaUnderTest = currentTestSuite['schema']
@@ -189,7 +194,7 @@ def main(argv):
         testNumber = 0 # restart for each suite, testsPassed + testsFailed = total of tests already run
         for instance in currentTestSuite['tests']:
             testNumber += 1
-            print('\n  Test [' + str(suitesRun + suitesBroken) + '.' + str(testNumber) + '] [[' + str(testsPassed + testsFailed + 1) + ']] >', str(instance['description']))
+            if quiet < 1: print('\n  Test [' + str(suitesRun + suitesBroken) + '.' + str(testNumber) + '] [[' + str(testsPassed + testsFailed + 1) + ']] >', str(instance['description']))
 
             #perform validation test on the current TLX instance
             currentTestInstance = instance['TLX']
@@ -227,12 +232,12 @@ def main(argv):
                 # this shouldn't happen here - it should be caught above
                 print('  WARN: schema in', testFilename, 'is faulty')
                 warnings += 1
-                print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
+                if quiet < 2: print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
             except jsonschema.exceptions.ValidationError as e:
                 if isVALID == True:
                     # FAILED, but supposedly VALID
                     print('  WARN: instance is supposed to be VALID but FAILED.')
-                    print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
+                    if quiet < 2: print('\n  DIAGNOSTIC: \n-------------------------------------\n   ', e, '\n', traceback.print_exc(), '\n-------------------------------------\n')
                     testsFailed += 1
                     warnings += 1
                 else:
@@ -244,7 +249,6 @@ def main(argv):
                 if isVALID == True:
                     # PASSED and supposedly VALID
                     testsPassed += 1
-                    #if debug: print('DEBUG:', currentTestInstance,'VALID and PASSED (correct).')
                 else:
                     # PASSED but supposedly INVALID
                     testsFailed += 1

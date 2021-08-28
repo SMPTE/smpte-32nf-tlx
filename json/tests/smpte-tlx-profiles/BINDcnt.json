@@ -10,6 +10,56 @@
             "description": "empty TLX",
             "TLX": { },
             "valid": false
+        },
+        {
+            "description": "BINDcnt exemplar",
+            "TLX": {
+                "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": true
+        },
+        {
+            "description": "DBC instance",
+            "TLX": {
+                "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" },
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789 ]
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "missing attribute rate",
+            "TLX": {
+                "TLXmediaCount": { "count": 0 },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" },
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789 ]
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "missing TLXmediaCount",
+            "TLX": {
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" },
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789 ]
+                }
+            },
+            "valid": false
+        },
+        {
+            "description": "missing TLXuniqueSourceID",
+            "TLX": {
+                "TLXmediaCount": { "count": 0 },
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789 ]
+                }
+            },
+            "valid": false
         }
     ]
 }
