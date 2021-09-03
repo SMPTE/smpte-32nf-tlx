@@ -16,7 +16,7 @@
             "valid": false
         },
         {
-            "description": "DBC with no currentLocalOffset",
+            "description": "DBC with no localOffset",
             "TLX": {
                 "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ] },
@@ -25,30 +25,30 @@
             "valid": false
         },
         {
-            "description": "DBC including currentLocalOffset",
+            "description": "DBC including localOffset",
             "TLX": {
                 "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ],
-                    "currentLocalOffset": -25237 },
+                    "localOffset": -25237 },
                 "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
             },
             "valid": true
         },
         {
-            "description": "partial DBC, but including currentLocalOffset",
+            "description": "partial DBC, but including localOffset",
             "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ],
-                    "currentLocalOffset": -25237 },
+                    "localOffset": -25237 },
                 "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
             },
             "valid": false
         },
         {
-            "description": "partial DBC, but including currentLocalOffset",
+            "description": "partial DBC, but including localOffset",
             "TLX": {
                 "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
                 "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ],
-                    "currentLocalOffset": -25237 }
+                    "localOffset": -25237 }
             },
             "valid": false
         }

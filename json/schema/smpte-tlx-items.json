@@ -8,7 +8,7 @@
   "examples": [
     {
       "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
-        "currentLocalOffset": -25163 },
+        "localOffset": -25237 },
       "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
       "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
     },
@@ -41,10 +41,10 @@
       "type": "object",
       "description": "Creation time of this TLX label.",
       "examples": [
-        { "ptpTime": [ 1234567890, 999999999 ], "currentLocalOffset": -25163,
+        { "ptpTime": [ 1234567890, 999999999 ], "localOffset": -25237,
           "isLeapSecond": false },
-        { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25163},
-        { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25163,
+        { "ptpTime": [ 12345678901, 999999999 ], "localOffset": -25237},
+        { "ptpTime": [ 12345678901, 999999999 ], "localOffset": -25237,
           "extensible": null }
       ],
       "properties": {
@@ -63,9 +63,9 @@
           "minItems": 2,
           "additionalItems": false
         },
-        "currentLocalOffset": {
-          "$id": "#TLXptpTimestamp/currentLocalOffset",
-          "title": "TLXptpTimestamp/currentLocalOffset",
+        "localOffset": {
+          "$id": "#TLXptpTimestamp/localOffset",
+          "title": "TLXptpTimestamp/localOffset",
           "type": "integer", "minimum": -2147483648, "exclusiveMaximum": 2147483648,
           "$comment": "ST 2059-2 limits to int32."
         },

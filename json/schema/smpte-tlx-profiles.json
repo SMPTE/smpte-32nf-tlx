@@ -15,7 +15,7 @@
       "examples": [
         {
           "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
-            "currentLocalOffset": -25163 },
+            "localOffset": -25237 },
           "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
           "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
         }
@@ -101,14 +101,14 @@
       "examples": [
         {
           "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
-            "currentLocalOffset": -25163 }
+            "localOffset": -25237 }
         }
       ],
       "properties": {
         "TLXptpTimestamp": {
           "properties": {
             "ptpTime": {},
-            "currentLocalOffset": {},
+            "localOffset": {},
             "isLeapSecond": {}
           },
           "required": [ "ptpTime" ],
@@ -128,16 +128,16 @@
       "examples": [
         {
           "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
-            "currentLocalOffset": -25163 }
+            "localOffset": -25237 }
         }
       ],
       "properties": {
         "TLXptpTimestamp": {
           "properties": {
             "ptpTime": {},
-            "currentLocalOffset": {}
+            "localOffset": {}
           },
-          "required": [ "ptpTime", "currentLocalOffset" ]
+          "required": [ "ptpTime", "localOffset" ]
         }
       },
       "required": [ "TLXptpTimestamp" ]
@@ -173,7 +173,7 @@
       "examples": [
         {
           "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
-            "currentLocalOffset": -25163 },
+            "localOffset": -25237 },
           "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
           "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
         },
@@ -201,7 +201,7 @@
         "TLXptpTimestamp": {
           "properties": {
             "ptpTime": {},
-            "currentLocalOffset": {},
+            "localOffset": {},
             "isLeapSecond": {}
           },
           "additionalProperties": false
@@ -260,7 +260,7 @@
       "examples": [
         {
           "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
-            "currentLocalOffset": -25163 },
+            "localOffset": -25237 },
           "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
         }
       ],

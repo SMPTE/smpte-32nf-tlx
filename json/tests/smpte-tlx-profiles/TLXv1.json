@@ -18,7 +18,19 @@
             "description": "DBC ",
             "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
-                  "currentLocalOffset": -25163 },
+                  "localOffset": -25237 },
+                "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": true
+        },
+        {
+            "description": "DBC with isLeapSecond",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+                  "localOffset": -25237,
+                  "isLeapSecond": false
+                },
                 "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
                 "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
             },
@@ -73,7 +85,7 @@
             "TLX": {
                 "TLXptpTimestamp": {
                     "ptpTime": [ 1234567890, 123456789 ],
-                    "currentLocalOffset": -25163,
+                    "localOffset": -25237,
                     "extra": "shouldn't be here"
                 }
             },
@@ -115,7 +127,7 @@
             "description": "DBC + extra item",
             "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
-                  "currentLocalOffset": -25163 },
+                  "localOffset": -25237 },
                 "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
                 "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" },
                 "extra": { "object-worthy": "yes, but not here" }
