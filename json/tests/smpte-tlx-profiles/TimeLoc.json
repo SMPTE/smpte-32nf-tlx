@@ -19,7 +19,7 @@
             "TLX": {
                 "TLXptpTimestamp": {
                     "ptpTime": [ 1234567890, 123456789],
-                    "currentLocalOffset": -25163
+                    "localOffset": -25237
                 }
             },
             "valid": true
@@ -29,7 +29,7 @@
             "TLX": {
                 "TLXptpTimestamp": {
                     "ptpTime": [ 1234567890, 123456789],
-                    "currentLocalOffset": -25163,
+                    "localOffset": -25237,
                     "isLeapSecond": false
                 }
             },
@@ -40,7 +40,7 @@
             "TLX": {
                 "TLXptpTimestamp": {
                     "ptpTime": [ 1234567890, 123456789],
-                    "currentLocalOffset": -25163,
+                    "localOffset": -25237,
                     "extra": "always"
                 }
             },

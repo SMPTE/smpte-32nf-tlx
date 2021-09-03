@@ -21,15 +21,15 @@
             "description": "timestamp with local",
             "TLX": { "TLXptpTimestamp":
                 { "ptpTime": [ 1234567890, 123456789 ],
-                    "currentLocalOffset": -25163 } },
+                    "localOffset": -25237 } },
             "valid": true
         },
         {
             "description": "timestamp with local and leapsecond",
             "TLX": { "TLXptpTimestamp":
                 { "ptpTime": [ 1234567890, 123456789 ],
-                    "currentLocalOffset": -25163,
-                    "isLeapSecond": true } },
+                    "localOffset": -25237,
+                    "isLeapSecond": false } },
             "valid": true
         },
         {
@@ -66,21 +66,21 @@
             "description": "timestamp with local wrong type",
             "TLX": { "TLXptpTimestamp":
                 { "ptpTime": [ 1234567890, 123456789 ],
-                    "currentLocalOffset": "-25163" } },
+                    "localOffset": "-25237" } },
             "valid": false
         },
         {
             "description": "timestamp with timestamp too long",
             "TLX": { "TLXptpTimestamp":
                 { "ptpTime": [ 1234567890, 123456789, 0 ],
-                    "currentLocalOffset": -25163 } },
+                    "localOffset": -25237 } },
             "valid": false
         },
         {
             "description": "timestamp with timestamp missing ns",
             "TLX": { "TLXptpTimestamp":
                 { "ptpTime": [ 1234567890 ],
-                    "currentLocalOffset": -25163 } },
+                    "localOffset": -25237 } },
             "valid": false
         }
         
