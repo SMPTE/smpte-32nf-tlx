@@ -42,7 +42,7 @@
       "description": "Creation time of this TLX label.",
       "examples": [
         { "ptpTime": [ 1234567890, 999999999 ], "currentLocalOffset": -25163,
-          "leapSecondEvent": false },
+          "isLeapSecond": false },
         { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25163},
         { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25163,
           "extensible": null }
@@ -69,9 +69,9 @@
           "type": "integer", "minimum": -2147483648, "exclusiveMaximum": 2147483648,
           "$comment": "ST 2059-2 limits to int32."
         },
-        "leapSecondEvent": {
-          "$id": "#TLXptpTimestamp/leapSecondEvent",
-          "title": "TLXptpTimestamp/leapSecondEvent",
+        "isLeapSecond": {
+          "$id": "#TLXptpTimestamp/isLeapSecond",
+          "title": "TLXptpTimestamp/isLeapSecond",
           "type": "boolean",
           "default": false
         }

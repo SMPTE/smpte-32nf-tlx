@@ -109,7 +109,7 @@
           "properties": {
             "ptpTime": {},
             "currentLocalOffset": {},
-            "leapSecondEvent": {}
+            "isLeapSecond": {}
           },
           "required": [ "ptpTime" ],
           "additionalProperties": false
@@ -202,7 +202,7 @@
           "properties": {
             "ptpTime": {},
             "currentLocalOffset": {},
-            "leapSecondEvent": {}
+            "isLeapSecond": {}
           },
           "additionalProperties": false
         },

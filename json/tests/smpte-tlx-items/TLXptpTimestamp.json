@@ -29,7 +29,7 @@
             "TLX": { "TLXptpTimestamp":
                 { "ptpTime": [ 1234567890, 123456789 ],
                     "currentLocalOffset": -25163,
-                    "leapSecondEvent": true } },
+                    "isLeapSecond": true } },
             "valid": true
         },
         {
