@@ -1,11 +1,11 @@
-[ {
+{
     "description": "Valid JSON, invalid suite (no 'schema')",
     "tests": [
-      {
-        "description": "media count and rate of 29.94fps (valid test)",
-        "data": { "TLXmediaCount": { "count": 300, "rate": [ 30000, 1001 ]}},
-        "valid": true
-      }
+        {
+            "description": "media count and rate of 29.94fps (valid test)",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 30000, 1001 ]}},
+            "valid": true
+        }
     ]
-} ]
+}
 
