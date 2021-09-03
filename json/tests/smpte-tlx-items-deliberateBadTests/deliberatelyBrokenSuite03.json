@@ -1,4 +1,4 @@
-[ {
+{
     "description": "valid JSON, invalid test schema (no 'valid')",
     "schema":   {
         "$id": "test/DBC-and-TimeLoc",
@@ -6,10 +6,10 @@
         "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-profiles" }
     },
     "tests": [
-      {
-        "description": "media count and rate of 29.94fps (valid test)",
-        "data": { "TLXmediaCount": { "count": 300, "rate": [ 30000, 1001 ]}},
-      }
+        {
+            "description": "media count and rate of 29.94fps (valid test)",
+            "data": { "TLXmediaCount": { "count": 300, "rate": [ 30000, 1001 ]}},
+        }
     ]
-} ]
+}
 
