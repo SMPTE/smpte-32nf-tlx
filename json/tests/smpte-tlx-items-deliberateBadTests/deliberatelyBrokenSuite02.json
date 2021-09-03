@@ -1,3 +1,4 @@
-{
-    "description": "valid JSON, but not an array as expected."
-}
+[
+    "description",
+    "valid JSON, but not an object as expected."
+]
