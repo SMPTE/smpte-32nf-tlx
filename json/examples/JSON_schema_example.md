@@ -17,7 +17,7 @@ One profile, the DBC, requires a conforming TLX label to include three specific 
 ```JSON
 {
     "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
-    "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ], "currentLocalOffset": -25163 },
+    "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ], "localOffset": -25237 },
     "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
 }
 ```
@@ -44,16 +44,16 @@ Here is an exemplary portion of the smpte-tlx-items schema, to give you an idea 
         "type": "object",
         "description": "Creation time of this TLX label.",
         "examples": [
-            { "ptpTime": [ 1234567890, 123456789 ], "currentLocalOffset": -25163, "leapSecondEvent": false },
-            { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25163},
-            { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25163, "foo": "bar" } ],
+            { "ptpTime": [ 1234567890, 123456789 ], "currentLocalOffset": -25237, "isLeapSecond": false },
+            { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25237},
+            { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25237, "foo": "bar" } ],
         "properties": {
             "ptpTime": { "type": "array", "items": [
                     { "description": "seconds", "type": "integer", "minimum": 0, "exclusiveMaximum": 281474976710656 },
                     { "description": "nanoseconds", "type": "integer", "minimum": 0, "exclusiveMaximum": 1000000000 } ],
                 "minItems": 2, "additionalItems": false },
-            "currentLocalOffset": { "type": "integer", "minimum": -2147483648, "exclusiveMaximum": 2147483648 },
-            "leapSecondEvent": { "type": "boolean", "default": false }
+            "localOffset": { "type": "integer", "minimum": -2147483648, "exclusiveMaximum": 2147483648 },
+            "isLeapSecond": { "type": "boolean", "default": false }
         },
         "required": [ "ptpTime" ],
         "additionalProperties": true
@@ -82,7 +82,7 @@ As a UBJSON tokenized translation from JSON :
             [l][1234567890]
             [l][123456789]
         []]
-        [i][18][currentLocalOffset][I][-25163]
+        [i][11][localOffset][I][-25237]
     [}]
     [i][17][TLXuniqueSourceID][{]
         [i][8][sourceID][S][i][36][51793043-be99-4c40-9d9f-b1e865e516c5]
@@ -98,11 +98,11 @@ Binary
 65 5B 69 32 69 01 5D 7D 69 0F 54 4C 58 70 74 70
 54 69 6D 65 73 74 61 6D 70 7B 69 07 70 74 70 54
 69 6D 65 5B 6C 49 96 02 D2 6C 07 5B CD 15 5D 69
-12 63 75 72 72 65 6E 74 4C 6F 63 61 6C 4F 66 66
-73 65 74 49 9D B5 7D 69 11 54 4C 58 75 6E 69 71
-75 65 53 6F 75 72 63 65 49 44 7B 69 08 73 6F 75
-72 63 65 49 44 53 69 24 35 31 37 39 33 30 34 33
-2D 62 65 39 39 2D 34 63 34 30 2D 39 64 39 66 2D
-62 31 65 38 36 35 65 35 31 36 63 35 7D 7D
+0B 6C 6F 63 61 6C 4F 66 66 73 65 74 49 9D 6B 7D
+69 11 54 4C 58 75 6E 69 71 75 65 53 6F 75 72 63
+65 49 44 7B 69 08 73 6F 75 72 63 65 49 44 53 69
+24 35 31 37 39 33 30 34 33 2D 62 65 39 39 2D 34
+63 34 30 2D 39 64 39 66 2D 62 31 65 38 36 35 65
+35 31 36 63 35 7D 7D
 ```
 
