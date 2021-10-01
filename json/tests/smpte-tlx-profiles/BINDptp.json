@@ -1,10 +1,10 @@
 {
-    "description": "BINDptp profile vigorous test suite",
+    "description": "ptpSEQ profile vigorous test suite",
     "schema": {
-        "$id": "test/BINDptp",
+        "$id": "test/ptpSEQ",
         "$schema": "http://json-schema.org/draft-07/schema",
         "allOf": [
-            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/BINDptp" },
+            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/ptpSEQ" },
             { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
         ]
     },
@@ -15,7 +15,7 @@
             "valid": false
         },
         {
-            "description": "exemplar BINDptp",
+            "description": "exemplar ptpSEQ",
             "TLX": {
                 "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
                   "currentLocalOffset": -25163 },
