@@ -9,7 +9,7 @@
 
     "DBC": {
       "$id": "#DBC",
-      "title": "TLX DBC Profile",
+      "title": "TLX Digital Birth Certificate (DBC) Profile",
       "type": "object",
       "description": "Digital Birth Certificate of the associated media unit.",
       "examples": [
@@ -29,9 +29,48 @@
     },
 
 
+    "ptpSEQ": {
+      "$id": "#ptpSEQ",
+      "title": "TLX PTP Timestamp Sequence (ptpSEQ) Profile",
+      "type": "object",
+      "description": "Provides a sufficiently unique identifier for the corresponding media unit, suitable for use as the basis for a key in a database such that relationships to the media unit, including temporal ranges of media units, can be established.",
+      "examples": [
+        {
+          "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+            "localOffset": -25237 },
+          "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+        }
+      ],
+      "properties": {
+        "TLXptpTimestamp": {},
+        "TLXuniqueSourceID": {}
+      },
+      "required": [ "TLXptpTimestamp", "TLXuniqueSourceID" ]
+    },
+    
+    
+    "countSEQ": {
+      "$id": "#countSEQ",
+      "title": "TLX Count Sequence (countSEQ) Profile",
+      "type": "object",
+      "description": "Provides a sufficiently unique identifier for the corresponding media unit, suitable for use as the basis for a key in a database such that relationships to the media unit, including consecutive ranges of media units, can be established.",
+      "examples": [
+        {
+          "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
+          "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+        }
+      ],
+      "properties": {
+        "TLXmediaCount": {},
+        "TLXuniqueSourceID": {}
+      },
+      "required": [ "TLXmediaCount", "TLXuniqueSourceID" ]
+    },
+    
+    
     "ST12-1": {
       "$id": "#ST12-1",
-      "title": "ST12-1 Profile",
+      "title": "TLX ST 12-1 Timecode (ST12-1) Profile",
       "type": "object",
       "description": "Information sufficient to populate a Time and Control Code, as specified by SMPTE ST 12-1.",
       "examples": [
@@ -62,7 +101,7 @@
 
     "ST12-3": {
       "$id": "#ST12-3",
-      "title": "ST12-3 Profile",
+      "title": "TLX ST 12-3 Timecode (ST12-3) Profile",
       "type": "object",
       "description": "Information sufficient to populate a Time and Control Code, as specified by SMPTE ST 12-3.",
       "examples": [
@@ -93,9 +132,38 @@
     },
 
 
+    "US-ASCII": {
+      "$id": "#US-ASCII",
+      "title": "TLX US-ASCII (US-ASCII) Profile",
+      "type": "object",
+      "description": "Provides a TLXsourceName for which the 'name' attribute has a length in Unicode characters that is the same as its length in bytes.",
+      "examples": [
+        {
+          "TLXsourceName": { "name": "Tape 001" }
+        }
+      ],
+      "properties": {
+        "TLXsourceName": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "pattern": "^[ -\\~]+$"
+            }
+          },
+          "required": [ "name" ],
+          "additionalProperties": true
+        }
+      },
+      "required": [ ],
+      "additionalProperties": true,
+      "minProperties": 1
+    },
+    
+    
     "TimeOnly": {
       "$id": "#TimeOnly",
-      "title": "TimeOnly Profile",
+      "title": "TLX Time Only (TimeOnly) Profile",
       "type": "object",
       "description": "A record of the creation time of the label for a corresponding media unit.",
       "examples": [
@@ -122,7 +190,7 @@
 
     "TimeLoc": {
       "$id": "#TimeLoc",
-      "title": "TimeLoc Profile",
+      "title": "TLX Local Time (TimeLoc) Profile",
       "type": "object",
       "description": "A record of the creation time of the label for a corresponding media unit that can be interpreted as local time.",
       "examples": [
@@ -146,7 +214,7 @@
 
     "TimeLike": {
       "$id": "#TimeLike",
-      "title": "TimeLike Profile",
+      "title": "TLX Time-Like (TimeLike) Profile",
       "type": "object",
       "description": "Provides the TLXmediaCount item and sufficient metadata for interpreting that count as a time-like value.",
       "examples": [
@@ -167,7 +235,7 @@
 
     "TLXv1": {
       "$id": "#TLXv1",
-      "title": "TLXv1 Profile",
+      "title": "TLX v1 (TLXv1) Profile",
       "type": "object",
       "description": "Contains no items or attributes other than those specified by ST 2120-2:202x.",
       "examples": [
@@ -177,21 +245,21 @@
           "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
           "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
         },
-
+        
         {
           "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ], "fieldMark": false,
-              "dropFrame": true, "modulus": "30",
-              "binaryGroups": "47210719", "bgFlags": "6",
-              "DBB1": "01", "DBB2": "00"
-            },
+            "dropFrame": true, "modulus": "30",
+            "binaryGroups": "47210719", "bgFlags": "6",
+            "DBB1": "01", "DBB2": "00"
+          },
           "TLXsourceName": { "name": "tape 001" }
         },
-
+        
         { "TLXuniqueSourceID": { "sourceID": "8eb03111-2085-48b5-919a-cebbf292ab48" },
           "TLXmediaCount": { "count": 12000, "rate": [ 1000, 1 ] },
           "TLXmediaUnitInterval": { "interval": [ 3, 1 ] }
         },
-
+        
         {
           "TLXmediaCount": { "count": 300, "rate": [24, 1] },
           "TLXmediaUnitInterval": { "interval": [110, 2400] }
@@ -249,76 +317,8 @@
       },
       "minProperties": 1,
       "additionalProperties": false
-    },
-
-
-    "BINDptp": {
-      "$id": "#BINDptp",
-      "title": "BINDptp Profile",
-      "type": "object",
-      "description": "Provides a sufficiently unique identifier for the corresponding media unit, suitable for use as the basis for a key in a database such that relationships to the media unit, including temporal ranges of media units, can be established.",
-      "examples": [
-        {
-          "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
-            "localOffset": -25237 },
-          "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
-        }
-      ],
-      "properties": {
-        "TLXptpTimestamp": {},
-        "TLXuniqueSourceID": {}
-      },
-      "required": [ "TLXptpTimestamp", "TLXuniqueSourceID" ]
-    },
-
-
-    "BINDcnt": {
-      "$id": "#BINDcnt",
-      "title": "BINDcnt Profile",
-      "type": "object",
-      "description": "Provides a sufficiently unique identifier for the corresponding media unit, suitable for use as the basis for a key in a database such that relationships to the media unit, including consecutive ranges of media units, can be established.",
-      "examples": [
-        {
-          "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
-          "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
-        }
-      ],
-      "properties": {
-        "TLXmediaCount": {},
-        "TLXuniqueSourceID": {}
-      },
-      "required": [ "TLXmediaCount", "TLXuniqueSourceID" ]
-    },
-
-
-    "US-ASCII": {
-      "$id": "#US-ASCII",
-      "title": "US-ASCII Profile",
-      "type": "object",
-      "description": "Provides a TLXsourceName for which the 'name' attribute has a length in Unicode characters that is the same as its length in bytes.",
-      "examples": [
-        {
-          "TLXsourceName": { "name": "Tape 001" }
-        }
-      ],
-      "properties": {
-          "TLXsourceName": {
-              "type": "object",
-              "properties": {
-                  "name": {
-                      "type": "string",
-                      "pattern": "^[ -\\~]+$"
-                  }
-              },
-              "required": [ "name" ],
-              "additionalProperties": true
-          }
-      },
-      "required": [ ],
-      "additionalProperties": true,
-      "minProperties": 1
     }
-    
+
     
   }
 }
