@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Script for publishing markdown documents in various formats
 
@@ -24,13 +24,16 @@ refdoc = None
 def get_word_template(config, args):
     """Return the full pathname to the Word template."""
     refdoc = None
+    
+    print(config)
+    print(args)
 
     # Was the Word template provided on the command line?
     if args.refdoc:
+        print(args.refdoc)
         refdoc = args.refdoc
-        if args.debug:
-            print(f'Using reference document from command-line arguments: {refdoc}')
-
+        # if args.debug:
+            # print(f'Using reference document from command-line arguments: {refdoc}')
 
     # Was the Word template provided in the configuration file?
     elif 'refdoc' in config:
@@ -77,7 +80,7 @@ def get_word_template(config, args):
 config_locations = ['.']
 
 
-def read_config(filename):
+def read_config_file(filename):
     """Read document information from the specified configuration file"""
     filetype = os.path.splitext(filename)[1][1:]
     if filetype == 'json':
@@ -95,14 +98,14 @@ def read_config(filename):
         return None
 
 
-def read_default_config():
+def read_config_default():
     """Read the document information from the default configuration file."""
     for directory in config_locations:
         if os.path.isdir(directory):
             for filetype in ['json', 'yaml']:
                 pathname = os.path.normpath(os.path.join(directory, f'config.{filetype}'))
                 if os.path.isfile(pathname):
-                    return read_config(pathname)
+                    return read_config_file(pathname)
                     
     # Could not find a configuration file
     return None
@@ -210,10 +213,10 @@ if __name__ == '__main__':
     # Set the document configuration information
     if args.config:
         # Read the document configuration from the specified file
-        config = read_config(args.config)
+        config = read_config_file(args.config)
     else:
         # Use the default document configuration
-        config = read_default_config()
+        config = read_config_default()
 
     if args.verbose: print("Source document: %s" % args.source)
 
