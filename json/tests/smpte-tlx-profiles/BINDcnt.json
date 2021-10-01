@@ -1,10 +1,10 @@
 {
-    "description": "BINDcnt profile vigorous test suite",
+    "description": "countSEQ profile vigorous test suite",
     "schema": {
-        "$id": "test/BINDcnt",
+        "$id": "test/countSEQ",
         "$schema": "http://json-schema.org/draft-07/schema",
         "allOf": [
-            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/BINDcnt" },
+            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/countSEQ" },
             { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
         ]
     },
@@ -15,7 +15,7 @@
             "valid": false
         },
         {
-            "description": "BINDcnt exemplar",
+            "description": "countSEQ exemplar",
             "TLX": {
                 "TLXmediaCount": { "count": 0, "rate": [ 30000, 1001 ] },
                 "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
