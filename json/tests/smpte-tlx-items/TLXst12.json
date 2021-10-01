@@ -1,0 +1,439 @@
+{
+    "description": "TLXst12 item vigorous test suite",
+    "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$id": "test/TLXst12",
+        "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
+    },
+    "tests": [
+        {
+            "description": "empty ST 12 item",
+            "TLX": { "TLXst12": { } },
+            "valid": false
+        },
+        {
+            "description": "simple ST 12 item",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ] } },
+            "valid": true
+        },
+        {
+            "description": "simple ST 12 item, timecode with invalid hours",
+            "TLX": { "TLXst12": { "timeAddress": [ 24, 2, 3, 23 ] } },
+            "valid": false
+        },
+        {
+            "description": "simple ST 12 item, timecode with invalid minutes",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 60, 3, 23 ] } },
+            "valid": false
+        },
+        {
+            "description": "simple ST 12 item, timecode with invalid seconds",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 60, 23 ] } },
+            "valid": false
+        },
+        {
+            "description": "simple ST 12 item, timecode with invalid frames",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 31 ] } },
+            "valid": false
+        },
+        {
+            "description": "simple ST 12 item + unknown attribute",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "notes": "timecode derived from edge code reader" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item with unknown attribute only",
+            "TLX": { "TLXst12": { "notes": "timecode wasn't readable" } },
+            "valid": false
+        },
+        {
+            "description": "simple ST 12 item, timecode missing hours/minutes",
+            "TLX": { "TLXst12": { "timeAddress": [ 3, 23 ] } },
+            "valid": false
+        },
+        {
+            "description": "simple ST 12 item, timecode adds days",
+            "TLX": { "TLXst12": { "timeAddress": [ 7, 1, 2, 3, 23 ] } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, drop frame attribute",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "dropFrame": true } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, drop frame attribute bad type",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "dropFrame": 0 } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, color frame attribute",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "colorFrame": true } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, color frame attribute bad type",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "colorFrame": 0 } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, field mark attribute",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "fieldMark": true } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, field mark attribute bad type",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "fieldMark": 0 } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary groups",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "binaryGroups": "00000000" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, binary groups too short",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "binaryGroups": "0000000" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary groups too long",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "binaryGroups": "000000000" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary groups empty",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "binaryGroups": "" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary groups wrong type",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "binaryGroups": 0 } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary groups lower case hexadecimal",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "binaryGroups": "0123abcd" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, binary groups upper case hexadecimal (receiver may PASS, sender shall FAIL)",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "binaryGroups": "0123ABCD" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary groups invalid hexadecimal (bad character)",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "binaryGroups": "01g3abcd" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary group flags",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "bgFlags": "0" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, binary group flags maximum value",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "bgFlags": "7" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, binary group flags out of hexadecimal range",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "bgFlags": "a" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary group flags out of range: max + 1",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "bgFlags": "8" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary group flags empty",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "bgFlags": "" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary group flags too long",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "bgFlags": "11" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary group flags wrong type",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "bgFlags": 3 } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, subFrame",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "subFrame": "00" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, subFrame too short",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "subFrame": "0" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, subFrame maximum value",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "subFrame": "1f" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, binary group flags out of hexadecimal range",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "subFrame": "ff" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary group flags out of range: max + 1",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "subFrame": "20" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary group flags empty",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "subFrame": "" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary group flags too long",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "subFrame": "01f" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, binary group flags wrong type",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "subFrame": 31 } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, modulus 24",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "24" } },
+            "valid": true
+        },       
+        {
+            "description": "ST 12 item, modulus 25",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "25" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus 30",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "30" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus 48",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "48" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus 50",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "50" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus 60",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "60" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus 72",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "72" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus 96",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "96" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus 100",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "100" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus 120 (24x5)",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "120 (24x5)" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus 120 (30x4)",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "120 (30x4)" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, modulus empty",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, modulus wrong (120)",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "120" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, modulus 24, leading zero",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "024" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, modulus 24, wrong type",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": 24 } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, modulus empty",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "modulus": "" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, DBB1",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB1": "00" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, DBB1 too short",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB1": "0" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, DBB1 empty",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB1": "" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, DBB1 too long",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB1": "000" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, DBB1 max value, lowercase",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB1": "ff" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, DBB1, lowercase",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB1": "1a" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, DBB1, uppercase (receiver may PASS, sender shall FAIL)",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB1": "1A" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, DBB2",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB2": "00" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, DBB2 too short",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB2": "0" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, DBB2 empty",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB2": "" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, DBB2 too long",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB2": "000" } },
+            "valid": false
+        },
+        {
+            "description": "ST 12 item, DBB2 max value, lowercase",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB2": "ff" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, DBB2, lowercase",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB2": "1a" } },
+            "valid": true
+        },
+        {
+            "description": "ST 12 item, DBB2, uppercase (receiver may PASS, sender shall FAIL)",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ],
+                                 "DBB2": "1A" } },
+            "valid": false
+        },
+        {
+            "description": "full ST 12 item, ST12-1 example",
+            "TLX": { "TLXst12": {
+                "timeAddress": [ 1, 0, 9, 29 ], 
+                "fieldMark": false,
+                "dropFrame": true,
+                "modulus": "30",
+                "binaryGroups": "47210719",
+                "bgFlags": "6",
+                "DBB1": "01",
+                "DBB2": "00" } },
+            "valid": true
+        },
+        {
+            "description": "full ST 12 item, ST12-3 example",
+            "TLX": { "TLXst12": { 
+                "timeAddress": [ 1, 0, 9, 23 ], 
+                "modulus": "72",
+                "subFrame": "02",
+                "binaryGroups": "00000000",
+                "DBB1": "80",
+                "DBB2": "03" } },
+            "valid": true
+        }        
+    ]
+}

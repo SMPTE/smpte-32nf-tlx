@@ -1,0 +1,196 @@
+{
+    "description": "US-ASCII profile vigorous test suite",
+    "schema": {
+        "$id": "test/US-ASCII",
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "allOf": [
+            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/US-ASCII" },
+            { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
+        ]
+    },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "TLX": { },
+            "valid": false
+        },
+        {
+            "description": "exemplar US-ASCII",
+            "TLX": { "TLXsourceName": { "name": "Tape 001" } },
+            "valid": true
+        },
+        {
+            "description": "valid TLX with no TLXsourceName",
+            "TLX": { "TLXuniqueSourceID": "fc1536a9-f952-430f-9382-b345b869cf97" },
+            "valid": false
+        },
+        {
+            "description": "exemplar + extra",
+            "TLX": {
+                "TLXsourceName": {
+                  "name": "Tape 001",
+                  "extra": null
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "Russian tape name",
+            "TLX": { "TLXsourceName": { "name": "ЛЕНТА 001" } },
+            "valid": false
+        },
+        {
+            "description": "Hindi tape name",
+            "TLX": { "TLXsourceName": { "name": "टेप 001" } },
+            "valid": false
+        },
+        {
+            "description": "too many acceptable characters",
+            "TLX": {
+                "TLXsourceName": {
+                    "name": " 012 ABC abc ~ [{(&]})',<.>;:\"\\/?!@#$%^&*"
+                }
+            },
+            "valid": false
+        },
+        {
+            "description": "assorted acceptable characters",
+            "TLX": {
+                "TLXsourceName": {
+                    "name": "~ [{(&]})',<.>;:\"\\/?!@#$%^&*"
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "space",
+            "TLX": { "TLXsourceName": { "name": " " } },
+            "valid": true
+        },
+        {
+            "description": "square brackets",
+            "TLX": { "TLXsourceName": { "name": "[]" } },
+            "valid": true
+        },
+        {
+            "description": "curly brackets",
+            "TLX": { "TLXsourceName": { "name": "{}" } },
+            "valid": true
+        },
+        {
+            "description": "angle brackets",
+            "TLX": { "TLXsourceName": { "name": "<>" } },
+            "valid": true
+        },
+        {
+            "description": "parens",
+            "TLX": { "TLXsourceName": { "name": "()" } },
+            "valid": true
+        },
+        {
+            "description": "double quote",
+            "TLX": { "TLXsourceName": { "name": "\"" } },
+            "valid": true
+        },
+        {
+            "description": "single quote",
+            "TLX": { "TLXsourceName": { "name": "'" } },
+            "valid": true
+        },
+        {
+            "description": "period",
+            "TLX": { "TLXsourceName": { "name": "." } },
+            "valid": true
+        },
+        {
+            "description": "comma",
+            "TLX": { "TLXsourceName": { "name": "," } },
+            "valid": true
+        },
+        {
+            "description": "question",
+            "TLX": { "TLXsourceName": { "name": "?" } },
+            "valid": true
+        },
+        {
+            "description": "asterisk",
+            "TLX": { "TLXsourceName": { "name": "*" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + plus + equals",
+            "TLX": { "TLXsourceName": { "name": "012=ABC+abc" } },
+            "valid": true
+        },
+        {
+            "description": "alphanumerics + other punctuation",
+            "TLX": { "TLXsourceName": { "name": "0:1;2|A!B@C#a$b%c^7&8-9_" } },
+            "valid": true
+        },
+        {
+            "description": "tilde (upper limit)",
+            "TLX": { "TLXsourceName": { "name": "~" } },
+            "valid": true
+        },
+        {
+            "description": "solidus (slash)",
+            "TLX": { "TLXsourceName": { "name": "/" } },
+            "valid": true
+        },
+        {
+            "description": "reverse solidus (backslash)",
+            "TLX": { "TLXsourceName": { "name": "\\" } },
+            "valid": true
+        },
+        {
+            "description": "tab",
+            "TLX": { "TLXsourceName": { "name": "\t" } },
+            "valid": false
+        },
+        {
+            "description": "backspace",
+            "TLX": { "TLXsourceName": { "name": "\b" } },
+            "valid": false
+        },
+        {
+            "description": "newline",
+            "TLX": { "TLXsourceName": { "name": "\n" } },
+            "valid": false
+        },
+        {
+            "description": "carriage return",
+            "TLX": { "TLXsourceName": { "name": "\r" } },
+            "valid": false
+        },
+        {
+            "description": "option key characters",
+            "TLX": { "TLXsourceName": { "name": "†™¡§¶∑≥" } },
+            "valid": false
+        },
+        {
+            "description": "umlaut u",
+            "TLX": { "TLXsourceName": { "name": "ü" } },
+            "valid": false
+        },
+        {
+            "description": "e-accute",
+            "TLX": { "TLXsourceName": { "name": "é" } },
+            "valid": false
+        },
+        {
+            "description": "e-grave",
+            "TLX": { "TLXsourceName": { "name": "è" } },
+            "valid": false
+        },
+        {
+            "description": "enyay",
+            "TLX": { "TLXsourceName": { "name": "ñ" } },
+            "valid": false
+        },
+        {
+            "description": "a-ring",
+            "TLX": { "TLXsourceName": { "name": "å" } },
+            "valid": false
+        }
+    ]
+}

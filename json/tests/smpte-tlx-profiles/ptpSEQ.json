@@ -1,0 +1,76 @@
+{
+    "description": "ptpSEQ profile vigorous test suite",
+    "schema": {
+        "$id": "test/ptpSEQ",
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "allOf": [
+            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/ptpSEQ" },
+            { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
+        ]
+    },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "TLX": { },
+            "valid": false
+        },
+        {
+            "description": "exemplar ptpSEQ",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+                  "currentLocalOffset": -25163 },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": true
+        },
+        {
+            "description": "slim timestamp",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": true
+        },
+        {
+            "description": "broken timestamp",
+            "TLX": {
+                "TLXptpTimestamp": { "time": [ 1234567890, 123456789 ] },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": false
+        },
+        {
+            "description": "broken sourceID",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] },
+                "TLXuniqueSourceID": { "srcID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": false
+        },
+        {
+            "description": "exemplar + extra timestamp attribute",
+            "TLX": {
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789 ],
+                    "extra": 42
+                },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004" }
+            },
+            "valid": true
+        },
+        {
+            "description": "exemplar + extra sourceID attribute",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ],
+                  "currentLocalOffset": -25163 },
+                "TLXuniqueSourceID": { "sourceID": "3ac760e0-e11b-11eb-ba80-0242ac130004",
+                    "extra": { "importance": null }
+                }
+            },
+            "valid": true
+        }
+
+    ]
+}
+
+

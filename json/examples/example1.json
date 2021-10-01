@@ -1,0 +1,5 @@
+{
+    "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] },
+    "TLXptpTimestamp": { "ptpTime": [1234567890, 123456789 ], "localOffset": -25163 },
+    "TLXuniqueSourceID": { "sourceID": "51793043-be99-4c40-9d9f-b1e865e516c5" }
+}

@@ -1,0 +1,92 @@
+{
+    "description": "TLX overall vigorous test suite",
+    "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$id": "test/TLXoverall",
+        "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
+    },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "TLX": { },
+            "valid": false
+        },
+        {
+            "description": "timestamp item only TLX",
+            "TLX": { "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789] } },
+            "valid": true
+        },
+        {
+            "description": "media count item only TLX",
+            "TLX": { "TLXmediaCount": { "count": 300 } },
+            "valid": true
+        },
+        {
+            "description": "unique source ID only TLX",
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "931b76bc-5493-4aed-9f4a-eb3d21c496bc" } },
+            "valid": true
+        },
+        {
+            "description": "timecode item only TLX",
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ] } },
+            "valid": true
+        },
+        {
+            "description": "source name item only TLX",
+            "TLX": { "TLXsourceName": { "name": "Tape 001" } },
+            "valid": true
+        },
+        {
+            "description": "interval item only TLX",
+            "TLX": { "TLXmediaUnitInterval": { "interval": [ 1, 50] } },
+            "valid": true
+        },
+       {
+            "description": "unknown item only",
+            "TLX": { "TLXnewItem": { "magicNumber": 2, "important": true } },
+            "valid": false
+        },
+       {
+           "description": "timestamp item + unknown item TLX",
+           "TLX": { "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789] },
+               "TLXnewItem": { "magicNumber": 2, "important": true }
+           },
+           "valid": true
+       },
+       {
+           "description": "media count item + unknown item TLX",
+           "TLX": { "TLXmediaCount": { "count": 300 },
+               "TLXnewItem": { "magicNumber": 2, "important": true }
+           },
+           "valid": true
+       },
+       {
+           "description": "unique source ID + unknown item TLX",
+           "TLX": { "TLXuniqueSourceID": { "sourceID": "931b76bc-5493-4aed-9f4a-eb3d21c496bc" },
+               "TLXnewItem": { "magicNumber": 2, "important": true }
+           },
+           "valid": true
+       },
+       {
+           "description": "timecode item + unknown item TLX",
+           "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 23 ] },
+               "TLXnewItem": { "magicNumber": 2, "important": true }
+           },
+           "valid": true
+       },
+       {
+           "description": "source name item + unknown item TLX",
+           "TLX": { "TLXsourceName": { "name": "Tape 001" } ,
+               "TLXnewItem": { "magicNumber": 2, "important": true }
+           },
+           "valid": true
+       },
+       {
+           "description": "interval item + unknown item TLX",
+           "TLX": { "TLXmediaUnitInterval": { "interval": [ 1, 50] } ,
+               "TLXnewItem": { "magicNumber": 2, "important": true }
+           },
+           "valid": true
+       }
+    ]
+}

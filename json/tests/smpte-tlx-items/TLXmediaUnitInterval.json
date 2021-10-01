@@ -1,0 +1,46 @@
+{
+    "description": "TLXmediaUnitInterval item vigorous test suite",
+    "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$id": "test/TLXmediaUnitInterval",
+        "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
+
+    },
+    "tests": [
+        {
+            "description": "empty item",
+            "TLX": { "TLXmediaUnitInterval": { } },
+            "valid": false
+        },
+        {
+            "description": "ATSC runtime",
+            "TLX": { "TLXmediaUnitInterval": { "interval": [ 1001, 30000 ] } },
+            "valid": true
+        },
+        {
+            "description": "DVB runtime",
+            "TLX": { "TLXmediaUnitInterval": { "interval": [ 1, 50 ] } },
+            "valid": true
+        },
+        {
+            "description": "bad denominator",
+            "TLX": { "TLXmediaUnitInterval": { "interval": [ 1, 0 ] } },
+            "valid": false
+        },
+        {
+            "description": "missing 'interval' attribute",
+            "TLX": { "TLXmediaUnitInterval": { "duration": [ 1, 50 ] } },
+            "valid": false
+        },
+        {
+            "description": "missing 'interval' attribute",
+            "TLX": { "TLXmediaUnitInterval": { "runtime": [ 1001, 30000 ] } },
+            "valid": false
+        },
+        {
+            "description": "extra attribute",
+            "TLX": { "TLXmediaUnitInterval": { "interval": [ 1,50 ], "extra": null } },
+            "valid": true
+        }
+    ]
+}

@@ -1,0 +1,105 @@
+{
+    "description": "TLXmediaCount item vigorous test suite",
+    "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$id": "test/TLXmediaCount",
+        "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
+    },
+    "tests": [
+        {
+            "description": "empty item",
+            "TLX": { "TLXmediaCount": { } },
+            "valid": false
+        },
+        {
+            "description": "media count of zero",
+            "TLX": { "TLXmediaCount": { "count": 0 } },
+            "valid": true
+        },
+        {
+            "description": "media count only, less than zero",
+            "TLX": { "TLXmediaCount": { "count": -100 } },
+            "valid": false
+        },
+        {
+            "description": "missing media count (i.e., empty TLXmediaCount)",
+            "TLX": { "TLXmediaCount": {} },
+            "valid": false
+        },
+        {
+            "description": "media count and rate of 50fps",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 50, 1 ] } },
+            "valid": true
+        },
+        {
+            "description": "media count and rate of 29.94fps",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 30000, 1001 ]}},
+            "valid": true
+        },
+        {
+            "description": "media count and rate with missing denominator",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 50 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with zero denominator",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 50, 0 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with zero numerator",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 0, 1 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count only, non-integer",
+            "TLX": { "TLXmediaCount": { "count": 300.5 } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with negative numerator",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ -50, 1 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with negative denominator",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 50, -1 ] } },
+            "valid": false
+        },
+        {
+            "description": "missing media count, rate only",
+            "TLX": { "TLXmediaCount": { "rate": [ 50, 1 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and something else",
+            "TLX": { "TLXmediaCount": { "count": 300, "extra": true } },
+            "valid": true
+        },
+        {
+            "description": "media count only, except wrong type (string)",
+            "TLX": { "TLXmediaCount": { "count": "300" } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with wrong type array items",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ "50", "1" ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate of three parts",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 50, 1, 2 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate of non-array type (number)",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": 50 } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate of non-array type (string)",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": "50, 1" } },
+            "valid": false
+        }
+    ]
+}

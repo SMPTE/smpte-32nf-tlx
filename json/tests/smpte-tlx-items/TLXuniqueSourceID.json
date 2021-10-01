@@ -1,0 +1,56 @@
+{
+    "description": "TLXuniqueSourceID item vigorous test suite",
+    "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$id": "test/TLXuniqueSourceID",
+        "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
+    },
+    "tests": [
+        {
+            "description": "empty source ID item",
+            "TLX": { "TLXuniqueSourceID": { } },
+            "valid": false
+        },
+        {
+            "description": "simple source ID item, zero length",
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "" } },
+            "valid": false
+        },
+        {
+            "description": "simple source ID item, missing character",
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f" } },
+            "valid": false
+        },
+        {
+            "description": "simple source ID item",
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3" } },
+            "valid": true
+        },
+        {
+            "description": "broken sourceID",
+            "TLX": { "TLXuniqueSourceID": { "srcID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3" } },
+            "valid": false
+        },
+        {
+            "description": "simple source ID item, wrong case (receiver may PASS, sender shall FAIL)",
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "D1E64EfD-19D1-4643-8DE9-119E19f4D8A6" } },
+            "valid": false
+        },
+        {
+            "description": "simple source ID item, no hyphens (receiver may PASS, sender shall FAIL)",
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "e2aae9bad5424691b242fc0748744d90" } },
+            "valid": false
+        },
+        {
+            "description": "source ID item + unknown attribute",
+            "TLX": { "TLXuniqueSourceID": { "sourceID": "7b3efe5a-abf3-43ae-a146-5e261b9959f3",
+                                             "MACaddress": "23-ea-4a-3b-21-ef" } },
+            "valid": true
+        },
+        {
+            "description": "source ID item with unknown attribute only",
+            "TLX": { "TLXuniqueSourceID": { "MACaddress": "23-ea-4a-3b-21-ef" } },
+            "valid": false
+        }
+    ]
+}

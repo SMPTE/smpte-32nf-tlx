@@ -1,0 +1,56 @@
+{
+    "description": "TimeOnly profile vigorous test suite",
+    "schema": {
+        "$id": "test/TimeOnly",
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "allOf": [
+            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/TimeOnly" },
+            { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
+        ]
+    },
+    "tests": [
+        {
+            "description": "empty TLX",
+            "TLX": { },
+            "valid": false
+        },
+        {
+            "description": "timestamp only",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] }
+            },
+            "valid": true
+        },
+        {
+            "description": "timestamp only with offset",
+            "TLX": {
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789 ],
+                    "localOffset": -25237
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "timestamp only with offset",
+            "TLX": {
+                "TLXptpTimestamp": {
+                    "ptpTime": [ 1234567890, 123456789 ],
+                    "localOffset": -25237,
+                    "isLeapSecond": false
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "timestamp and sourceName",
+            "TLX": {
+                "TLXptpTimestamp": { "ptpTime": [ 1234567890, 123456789 ] },
+                "TLXsourceName": { "name": "tape 001" }
+            },
+            "valid": false
+        }
+    ]
+}
+
+

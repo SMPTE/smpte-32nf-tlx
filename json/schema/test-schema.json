@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "/test-schema",
+    "description": "Schema for a test suite providing a $schema against which TLX test instances are evaluated, a 'schema' that is the jsonSchema metaschema against which the $schema is evaluated, and am array of TLX test instances.",
+
+    "type": "object",
+
+    "properties": {
+        "description": {
+            "description": "The test set description",
+            "type": "string"
+        },
+        "schema": {
+            "description": "This test suite's schema for evaluating test instances.  An $id and a $schema (metadata) are required.",
+            "$ref": "#/definitions/adhocSchema"
+         },
+        "tests": {
+            "description": "A set of related tests all using the same schema",
+            "type": "array",
+            "items": { "$ref": "#/definitions/test" },
+            "minItems": 1
+        }
+    },
+    "required": [ "description", "schema", "tests" ],
+    "additionalProperties": false,
+    "minItems": 1,
+
+    "definitions": {
+        "adhocSchema": {
+            "description": "schema to evaluate test TLXs herein",
+            "type": "object",
+            "properties": {
+                "$schema": {
+                    "description": "metaschema used to validate this suite's schema",
+                    "type": "string",
+                    "format": "uri"
+                },
+                "$id": {
+                    "description": "base uri identifier for this suite's schema",
+                    "type": "string",
+                    "format": "uri"
+                }
+            },
+            "required": [ "$schema", "$id" ],
+            "additionalProperties": true,
+            "minProperties": 3
+        },
+        "test": {
+            "description": "individual TLX test object",
+            "type": "object",
+            "properties": {
+                "description": {
+                    "description": "unique-ish name of test (brief)",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "TLX": {
+                    "description": "TLX instance to be validated against the schema."
+                },
+                "valid": { "type": "boolean" }
+            },
+            "additionalProperties": false,
+            "required": [ "description", "TLX", "valid" ]
+        }
+    }
+}

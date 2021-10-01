@@ -1,0 +1,88 @@
+{
+    "description": "TLXptpTimestamp item vigorous test suite",
+    "schema": {
+        "$schema": "http://json-schema.org/draft-07/schema",
+        "$id": "test/TLXptpTimestamp",
+        "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
+    },
+    "tests": [
+        {
+            "description": "empty item",
+            "TLX": { "TLXptpTimestamp": { } },
+            "valid": false
+        },
+        {
+            "description": "simple TLXptpTimestamp",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 1234567890, 123456789 ] } },
+            "valid": true
+        },
+        {
+            "description": "timestamp with local",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 1234567890, 123456789 ],
+                    "localOffset": -25237 } },
+            "valid": true
+        },
+        {
+            "description": "timestamp with local and leapsecond",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 1234567890, 123456789 ],
+                    "localOffset": -25237,
+                    "isLeapSecond": false } },
+            "valid": true
+        },
+        {
+            "description": "simple TLXptpTimestamp, max ns",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 1234567890, 999999999 ] } },
+            "valid": true
+        },
+        {
+            "description": "simple TLXptpTimestamp, max + 1 ns",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 1234567890, 1000000000 ] } },
+            "valid": false
+        },
+        {
+            "description": "simple TLXptpTimestamp, negative ns",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 1234567890, -98765432 ] } },
+            "valid": false
+        },
+        {
+            "description": "simple TLXptpTimestamp, exclusive max - 1 seconds",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 281474976710655, 0 ] } },
+            "valid": true
+        },
+        {
+            "description": "simple TLXptpTimestamp, exclusive max seconds",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 281474976710656, 0 ] } },
+            "valid": false
+        },
+        {
+            "description": "timestamp with local wrong type",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 1234567890, 123456789 ],
+                    "localOffset": "-25237" } },
+            "valid": false
+        },
+        {
+            "description": "timestamp with timestamp too long",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 1234567890, 123456789, 0 ],
+                    "localOffset": -25237 } },
+            "valid": false
+        },
+        {
+            "description": "timestamp with timestamp missing ns",
+            "TLX": { "TLXptpTimestamp":
+                { "ptpTime": [ 1234567890 ],
+                    "localOffset": -25237 } },
+            "valid": false
+        }
+        
+    ]
+}
