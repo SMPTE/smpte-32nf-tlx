@@ -8,7 +8,7 @@ json/
 > [2021-10-03] JSON schemas, test suites, and Python test software for the schemas of SMPTE ST 2120-2 and SMPTE RP 2120-3
 
 models/
-> [needs update] Class diagrams for TLX drawn using Visual Paradigm
+> [needs update - likely obsolete diagram from 2020-10-09] Class diagrams for TLX drawn using Visual Paradigm
 
 notes/
 > [needs update] Notes on JSON schema
