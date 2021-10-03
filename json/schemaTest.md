@@ -18,9 +18,9 @@ schemaTest.py [-h][-d] [-q]* [-v] [-s <schemaPath> [ <testSuiteFile>]* ]'
   
   the remaining argument(s) indicate path(s) to the test suite(s).  A collection of files in a folder is a typical usage, e.g., "./tests/smpte-tlx-items/\*" though files can be listed individually, too.
   
-  Each non-hidden file in the directory of <schemaPath> is loaded (if possible) as a schema file and produces a warning otherwise
+  Each non-hidden file in the \<schemapath\> directory is loaded (if possible) as a schema file and produces a warning otherwise
   
-  Each <testSuiteFile> is validated as a test suite using the test-schema.json file, which is expected to have been found on <schemaPath>.
+  Each \<testSuiteFile\> is validated as a test suite using the test-schema.json file, which is expected to have been found in \<schemaPath\>.
   
   Upon execution, a report is given for each test run.  Diagnostics are presented when a validation result differs from what is expected.  Diagnostics are those provided by the jsonSchema.exceptions module.
   
@@ -40,7 +40,7 @@ which uses the default schemaPath of './schema'
   
   ## Schema's Required
   
-  test-schema.json - defines the structure of a valid test suite, must be present in <schemaPath>
+  test-schema.json - defines the structure of a valid test suite, must be present in \<schemaPath\>
   
 This application was developed to provide automated testing of the following schemas:  
   smpte-tlx-items.json - which is being deployed as an informative schema consistent with SMPTE ST 2120-2 - TLX Items
