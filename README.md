@@ -2,7 +2,10 @@
 
 
 overview.txt
-> Over of the TLX document suite written by Bill Redmann
+> Overview of the TLX document suite written by Bill Redmann
+
+JSON/
+> JSON schemas, test suites, and Python test software for the schemas of SMPTE ST 2120-2 and SMPTE RP 2120-3
 
 models/
 > [needs update] Class diagrams for TLX drawn using Visual Paradigm
