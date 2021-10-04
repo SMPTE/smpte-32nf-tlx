@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "$id": "/test-schema",
-    "description": "Schema for a test suite providing a $schema against which TLX test instances are evaluated, a 'schema' that is the jsonSchema metaschema against which the $schema is evaluated, and am array of TLX test instances.",
+    "description": "Schema for a test suite providing a 'description' of the TLX test sequence; a 'schema' against which TLX test instances are to be evaluated, including a '$schema' that is the jsonSchema metaschema against which the schema is evaluated; and an array 'tests' of TLX test instances.  Each TLX test instance includes a brief 'description', the 'TLX' to be evaluated, and the expected validation result (i.e., true = valid, false = invalid)",
 
     "type": "object",
 
