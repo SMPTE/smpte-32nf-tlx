@@ -48,7 +48,8 @@ Here is an exemplary portion of the smpte-tlx-items schema, to give you an idea 
             { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25237},
             { "ptpTime": [ 12345678901, 999999999 ], "currentLocalOffset": -25237, "foo": "bar" } ],
         "properties": {
-            "ptpTime": { "type": "array", "items": [
+            "ptpTime": { "type": "array",
+                "items": [
                     { "description": "seconds", "type": "integer", "minimum": 0, "exclusiveMaximum": 281474976710656 },
                     { "description": "nanoseconds", "type": "integer", "minimum": 0, "exclusiveMaximum": 1000000000 } ],
                 "minItems": 2, "additionalItems": false },
