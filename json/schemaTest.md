@@ -38,10 +38,19 @@ which uses the default schemaPath of './schema'
   ## Modules Required
   sys, os.path, glob, traceback, getopt, inspect, json, jsonschema
   
-  ## Schema's Required
+  ## Schemas Required
   
   test-schema.json - defines the structure of a valid test suite, must be present in \<schemaPath\>
+  This schema file includes a description of both the overall test suite structure and the structure for individual test instances, and this schema can validate the same.
   
+  ## Test "Test Suites"
+  
+  The tests/smpte-tlx-items-deliberateBadTests/ folder includes a number of test suites which are deliberately faulty for use in validating that schemaTest.py correctly recognizes, rejects, and diagnoses faulty test suite files.
+  
+  ## Expected Use
+
 This application was developed to provide automated testing of the following schemas:  
-  smpte-tlx-items.json - which is being deployed as an informative schema consistent with SMPTE ST 2120-2 - TLX Items
-  smpte-tlx-profiles.json - which is being deployed as an informative schema consistent with SMPTE ST 2120-3 - TLX Profiles
+* smpte-tlx-items.json - an informative schema consistent with SMPTE ST 2120-2 - TLX Items
+* smpte-tlx-profiles.json - an informative schema consistent with SMPTE ST 2120-3 - TLX Profiles
+
+Test suites corresponding to these schemas can be found in tests/smpte-tlx-items/ and tests/smpte-tlx-profiles/ respectively.
