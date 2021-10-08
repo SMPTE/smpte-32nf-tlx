@@ -3,7 +3,7 @@
     "schema": {
         "$schema": "http://json-schema.org/draft-07/schema",
         "$id": "test/TLXmediaCount",
-        "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items"
+        "$ref": "http://smpte-ra.org/schemas/2120-2/2021/smpte-tlx-items"
     },
     "tests": [
         {
