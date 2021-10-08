@@ -4,8 +4,8 @@
         "$id": "test/ptpSEQ",
         "$schema": "http://json-schema.org/draft-07/schema",
         "allOf": [
-            { "$ref": "http://smpte-ra.org/2120/3/2021/smpte-tlx-profiles#$defs/ptpSEQ" },
-            { "$ref": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items" }
+            { "$ref": "http://smpte-ra.org/schemas/2120-3/2021/smpte-tlx-profiles#$defs/ptpSEQ" },
+            { "$ref": "http://smpte-ra.org/schemas/2120-2/2021/smpte-tlx-items" }
         ]
     },
     "tests": [

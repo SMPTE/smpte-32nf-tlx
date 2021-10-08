@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "http://smpte-ra.org/2120/2/2021/smpte-tlx-items",
+  "$id": "http://smpte-ra.org/schemas/2120-2/2021/smpte-tlx-items",
   "title": "TLX",
   "type": "object",
   "description": "Schema for the SMPTE Extensible Time Label (TLX).",
