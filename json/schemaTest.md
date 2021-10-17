@@ -50,7 +50,7 @@ which uses the default schemaPath of './schema'
   ## Expected Use
 
 This application was developed to provide automated testing of the following schemas:  
-* smpte-tlx-items.json - an informative schema consistent with SMPTE ST 2120-2 - TLX Items
-* smpte-tlx-profiles.json - an informative schema consistent with SMPTE ST 2120-3 - TLX Profiles
+* smpte-tlx-items-2021.json - an informative schema consistent with SMPTE ST 2120-2:2021 - TLX Items
+* smpte-tlx-profiles-2021.json - an informative schema consistent with SMPTE ST 2120-3:2021 - TLX Profiles
 
 Test suites corresponding to these schemas can be found in tests/smpte-tlx-items/ and tests/smpte-tlx-profiles/ respectively.
