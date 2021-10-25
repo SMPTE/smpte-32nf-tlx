@@ -14,7 +14,6 @@ notes/
 > [needs update] Notes on JSON schema
 
 systems/
-> Markdown version of TLX Part 1 superseded by the Word draft on Teams.
-The original title for the document was "TLX Part 1 Systems" was has been changed to
-"TLX Part 1 Structure".
+> [2021-10-25 needs update -or- could be archived; many of the definitions list are no longer used in the document] Markdown version of TLX Part 1 superseded by the Word draft on Teams.
+The original title for the document was "TLX Part 1 Systems" was has been changed to "TLX Part 1 Structure".
 
