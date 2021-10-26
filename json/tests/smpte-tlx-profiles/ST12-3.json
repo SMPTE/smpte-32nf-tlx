@@ -19,7 +19,7 @@
             "TLX": {
                 "TLXst12": {
                     "timeAddress": [ 1, 0, 9, 23 ],
-                    "subframe": 2,
+                    "subFrame": "18",
                     "dropFrame": false,
                     "modulus": "72",
                     "binaryGroups": "00000000",
@@ -48,15 +48,20 @@
         {
             "description": "minimal ST 12-1",
             "TLX": {
-              "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ] }
+              "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10"
+                }
             },
             "valid": true
         },
         {
             "description": "modulus 24",
             "TLX": {
-                    "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
-                        "modulus": "24"
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10",
+                    "modulus": "24"
                     }
             },
             "valid": false
@@ -65,7 +70,8 @@
             "description": "modulus 25",
             "TLX": {
                 "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
-                        "modulus": "25"
+                    "subFrame": "10",
+                    "modulus": "25"
                 }
             },
             "valid": false
@@ -74,6 +80,7 @@
             "description": "modulus 30",
             "TLX": {
                 "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10",
                     "modulus": "30"
                 }
             },
@@ -83,6 +90,7 @@
             "description": "modulus 48",
             "TLX": {
                 "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10",
                     "modulus": "48"
                 }
             },
@@ -92,6 +100,7 @@
             "description": "modulus 50",
             "TLX": {
                 "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10",
                     "modulus": "50"
                 }
             },
@@ -101,6 +110,7 @@
             "description": "modulus 60",
             "TLX": {
                 "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10",
                     "modulus": "60"
                 }
             },
@@ -109,7 +119,9 @@
         {
             "description": "modulus 72",
             "TLX": {
-                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10",
                     "modulus": "72"
                 }
             },
@@ -118,7 +130,9 @@
         {
             "description": "modulus 96",
             "TLX": {
-                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10",
                     "modulus": "96"
                 }
             },
@@ -127,7 +141,9 @@
         {
             "description": "modulus 100",
             "TLX": {
-                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "18",
                     "modulus": "100"
                 }
             },
@@ -136,7 +152,9 @@
         {
             "description": "modulus 120 (24x5)",
             "TLX": {
-                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "18",
                     "modulus": "120 (24x5)"
                 }
             },
@@ -145,7 +163,9 @@
         {
             "description": "modulus 120 (30x4)",
             "TLX": {
-                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10",
                     "modulus": "120 (30x4)"
                 }
             },
@@ -154,7 +174,9 @@
         {
             "description": "modulus 120 (30x4) typo",
             "TLX": {
-                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "18",
                     "modulus": "120 (30*4)"
                 }
             },
@@ -163,20 +185,119 @@
         {
             "description": "modulus 76",
             "TLX": {
-                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 29 ],
+                    "subFrame": "10",
                     "modulus": "76"
                 }
             },
             "valid": false
         },
         {
-            "description": "subframe present",
+            "description": "subFrame 00",
             "TLX": {
-                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ],
-                    "subframe": 1
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 23 ],
+                    "subFrame": "00",
+                    "modulus": "120 (24x5)"
                 }
             },
             "valid": true
+        },
+        {
+            "description": "subFrame 04",
+            "TLX": {
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 23 ],
+                    "subFrame": "04",
+                    "modulus": "120 (24x5)"
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "subFrame 08",
+            "TLX": {
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 23 ],
+                    "subFrame": "08",
+                    "modulus": "120 (24x5)"
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "subFrame 0c",
+            "TLX": {
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 23 ],
+                    "subFrame": "0c",
+                    "modulus": "120 (24x5)"
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "subFrame 10",
+            "TLX": {
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 23 ],
+                    "subFrame": "10",
+                    "modulus": "120 (24x5)"
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "subFrame 14",
+            "TLX": {
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 24 ],
+                    "subFrame": "14",
+                    "modulus": "100"
+                }
+            },
+            "valid": false
+        },
+        {
+            "description": "subFrame 18",
+            "TLX": {
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 24 ],
+                    "subFrame": "18",
+                    "modulus": "100"
+                }
+            },
+            "valid": true
+        },
+        {
+            "description": "subFrame 1c",
+            "TLX": {
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 24 ],
+                    "subFrame": "1c",
+                    "modulus": "100"
+                }
+            },
+            "valid": false
+        },
+        {
+            "description": "subFrame 20",
+            "TLX": {
+                "TLXst12": {
+                    "timeAddress": [ 1, 0, 9, 24 ],
+                    "subFrame": "20",
+                    "modulus": "100"
+                }
+            },
+            "valid": false
+        },
+        {
+            "description": "subframe missing",
+            "TLX": {
+                "TLXst12": { "timeAddress": [ 1, 0, 9, 29 ] }
+            },
+            "valid": false
         },
         {
             "description": "DBC exemplar",
