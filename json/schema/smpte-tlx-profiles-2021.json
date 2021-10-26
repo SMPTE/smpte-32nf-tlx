@@ -106,7 +106,8 @@
       "description": "Information sufficient to populate a Time and Control Code, as specified by SMPTE ST 12-3.",
       "examples": [
         {
-          "TLXst12": { "timeAddress": [ 1, 0, 9, 71 ],
+          "TLXst12": { "timeAddress": [ 1, 0, 9, 23 ],
+            "subFrame": "10",
             "dropFrame": true, "modulus": "72",
             "binaryGroups": "47210719",
             "DBB1": "80", "DBB2": "03" }
@@ -120,12 +121,13 @@
           "type": "object",
           "properties": {
             "timeAddress": {},
+            "subFrame": { "enum": ["00", "04", "08", "0c", "10", "18"] },
             "modulus": { "enum": [ "72", "96", "100", "120 (30x4)", "120 (24x5)" ] },
             "bgFlags": false,
             "colorFrame": false,
             "fieldMark": false
           },
-          "required": [ "timeAddress" ]
+          "required": [ "timeAddress", "subFrame" ]
         }
       },
       "required": [ "TLXst12" ]
