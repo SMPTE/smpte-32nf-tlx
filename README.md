@@ -2,19 +2,17 @@
 
 This repository provides the informative schemas ``tlx-smpte-items`` referenced in the *SMPTE ST 2120-2 Extensible Time Label - Items* and ``tlx-smpte-profiles`` referenced in *SMPTE RP 2120-3 Extensible Time Label - Profiles*.
 
-overview.txt
-> [2021-10-03 obsolete] Overview of the TLX document suite written by Bill Redmann
+The documentation and software in this repository is not a substitute for definitions, specifications, and descriptions provided in the standards and recommended practice documents of the SMPTE 2120 Extensible Time Label suite.
 
-json/
-> [2021-10-25 current] JSON schemas, test software, and test suites for the informative schemas tlx-smpte-items of SMPTE ST 2120-2 and tlx-smpte-profiles of SMPTE RP 2120-3
+For more information about TLX, see *SMPTE ST 2120-1 Extensible Time Label - Structure*
 
-models/
-> [needs update - obsolete diagram from 2020-10-09] Class diagrams for TLX drawn using Visual Paradigm
+The repository contains the following files and directories:
 
-notes/
-> [obsolete?] Notes on JSON schema
+``json/``
+> JSON schemas, test software, documentation, and test suites for the informative JSON schemas ``tlx-smpte-items`` and ``tlx-smpte-profiles``
 
-systems/
-> [obsolete - supplanted by working drafts and tracked on SMPTE SKN] Markdown version of TLX Part 1 superseded by the Word draft on Teams.
-The original title for the document was "TLX Part 1 Systems" was has been changed to "TLX Part 1 Structure".
+``README.md``
+> this file
 
+``.gitignore``
+> files to be ignored by GitHub version control
