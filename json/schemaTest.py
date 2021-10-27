@@ -24,7 +24,7 @@ def showUsage():
     print ('USAGE: schemaTest.py [-h][-d][-v] [-s <schemaPath> [ <testSuiteFile>]+ ]' )
     print (' Validates using schemas in <schemaPath>, as directed by various instances in each of one or more <testSuiteFile>s')
     print (' -d prints debug hints, -v raises verbosity')
-    print ('\n <schemaPath> defaults to ./schema')
+    print ('\n <schemaPath> defaults to ./schemas')
 
 def main(argv):
     debug = 0
@@ -41,7 +41,7 @@ def main(argv):
     warnings = 0
 
     # this is where the schemas should be found (with a default)
-    schemaPath = './schema'
+    schemaPath = './schemas'
 
     # validate the arguments passed
     try:
