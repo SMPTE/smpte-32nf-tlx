@@ -27,6 +27,11 @@
             "valid": true
         },
         {
+            "description": "max source name (41 code points) item",
+            "TLX": { "TLXsourceName": { "name": "12345678901234567890123456789012345678901" } },
+            "valid": false
+        },
+        {
             "description": "long source name (50 code points, 50 bytes) item",
             "TLX": { "TLXsourceName": { "name": "tape 0010/tape 0020/tape 0030/tape 0040/tape 0050/" } },
             "valid": false
@@ -42,12 +47,11 @@
             "valid": true
         },
         {
-            "description": "mixed text and icons source name (26 code points, 41 bytes - four per icon character) item",
+            "description": "mixed text and icons source name (26 code points, 41 bytes - four per icon) item",
             "TLX": { "TLXsourceName": { "name": "📀 001, 📄 125A, 🎬 1, 🎥 2, ⭕️" } },
             "valid": true
-        },
-        {
-            "description": "max source name (40 code points, 160 bytes - four per emoji character) item",
+        },        {
+            "description": "max source name (40 code points, 160 bytes - four per emoji) item",
             "TLX": { "TLXsourceName": { "name": "😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍😀😀😀😀😀😀😀😀😀😍" } },
             "valid": true
         },
