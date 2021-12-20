@@ -1,0 +1,1 @@
+The foo item is fictional, an example used in ST 2120-1 for illustrative purposes.  The files here allow for the example to be validated and tested against each other for consistency.  These files are not an element of ST 2120-1.
