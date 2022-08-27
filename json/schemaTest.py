@@ -21,7 +21,7 @@ testSchemaFilename = 'test-schema.json'  # this is the schema file for validatin
 testSchemaID = '' # set this when this schema is loaded into the store
 
 def showUsage():
-    print ('USAGE: schemaTest.py [-h][-d][-v] [-s <schemaPath> [ <testSuiteFile>]+ ]' )
+    print ('USAGE: schemaTest.py [-h][-d][-v] [-s <schemaPath>] [ <testSuiteFile>]+' )
     print (' Validates using schemas in <schemaPath>, as directed by various instances in each of one or more <testSuiteFile>s')
     print (' -d prints debug hints, -v raises verbosity')
     print ('\n <schemaPath> defaults to ./schemas')
