@@ -33,7 +33,7 @@
         },
         {
             "description": "simple ST 12 item, timecode with invalid frames",
-            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 31 ] } },
+            "TLX": { "TLXst12": { "timeAddress": [ 1, 2, 3, 30 ] } },
             "valid": false
         },
         {
