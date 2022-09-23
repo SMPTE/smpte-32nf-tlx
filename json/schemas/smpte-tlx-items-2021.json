@@ -97,7 +97,7 @@
           "$id": "#TLXmediaCount/count",
           "title": "TLXmediaCount/count",
           "allOf": [
-            { "$ref": "#/definitions/integerType" },
+            { "$ref": "#/definitions/strictIntegerType" },
             { "minimum": 0 }
           ]
         },
@@ -106,7 +106,10 @@
           "title": "TLXmediaCount/rate",
           "allOf": [
             { "$ref": "#/definitions/rationalType"},
-            { "items": { "minimum": 1 } }
+            { "prefixItems": [
+                { "minimum": 1 }
+            	]
+            }
           ]
         }
       },
@@ -130,8 +133,7 @@
           "$id": "#TLXmediaUnitInterval/interval",
          "title": "TLXmediaUnitInterval/interval",
           "allOf": [
-            { "$ref": "#/definitions/rationalType" },
-            { "items": { "minimum": 1 } }
+            { "$ref": "#/definitions/rationalType" }
           ]
         }
       },
@@ -317,10 +319,28 @@
     "integerType": {
       "$id": "#integerType",
       "title": "integerType",
-      "type": "integer",
-      "minimum": -9007199254740991,
-      "maximum": 9007199254740991
+      "type": "integer"
     },
+    
+    "strictIntegerType": {
+      "$id": "#strictIntegerType",
+      "title": "strictIntegerType",
+      "type": "integer",
+      "$comment": "restricts range to +/- 10^15 - 1 per recommendation",
+      "minimum": -999999999999999,
+      "maximum": 999999999999999
+    },
+    
+
+    "int32Type": {
+      "$id": "#int32Type",
+      "title": "int32Type",
+      "type": "integer",
+      "$comment": "provides the restricted range of an int32 that is required by rationalType",
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    
 
     "rationalType": {
       "$id": "#rationalType",
@@ -328,10 +348,10 @@
       "type": "array",
       "items": [
         { "$comment": "numerator",
-          "$ref": "#/definitions/integerType"},
+          "$ref": "#/definitions/int32Type"},
         { "$comment": "demominator",
           "allOf": [
-            {"$ref": "#/definitions/integerType"},
+            {"$ref": "#/definitions/int32Type"},
             { "not": { "enum": [ 0 ] } }
           ]
         }

@@ -22,6 +22,16 @@
             "valid": false
         },
         {
+            "description": "media count greater than 10^15 - 1",
+            "TLX": { "TLXmediaCount": { "count": 1000000000000000 } },
+            "valid": false
+        },
+        {
+            "description": "media count equal to 10^15 - 1",
+            "TLX": { "TLXmediaCount": { "count": 999999999999999 } },
+            "valid": true
+        },
+        {
             "description": "missing media count (i.e., empty TLXmediaCount)",
             "TLX": { "TLXmediaCount": {} },
             "valid": false
@@ -47,9 +57,44 @@
             "valid": false
         },
         {
+            "description": "media count and rate with negative denominator",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 50, -1 ] } },
+            "valid": true
+        },
+        {
             "description": "media count and rate with zero numerator",
             "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 0, 1 ] } },
+            "valid": true
+        },
+        {
+            "description": "media count and rate with numerator too big",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 2147483648, 1 ] } },
             "valid": false
+        },
+        {
+            "description": "media count and rate with numerator too small",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ -2147483649, 1 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with denominator too big",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 0, 2147483648 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with denominator too small",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 0, -2147483649 ] } },
+            "valid": false
+        },
+        {
+            "description": "media count and rate with numerator and denominator at max",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 2147483647, 2147483647 ] } },
+            "valid": true
+        },
+        {
+            "description": "media count and rate with numerator and denominator at min",
+            "TLX": { "TLXmediaCount": { "count": 300, "rate": [ -2147483648, -2147483648 ] } },
+            "valid": true
         },
         {
             "description": "media count only, non-integer",
@@ -59,12 +104,12 @@
         {
             "description": "media count and rate with negative numerator",
             "TLX": { "TLXmediaCount": { "count": 300, "rate": [ -50, 1 ] } },
-            "valid": false
+            "valid": true
         },
         {
             "description": "media count and rate with negative denominator",
             "TLX": { "TLXmediaCount": { "count": 300, "rate": [ 50, -1 ] } },
-            "valid": false
+            "valid": true
         },
         {
             "description": "missing media count, rate only",
